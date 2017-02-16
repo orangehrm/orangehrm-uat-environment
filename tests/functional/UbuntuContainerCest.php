@@ -82,7 +82,7 @@ class UbuntuContainerCest
     public function phpunitTest(AcceptanceTester $I){
         $I->wantTo("verify phpunit library is installed in the container");
         $I->runShellCommand("docker exec uat_web phpunit --version");
-        $I->seeInShellOutput('PHPUnit 4.2.6');
+        $I->seeInShellOutput('PHPUnit 3.7.28');
     }
 
     public function gitTest(AcceptanceTester $I){
@@ -161,7 +161,6 @@ class UbuntuContainerCest
             $I->seeInShellOutput('Reflection');
             $I->seeInShellOutput('session');
             $I->seeInShellOutput('SimpleXML');
-            $I->seeInShellOutput('xdebug');
             $I->seeInShellOutput('xml');
             $I->seeInShellOutput('zip');
             $I->seeInShellOutput('zlib');
