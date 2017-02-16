@@ -36,7 +36,7 @@ class UbuntuContainerCest
         $I->seeInShellOutput('OpenSSH');
     }
 
-    public function apacheRunningTest(AcceptanceTester $I){
+    public function sshRunningTest(AcceptanceTester $I){
         $I->wantTo("verify apache is up and running in the container");
         $I->runShellCommand("docker exec uat_web service ssh status");
         $I->seeInShellOutput('sshd is running');
