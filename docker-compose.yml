@@ -1,0 +1,32 @@
+version: '2'
+services:
+  web:
+    image: orangehrm/orangehrm-environment-images:uat-5.5
+    ports:
+      - "443:443"
+    volumes:
+      - ./ohrm_dev:/var/www/html
+      - ./config/php5/apache2/php.ini:/etc/php5/apache2/php.ini
+      - ./config/php5/cli/php.ini:/etc/php5/cli/php.ini
+      - ./config/mysql-client:/etc/mysql
+      - ./config/apache2/sites-available:/etc/apache2/sites-available
+      - ./config/apache2/cert:/etc/apache2/cert
+      - ./logs/ubuntu_logs:/var/log/apache2
+      - /etc/localtime:/etc/localtime
+    links:
+      - db
+    restart: always
+    container_name: uat_web
+
+  db:
+    image: mysql:5.5
+    expose:
+      - "3306"
+    volumes:
+      - ./config/mysql-server:/etc/mysql
+      - ./logs/mysql_logs:/var/log
+      - /etc/localtime:/etc/localtime
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+    restart: always
+    container_name: uat_mysql

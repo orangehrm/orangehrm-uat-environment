@@ -1,0 +1,31 @@
+language: php
+sudo: required
+ 
+matrix:
+    include:
+        - os: linux
+          dist: trusty          
+services:
+  - docker
+
+cache:
+    directories:
+        - vendor
+        - $HOME/.composer/cache
+
+before_install:
+  - uname -a
+  - php --version
+  - docker version
+  - composer self-update
+
+install:
+  - composer install
+  - docker-compose up -d
+
+script:
+  - php vendor/bin/codecept run functional
+
+
+
+
