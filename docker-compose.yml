@@ -3,7 +3,7 @@ services:
   web:
     image: orangehrm/orangehrm-environment-images:uat-5.5
     ports:
-      - "443:443"
+      - "6464:443"
     volumes:
       - ./ohrm_dev:/var/www/html
       - ./config/php5/apache2/php.ini:/etc/php5/apache2/php.ini

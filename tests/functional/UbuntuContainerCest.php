@@ -30,19 +30,6 @@ class UbuntuContainerCest
         $I->seeInShellOutput('apache2 is running');
     }
 
-    public function sshInstalledTest(AcceptanceTester $I){
-        $I->wantTo("verify ssh is installed in the container");
-        $I->runShellCommand("docker exec uat_web ssh -V");
-        $I->seeInShellOutput('OpenSSH');
-    }
-
-    public function sshRunningTest(AcceptanceTester $I){
-        $I->wantTo("verify apache is up and running in the container");
-        $I->runShellCommand("docker exec uat_web service ssh status");
-        $I->seeInShellOutput('sshd is running');
-    }
-
-
     public function cronTest(AcceptanceTester $I){
         $I->wantTo("verify cron is installed in the container");
         $I->runShellCommand("docker exec uat_web apt list --installed | grep cron");
@@ -164,6 +151,13 @@ class UbuntuContainerCest
             $I->seeInShellOutput('xml');
             $I->seeInShellOutput('zip');
             $I->seeInShellOutput('zlib');
+    }
+
+
+    public function sshRunningTest(AcceptanceTester $I){
+            $I->wantTo("verify ssh is up and running in the container");
+            $I->runShellCommand("docker exec uat_web service ssh status");
+            $I->seeInShellOutput('sshd is running');
     }
 
     public function mysqlServerTest(AcceptanceTester $I){
