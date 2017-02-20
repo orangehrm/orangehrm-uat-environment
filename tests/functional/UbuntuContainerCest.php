@@ -12,7 +12,7 @@ class UbuntuContainerCest
     }
 
 
-  public function ContainerTest(AcceptanceTester $I){
+    public function ContainerTest(AcceptanceTester $I){
         $I->wantTo("verify ubuntu container up and running");
         $I->runShellCommand("docker inspect -f {{.State.Running}} uat_web");
         $I->seeInShellOutput("true");
@@ -47,6 +47,8 @@ class UbuntuContainerCest
         $I->runShellCommand("docker exec uat_web libreoffice --version");
         $I->seeInShellOutput('LibreOffice 4.3.3.2');
     }
+
+
 
     public function propplerUtilTest(AcceptanceTester $I){
         $I->wantTo("verify poppler-util is installed in the container");
@@ -153,6 +155,17 @@ class UbuntuContainerCest
             $I->seeInShellOutput('zlib');
     }
 
+    public function bzip2Test(AcceptanceTester $I){
+            $I->wantTo("verify bzip2 is installed in the container");
+            $I->runShellCommand("docker exec uat_web dpkg -s bzip2");
+            $I->seeInShellOutput("Version: 1.0.6-7+b3");
+    }
+
+    public function sshTest(AcceptanceTester $I){
+            $I->wantTo("verify OpenSSH is installed in the container");
+            $I->runShellCommand("docker exec uat_web dpkg -s openssh-server");
+            $I->seeInShellOutput("Version: 1:6.7p1-5+deb8u3");
+    }
 
     public function sshRunningTest(AcceptanceTester $I){
             $I->wantTo("verify ssh is up and running in the container");
@@ -165,5 +178,7 @@ class UbuntuContainerCest
             $I->runShellCommand("docker exec uat_web ping db -c 2");
             $I->seeInShellOutput('2 packets transmitted, 2 packets received');
     }
+
+
 
 }
