@@ -167,6 +167,24 @@ class UbuntuContainerCest
             $I->seeInShellOutput("Version: 1:6.7p1-5+deb8u3");
     }
 
+    public function libpamldapTest(AcceptanceTester $I){
+            $I->wantTo("verify libpam-ldap is installed in the container");
+            $I->runShellCommand("docker exec uat_web dpkg -s libpam-ldap");
+            $I->seeInShellOutput("Version: 184-8.7+b1");
+    }
+
+    public function libnssldapTest(AcceptanceTester $I){
+            $I->wantTo("verify libnss-ldap is installed in the container");
+            $I->runShellCommand("docker exec uat_web dpkg -s libnss-ldap");
+            $I->seeInShellOutput("Version: 265-3+b1");
+    }
+
+    public function nscdTest(AcceptanceTester $I){
+            $I->wantTo("verify nscd is installed in the container");
+            $I->runShellCommand("docker exec uat_web dpkg -s nscd");
+            $I->seeInShellOutput("Version: 2.19-18+deb8u7");
+    }
+
     public function sshRunningTest(AcceptanceTester $I){
             $I->wantTo("verify ssh is up and running in the container");
             $I->runShellCommand("docker exec uat_web service ssh status");
