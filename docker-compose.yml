@@ -15,6 +15,12 @@ services:
       - /etc/localtime:/etc/localtime
       - ./config/hostname:/etc/hostname
       - ./config/welcome:/etc/motd
+      - ./config/ldap/nsswitch.conf:/etc/nsswitch.conf
+      - ./config/ldap/pam.d/common-auth:/etc/pam.d/common-auth
+      - ./config/ldap/pam.d/common-account:/etc/pam.d/common-account
+      - ./config/ldap/pam.d/common-password:/etc/pam.d/common-password
+      - ./config/ldap/pam.d/common-session:/etc/pam.d/common-session
+      - ./config/ldap/pam.d/common-session-noninteractive:/etc/pam.d/common-session-noninteractive
     links:
       - db
     restart: always
