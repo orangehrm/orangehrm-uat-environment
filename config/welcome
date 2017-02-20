@@ -1,0 +1,34 @@
+#################################################################################
+                     Welcome to OrangeHRM UAT environment!
+
+   ****** DO NOT INSTALL ANY PRODUCT RELATED INSTANCES IN THIS ENVIRONMENT ******
+
+       ********************************************************************
+       *                                                                  *
+       * This system is for the use of authorized users only.  Usage of   *
+       * this system may be monitored and recorded by OrangeHRM system    *
+       * personnel.                                                       *
+       *                                                                  *
+       * Anyone using this system expressly consents to such monitoring   *
+       * and is advised that if such monitoring reveals possible          *
+       * evidence of criminal activity, OrangeHRM system personnel        *
+       * may provide the                                                  *
+       * evidence from such monitoring to law enforcement officials.      *
+       *                                                                  *
+       * Disconnect IMMEDIATELY if you are not an authorized user!        *
+       ********************************************************************
+
+
+   This environment contains :
+                          Apache 2.4.10
+                          bower 1.0
+                          bzip2
+                          cron 3.0
+                          curl 7.38
+                          LibreOffice 4.3.3.2
+                          MySQL 5.5
+                          npm 2.0
+                          PHP 5.5
+                          PHPUnit 3.7.28
+
+#################################################################################

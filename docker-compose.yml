@@ -13,6 +13,8 @@ services:
       - ./config/apache2/cert:/etc/apache2/cert
       - ./logs/ubuntu_logs:/var/log/apache2
       - /etc/localtime:/etc/localtime
+      - ./config/hostname:/etc/hostname
+      - ./config/welcome:/etc/motd
     links:
       - db
     restart: always
