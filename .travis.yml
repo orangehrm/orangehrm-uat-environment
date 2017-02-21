@@ -19,7 +19,7 @@ before_install:
   - docker version
   - composer self-update
 
-install
+install:
   - docker-compose up -d
   - composer install
   - docker ps
