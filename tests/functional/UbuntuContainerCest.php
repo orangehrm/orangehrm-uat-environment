@@ -24,12 +24,6 @@ class UbuntuContainerCest
         $I->seeInShellOutput('Server version: Apache/2.4.10');
     }
 
-    public function apacheRunningTest(AcceptanceTester $I){
-        $I->wantTo("verify apache is up and running in the container");
-        $I->runShellCommand("docker exec uat_web service apache2 status");
-        $I->seeInShellOutput('apache2 is running');
-    }
-
     public function cronTest(AcceptanceTester $I){
         $I->wantTo("verify cron is installed in the container");
         $I->runShellCommand("docker exec uat_web apt list --installed | grep cron");
@@ -191,7 +185,14 @@ class UbuntuContainerCest
             $I->seeInShellOutput('sshd is running');
     }
 
-    public function mysqlServerTest(AcceptanceTester $I){
+
+    public function apacheRunningTest(AcceptanceTester $I){
+            $I->wantTo("verify apache is up and running in the container");
+            $I->runShellCommand("docker exec uat_web service apache2 status");
+            $I->seeInShellOutput('apache2 is running');
+    }
+
+    public function mysqlServerConnectionTest(AcceptanceTester $I){
             $I->wantTo("verify mysql container is linked with ubuntu container properly");
             $I->runShellCommand("docker exec uat_web ping db -c 2");
             $I->seeInShellOutput('2 packets transmitted, 2 packets received');
