@@ -19,9 +19,10 @@ before_install:
   - docker version
   - composer self-update
 
-install:
-  - composer install
+install
   - docker-compose up -d
+  - composer install
+  - docker ps
 
 script:
   - php vendor/bin/codecept run functional
