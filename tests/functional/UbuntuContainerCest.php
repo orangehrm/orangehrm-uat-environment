@@ -179,6 +179,18 @@ class UbuntuContainerCest
             $I->seeInShellOutput("Version: 2.19-18+deb8u7");
     }
 
+    public function javaTest(AcceptanceTester $I){
+            $I->wantTo("verify java is installed in the container");
+            $I->runShellCommand("docker exec uat_web dpkg -s openjdk-7-jre");
+            $I->seeInShellOutput("Version: 7u121-2.6.8-2~deb8u1");
+    }
+
+    public function wgetTest(AcceptanceTester $I){
+            $I->wantTo("verify wget is installed in the container");
+            $I->runShellCommand("docker exec uat_web dpkg -s wget");
+            $I->seeInShellOutput("Version: 1.16-1+deb8u1");
+    }
+
     public function sshRunningTest(AcceptanceTester $I){
             $I->wantTo("verify ssh is up and running in the container");
             $I->runShellCommand("docker exec uat_web service ssh status");
