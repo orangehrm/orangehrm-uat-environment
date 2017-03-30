@@ -132,6 +132,8 @@ class UbuntuContainerCest
             $I->seeInShellOutput('ldap');
             $I->seeInShellOutput('libxml');
             $I->seeInShellOutput('mbstring');
+            $I->seeInShellOutput('mcrypt');
+            $I->seeInShellOutput('memcache');
             $I->seeInShellOutput('mysql');
             $I->seeInShellOutput('mysqli');
             $I->seeInShellOutput('mysqlnd');
@@ -144,6 +146,7 @@ class UbuntuContainerCest
             $I->seeInShellOutput('Reflection');
             $I->seeInShellOutput('session');
             $I->seeInShellOutput('SimpleXML');
+            $I->seeInShellOutput('stats');
             $I->seeInShellOutput('xml');
             $I->seeInShellOutput('zip');
             $I->seeInShellOutput('zlib');
