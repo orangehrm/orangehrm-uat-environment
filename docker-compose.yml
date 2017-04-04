@@ -5,7 +5,7 @@ services:
     ports:
       - "6464:443"
     volumes:
-      - ./ohrm_dev:/var/www/html
+      - ./ohrm_uat:/var/www/html
       - ./config/php5/php.ini:/usr/local/etc/php/php.ini
       - ./config/mysql-client:/etc/mysql
       - ./config/apache2/sites-available:/etc/apache2/sites-available
