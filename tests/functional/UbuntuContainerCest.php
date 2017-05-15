@@ -180,7 +180,7 @@ class UbuntuContainerCest
     public function nscdTest(AcceptanceTester $I){
             $I->wantTo("verify nscd is installed in the container");
             $I->runShellCommand("docker exec uat_web dpkg -s nscd");
-            $I->seeInShellOutput("Version: 2.19-18+deb8u7");
+            $I->seeInShellOutput("Version: 2.19-18+deb8u9");
     }
 
     public function javaTest(AcceptanceTester $I){
@@ -192,7 +192,7 @@ class UbuntuContainerCest
     public function wgetTest(AcceptanceTester $I){
             $I->wantTo("verify wget is installed in the container");
             $I->runShellCommand("docker exec uat_web dpkg -s wget");
-            $I->seeInShellOutput("Version: 1.16-1+deb8u1");
+            $I->seeInShellOutput("Version: 1.16-1+deb8u2");
     }
 
     public function sshRunningTest(AcceptanceTester $I){
