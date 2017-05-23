@@ -14,6 +14,8 @@ services:
       - /etc/localtime:/etc/localtime
       - ./config/hostname:/etc/hostname
       - ./config/welcome:/etc/motd
+      - ./config/sudoers:/etc/sudoers
+      - ./config/ssh/sshd_config:/etc/ssh/sshd_config
       - ./config/ldap/nsswitch.conf:/etc/nsswitch.conf
       - ./config/ldap/ldap-nss.conf:/etc/libnss-ldap.conf
       - ./config/ldap/ldap-pam.conf:/etc/pam_ldap.conf
