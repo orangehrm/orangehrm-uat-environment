@@ -81,9 +81,9 @@ class UbuntuContainerCest
     }
 
     public function phpTest(AcceptanceTester $I){
-        $I->wantTo("verify php 5.5 is installed in the container");
+        $I->wantTo("verify php 5.6 is installed in the container");
         $I->runShellCommand("docker exec uat_web php --version");
-        $I->seeInShellOutput('PHP 5.5');
+        $I->seeInShellOutput('PHP 5.6');
     }
 
     public function nodeTest(AcceptanceTester $I){
@@ -186,7 +186,7 @@ class UbuntuContainerCest
     public function javaTest(AcceptanceTester $I){
             $I->wantTo("verify java is installed in the container");
             $I->runShellCommand("docker exec uat_web dpkg -s openjdk-7-jre");
-            $I->seeInShellOutput("Version: 7u121-2.6.8-2~deb8u1");
+            $I->seeInShellOutput("Version: 7u131");
     }
 
     public function wgetTest(AcceptanceTester $I){
