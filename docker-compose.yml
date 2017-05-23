@@ -27,6 +27,7 @@ services:
     links:
       - db
     restart: always
+    hostname: orangehrm-uat-web
     container_name: uat_web
 
   db:
@@ -40,4 +41,5 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: 1234
     restart: always
+    hostname: orangehrm-uat-db
     container_name: uat_mysql
