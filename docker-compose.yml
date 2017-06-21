@@ -43,3 +43,16 @@ services:
     restart: always
     hostname: orangehrm-uat-db
     container_name: uat_mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    volumes:
+      - /etc/localtime:/etc/localtime
+    links:
+      - db
+    ports:
+      - "9090:80"
+    environment:
+      PMA_HOST: db
+    restart: always
+    container_name: enterprise_uat_phpmyadmin
