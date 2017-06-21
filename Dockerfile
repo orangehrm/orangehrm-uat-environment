@@ -23,8 +23,6 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y  --no-in
   ca-certificates \
   curl \
   git \
-  libmcrypt-dev \
-  libmemcached-dev \
   libnss-ldap \
   libpam-ldap \
   libssl-dev \
@@ -36,11 +34,7 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y  --no-in
   subversion \
   sudo \
   vim \
-  wget \
-  && pecl install memcache \
-  && docker-php-ext-enable memcache \
-  && docker-php-ext-configure mcrypt \
-  && docker-php-ext-install mcrypt
+  wget
 
 
 #Fix locale issue for SVN
@@ -60,7 +54,6 @@ RUN echo "root:root" | chpasswd
 # Tidy up the container
 RUN DEBIAN_FRONTEND=noninteractive apt-get purge -y \
     build-essential \
-    libmemcached-dev \
     libssl-dev  \
     libz-dev \
     && DEBIAN_FRONTEND=noninteractive apt-get -y autoremove  \
@@ -77,7 +70,7 @@ COPY phpunit-3.7.28.phar /usr/bin/phpunit
 EXPOSE 22
 
 # Add supervisor conf
-RUN mkdir -p /var/lock/apache2 /var/run/apache2 /var/run/sshd /var/log/supervisor
+RUN mkdir -p /var/run/sshd
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Docker startup
