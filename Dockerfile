@@ -35,7 +35,6 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y  --no-in
   poppler-utils \
   subversion \
   sudo \
-  supervisor \
   vim \
   wget \
   && pecl install memcache \
