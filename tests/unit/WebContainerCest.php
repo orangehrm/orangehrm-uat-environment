@@ -37,6 +37,7 @@ class WebContainerCest
 
     public function checkApacheServiceIsRunning(UnitTester $I){
         $I->wantTo("verify apache is up and running in the container");
+        $I->runShellCommand("ping -c 10 localhost");
         $I->runShellCommand("docker exec uat_web service apache2 status");
         $I->seeInShellOutput('apache2 is running');
     }
@@ -220,7 +221,7 @@ class WebContainerCest
     public function checkNSCDInstallation(UnitTester $I){
             $I->wantTo("verify nscd is installed in the container");
             $I->runShellCommand("docker exec uat_web dpkg -s nscd");
-            $I->seeInShellOutput("Version: 2.19-18+deb8u9");
+            $I->seeInShellOutput("Version: 2.19");
     }
 
     public function checkJavaVersion(UnitTester $I){
