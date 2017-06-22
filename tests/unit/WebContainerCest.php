@@ -1,7 +1,7 @@
 <?php
 
 
-class UbuntuContainerCest
+class WebContainerCest
 {
     public function _before(UnitTester $I)
     {
@@ -67,79 +67,79 @@ class UbuntuContainerCest
 
   public function checkMySQLClientInstallation(UnitTester $I){
         $I->wantTo("verify mysql-client is installed in the container");
-        $I->runShellCommand("docker exec qa_web_56 apt list --installed | grep mysql-client");
+        $I->runShellCommand("docker exec uat_web apt list --installed | grep mysql-client");
         $I->seeInShellOutput('mysql-client/now 5.5');
     }
 
     public function checkLibreOfficeInstallation(UnitTester $I){
         $I->wantTo("verify LibreOffice is installed in the container");
-        $I->runShellCommand("docker exec qa_web_56 libreoffice --version");
+        $I->runShellCommand("docker exec uat_web libreoffice --version");
         $I->seeInShellOutput('LibreOffice 4.3.3.2');
     }
 
 
   public function checkPopplerUtilInstallation(UnitTester $I){
         $I->wantTo("verify poppler-util is installed in the container");
-        $I->runShellCommand("docker exec qa_web_56 apt list --installed | grep poppler-util");
+        $I->runShellCommand("docker exec uat_web apt list --installed | grep poppler-util");
         $I->seeInShellOutput('poppler-util');
     }
 
     public function checkZipInstallation(UnitTester $I){
         $I->wantTo("verify zip library is installed in the container");
-        $I->runShellCommand("docker exec qa_web_56 zip -v");
+        $I->runShellCommand("docker exec uat_web zip -v");
         $I->seeInShellOutput('Zip 3');
     }
 
     public function checkUnzipIsInstallation(UnitTester $I){
         $I->wantTo("verify UnZip library is installed in the container");
-        $I->runShellCommand("docker exec qa_web_56 unzip -v");
+        $I->runShellCommand("docker exec uat_web unzip -v");
         $I->seeInShellOutput('UnZip 6');
     }
 
     public function checkPHPUnitVersion(UnitTester $I){
         $I->wantTo("verify phpunit library is installed in the container");
-        $I->runShellCommand("docker exec qa_web_56 phpunit --version");
+        $I->runShellCommand("docker exec uat_web phpunit --version");
         $I->seeInShellOutput('PHPUnit 3.7.28');
     }
     public function checkGitInstallation(UnitTester $I){
         $I->wantTo("verify git is installed in the container");
-        $I->runShellCommand("docker exec qa_web_56 git --version");
+        $I->runShellCommand("docker exec uat_web git --version");
         $I->seeInShellOutput('git version 2.1.4');
     }
 
     public function checkCurlInstallation(UnitTester $I){
         $I->wantTo("verify curl is installed in the container");
-        $I->runShellCommand("docker exec qa_web_56 curl --version");
+        $I->runShellCommand("docker exec uat_web curl --version");
         $I->seeInShellOutput('curl 7.38');
     }
 
     public function checkPHPVersion(UnitTester $I){
         $I->wantTo("verify php 5.6 is installed in the container");
-        $I->runShellCommand("docker exec qa_web_56 php --version");
+        $I->runShellCommand("docker exec uat_web php --version");
         $I->seeInShellOutput('PHP 5.6');
     }
 
     public function checkNodeVersion(UnitTester $I){
         $I->wantTo("verify node v4 is installed in the container");
-        $I->runShellCommand("docker exec qa_web_56 node -v");
+        $I->runShellCommand("docker exec uat_web node -v");
         $I->seeInShellOutput('v4');
     }
 
     public function checkNPMVersion(UnitTester $I){
         $I->wantTo("verify npm is installed in the container");
-        $I->runShellCommand("docker exec qa_web_56 npm --version");
+        $I->runShellCommand("docker exec uat_web npm --version");
         $I->seeInShellOutput("2");
     }
 
     public function checkNodemonInstallation(UnitTester $I){
         $I->wantTo("verify nodemon is installed in the container");
-        $I->runShellCommand("docker exec qa_web_56 nodemon");
+        $I->runShellCommand("docker exec uat_web nodemon");
         $I->seeInShellOutput('Usage: nodemon');
     }
 
     public function checkBowerVersion(UnitTester $I){
         $I->wantTo("verify bower is installed in the container");
-        $I->runShellCommand("docker exec qa_web_56 bower --version");
+        $I->runShellCommand("docker exec uat_web bower --version");
         $I->seeInShellOutput('1');
     }
 

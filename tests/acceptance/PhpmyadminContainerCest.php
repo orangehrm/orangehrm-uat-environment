@@ -23,6 +23,4 @@ class PhpmyadminContainerCest
         $I->see("Server version: 5.5");
     }
 
-
-
 }

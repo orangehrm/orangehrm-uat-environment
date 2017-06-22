@@ -1,7 +1,7 @@
 <?php
 
 
-class UbuntuContainerCest
+class WebContainerCest
 {
     public function _before(FunctionalTester $I)
     {
