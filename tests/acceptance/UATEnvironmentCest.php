@@ -16,9 +16,20 @@ class UATEnvironmentCest
         $I->runShellCommand('docker exec uat_web rm -rf /var/www/html/php-simple');
     }
 
-    public function UATWebTest(AcceptanceTester $I){
+    public function checkSampleApp(AcceptanceTester $I){
         $I->wantTo("verify uat environment is working properly with a php application");
         $I->runShellCommand("docker exec uat_web php /var/www/html/php-simple/app.php");
         $I->cantSeeInShellOutput("false");
     }
+
+    public function checkLoginToDBFromPhpmyadmin(AcceptanceTester $I){
+        $I->wantTo("log into mysql 5.5 server through phpmyadmin");
+        $I->amOnPage('http://localhost:9090');
+        $I->fillField('Username:', 'root');
+        $I->fillField('Password:', '1234');
+        $I->click('Go');
+        $I->see('Server: db');
+        $I->see("Server version: 5.5");
+    }
+
 }
