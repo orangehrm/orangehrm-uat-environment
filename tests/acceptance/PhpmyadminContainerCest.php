@@ -18,7 +18,6 @@ class PhpmyadminContainerCest
         $I->amOnPage('http://localhost:9090');
         $I->fillField('Username:', 'root');
         $I->fillField('Password:', '1234');
-        $I->selectOption('form select[name=server]','1');
         $I->click('Go');
         $I->see('Server: db');
         $I->see("Server version: 5.5");
