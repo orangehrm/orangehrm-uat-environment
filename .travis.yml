@@ -1,10 +1,15 @@
 language: php
 sudo: required
- 
+
+env:
+  global:
+  - REPO=orangehrm/orangehrm-environment-images
+  - TAG=uat-5.5
+
 matrix:
     include:
         - os: linux
-          dist: trusty          
+          dist: trusty
 services:
   - docker
 
@@ -18,6 +23,7 @@ before_install:
   - php --version
   - docker version
   - composer self-update
+  - docker build -t $REPO:$TAG docker-image
 
 install:
   - docker-compose up -d
@@ -25,8 +31,10 @@ install:
   - docker ps
 
 script:
+  - php vendor/bin/codecept run unit
   - php vendor/bin/codecept run functional
   - php vendor/bin/codecept run acceptance
 
-
-
+after_success:
+  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+  - docker push $REPO:$TAG
