@@ -11,10 +11,5 @@ class MysqlContainerCest
     {
     }
 
-    // tests
-    public function mySqlContainerTest(AcceptanceTester $I){
-        $I->wantTo("verify mysql container is up and running");
-        $I->runShellCommand("docker inspect -f {{.State.Running}} uat_mysql");
-        $I->seeInShellOutput("true");
-    }
+
 }
