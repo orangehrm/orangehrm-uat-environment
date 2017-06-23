@@ -24,6 +24,12 @@ class WebContainerCest
         $I->seeInShellOutput('PHP 5.5');
     }
 
+    public function apacheRunningTest(UnitTester $I){
+            $I->wantTo("verify apache is up and running in the container");
+            $I->runShellCommand("docker exec uat_web service apache2 status");
+            $I->seeInShellOutput('apache2 is running');
+    }
+
     public function phpunitTest(UnitTester $I){
         $I->wantTo("verify phpunit library is installed in the container");
         $I->runShellCommand("docker exec uat_web phpunit --version");
@@ -114,13 +120,6 @@ class WebContainerCest
             $I->wantTo("verify ssh is up and running in the container");
             $I->runShellCommand("docker exec uat_web service ssh status");
             $I->seeInShellOutput('sshd is running');
-    }
-
-
-    public function apacheRunningTest(UnitTester $I){
-            $I->wantTo("verify apache is up and running in the container");
-            $I->runShellCommand("docker exec uat_web service apache2 status");
-            $I->seeInShellOutput('apache2 is running');
     }
 
     public function mysqlServerConnectionTest(UnitTester $I){
