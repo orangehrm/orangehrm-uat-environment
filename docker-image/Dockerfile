@@ -23,24 +23,15 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y  --no-in
   ca-certificates \
   curl \
   git \
-  libmcrypt-dev \
-  libmemcached-dev \
   libnss-ldap \
   libpam-ldap \
-  libssl-dev \
   libz-dev \
   nscd \
   openjdk-7-jre \
   openssh-server \
-  poppler-utils \
   subversion \
-  supervisor \
   vim \
-  wget \
-  && pecl install memcache \
-  && docker-php-ext-enable memcache \
-  && docker-php-ext-configure mcrypt \
-  && docker-php-ext-install mcrypt
+  wget
 
 
 #Fix locale issue for SVN
@@ -60,8 +51,6 @@ RUN echo "root:root" | chpasswd
 # Tidy up the container
 RUN DEBIAN_FRONTEND=noninteractive apt-get purge -y \
     build-essential \
-    libmemcached-dev \
-    libssl-dev  \
     libz-dev \
     && DEBIAN_FRONTEND=noninteractive apt-get -y autoremove  \
     && apt-get clean  \
