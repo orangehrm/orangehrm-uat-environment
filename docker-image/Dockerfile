@@ -41,10 +41,6 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get purge -y \
     && apt-get clean  \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# Enable virtual hosts
-COPY config/apache2-sites/orangehrm.conf /etc/apache2/sites-available/orangehrm.conf
-RUN ln -s /etc/apache2/sites-available/orangehrm.conf /etc/apache2/sites-enabled/
-RUN a2ensite orangehrm.conf
 
 
 EXPOSE 22
