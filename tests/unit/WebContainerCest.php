@@ -49,54 +49,6 @@ class WebContainerCest
         $I->seeInShellOutput('supervisord is running');
     }
 
-    public function checkPHPUnitVersion(UnitTester $I){
-        $I->wantTo("verify phpunit library is installed in the container");
-        $I->runShellCommand("docker exec uat_web phpunit --version");
-        $I->seeInShellOutput('PHPUnit 3.7.28');
-    }
-    public function checkGitInstallation(UnitTester $I){
-        $I->wantTo("verify git is installed in the container");
-        $I->runShellCommand("docker exec uat_web git --version");
-        $I->seeInShellOutput('git version 2.1.4');
-    }
-
-    public function checkCurlInstallation(UnitTester $I){
-        $I->wantTo("verify curl is installed in the container");
-        $I->runShellCommand("docker exec uat_web curl --version");
-        $I->seeInShellOutput('curl 7.38');
-    }
-
-
-    public function checkNodeVersion(UnitTester $I){
-        $I->wantTo("verify node v4 is installed in the container");
-        $I->runShellCommand("docker exec uat_web node -v");
-        $I->seeInShellOutput('v4');
-    }
-
-    public function checkNPMVersion(UnitTester $I){
-        $I->wantTo("verify npm is installed in the container");
-        $I->runShellCommand("docker exec uat_web npm --version");
-        $I->seeInShellOutput("2");
-    }
-
-    public function checkNodemonInstallation(UnitTester $I){
-        $I->wantTo("verify nodemon is installed in the container");
-        $I->runShellCommand("docker exec uat_web nodemon");
-        $I->seeInShellOutput('Usage: nodemon');
-    }
-
-    public function checkBowerVersion(UnitTester $I){
-        $I->wantTo("verify bower is installed in the container");
-        $I->runShellCommand("docker exec uat_web bower --version");
-        $I->seeInShellOutput('1');
-    }
-
-    public function checkBzip2Installation(UnitTester $I){
-            $I->wantTo("verify bzip2 is installed in the container");
-            $I->runShellCommand("docker exec uat_web dpkg -s bzip2");
-            $I->seeInShellOutput("Version: 1.0.6-7+b3");
-    }
-
     public function checkSSHInstallation(UnitTester $I){
             $I->wantTo("verify OpenSSH is installed in the container");
             $I->runShellCommand("docker exec uat_web dpkg -s openssh-server");

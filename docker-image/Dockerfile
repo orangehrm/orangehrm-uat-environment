@@ -1,38 +1,22 @@
-FROM orangehrm/orangehrm-environment-images:prod-5.6
+FROM orangehrm/orangehrm-environment-images:dev-5.6
 
 MAINTAINER orangehrm
 LABEL authors = "Ridwan Shariffdeen <ridwan@orangehrmlive.com>
 
 # Our user in the container
 USER root
-WORKDIR /var/www/
+WORKDIR /var/www/html/
 
-# Enable apache mods.
-RUN a2enmod  vhost_alias
-
-#installing nodejs
-RUN curl -sL https://deb.nodesource.com/setup_4.x | bash
-RUN apt-get install -y nodejs && npm install -y -g bower gulp nodemon
-
-# installing composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 #Install dependent software
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y  --no-install-recommends --force-yes \
-  bzip2 \
-  ca-certificates \
-  curl \
-  git \
   libnss-ldap \
   libpam-ldap \
   libz-dev \
   nscd \
   openjdk-7-jre \
   openssh-server \
-  poppler-utils \
-  subversion \
   sudo \
-  vim \
   wget
 
 
@@ -53,7 +37,6 @@ RUN echo "root:root" | chpasswd
 # Tidy up the container
 RUN DEBIAN_FRONTEND=noninteractive apt-get purge -y \
     build-essential \
-    libz-dev \
     && DEBIAN_FRONTEND=noninteractive apt-get -y autoremove  \
     && apt-get clean  \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
@@ -63,7 +46,6 @@ COPY config/apache2-sites/orangehrm.conf /etc/apache2/sites-available/orangehrm.
 RUN ln -s /etc/apache2/sites-available/orangehrm.conf /etc/apache2/sites-enabled/
 RUN a2ensite orangehrm.conf
 
-COPY phpunit-3.7.28.phar /usr/bin/phpunit
 
 EXPOSE 22
 
