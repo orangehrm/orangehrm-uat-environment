@@ -15,6 +15,7 @@ services:
       - ./config/hostname:/etc/hostname
       - ./config/welcome:/etc/motd
       - ./config/sudoers:/etc/sudoers
+      - ./config/crontabs:/var/spool/cron/crontabs
       - ./config/ssh/sshd_config:/etc/ssh/sshd_config
       - ./config/ldap/nsswitch.conf:/etc/nsswitch.conf
       - ./config/ldap/ldap-nss.conf:/etc/libnss-ldap.conf
