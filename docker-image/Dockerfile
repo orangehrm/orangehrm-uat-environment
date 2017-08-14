@@ -1,4 +1,4 @@
-FROM thulana/orangehrm-environment-images:dev-5.6-centos
+FROM thulana/orangehrm-environment-images:dev-5.6-centos7
 
 MAINTAINER orangehrm
 LABEL authors = "Ridwan Shariffdeen <ridwan@orangehrmlive.com> , Thulana Kannangara <thulana@orangehrm.us.com>"
