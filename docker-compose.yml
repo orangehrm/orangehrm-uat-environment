@@ -25,6 +25,9 @@ services:
       - ./config/ldap/pam.d/common-password:/etc/pam.d/common-password
       - ./config/ldap/pam.d/common-session:/etc/pam.d/common-session
       - ./config/ldap/pam.d/common-session-noninteractive:/etc/pam.d/common-session-noninteractive
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+
+    privileged: true
     links:
       - db
     restart: always
