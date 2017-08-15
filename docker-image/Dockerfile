@@ -26,6 +26,7 @@ RUN yum -y install \
     sudo \
     nscd \
     openldap \
+    authconfig \
     openldap-clients \
     nss-pam-ldapd \
     && yum -y update bash \
