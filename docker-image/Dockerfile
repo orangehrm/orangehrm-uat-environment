@@ -25,6 +25,9 @@ RUN yum -y install \
     wget \
     sudo \
     nscd \
+    openldap \
+    openldap-clients \
+    nss-pam-ldapd \
     && yum -y update bash \
     && rm -rf /var/cache/yum/* \
     && yum clean all

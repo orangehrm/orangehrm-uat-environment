@@ -81,7 +81,7 @@ class WebContainerCest
 
     public function checkJavaVersion(UnitTester $I){
             $I->wantTo("verify java is installed in the container");
-            $I->runShellCommand("docker exec uat_web rpm -qa | grep openjdk-8-jre");
+            $I->runShellCommand("docker exec uat_web rpm -qa | grep java-1.8.0-openjdk");
             $I->seeInShellOutput("java-1.8.0");
     }
 
