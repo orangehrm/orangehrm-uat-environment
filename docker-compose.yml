@@ -6,10 +6,10 @@ services:
       - "443:443"
     volumes:
       - ./html:/var/www/html
-      - ./config/php5/php.ini:/usr/local/etc/php/php.ini
+      - ./config/php5/php.ini:/etc/php.ini
       - ./config/mysql-client:/etc/mysql
-      - ./config/apache2/sites-available:/etc/apache2/sites-available
-      - ./config/apache2/cert:/etc/apache2/cert
+      - ./config/apache2/sites-available:/etc/httpd/sites-available
+      - ./config/apache2/cert:/etc/httpd/cert
       - ./logs/ubuntu_logs:/var/log/apache2
       - /etc/localtime:/etc/localtime
       - ./config/hostname:/etc/hostname
