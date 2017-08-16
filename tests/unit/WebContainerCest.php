@@ -61,16 +61,16 @@ class WebContainerCest
             $I->seeInShellOutput('active (running)');
     }
 
-    public function checkLibPAMLDAPInstallation(UnitTester $I){
-            $I->wantTo("verify libpam-ldap is installed in the container");
-            $I->runShellCommand("docker exec uat_web dpkg -s libpam-ldap");
-            $I->seeInShellOutput("Version: 184-8.7+b1");
+    public function checkNSSPAMLDAPInstallation(UnitTester $I){
+            $I->wantTo("verify nss-pam-ldapd is installed in the container");
+            $I->runShellCommand("docker exec uat_web rpm -qa | grep nss-pam-ldapd");
+            $I->seeInShellOutput("nss-pam-ldapd-0.8.13");
     }
 
-    public function checkLibNSSLDAPInstallation(UnitTester $I){
-            $I->wantTo("verify libnss-ldap is installed in the container");
-            $I->runShellCommand("docker exec uat_web dpkg -s libnss-ldap");
-            $I->seeInShellOutput("Version: 265-3+b1");
+    public function checkOpenldapInstallation(UnitTester $I){
+            $I->wantTo("verify open-ldap is installed in the container");
+            $I->runShellCommand("docker exec uat_web rpm -qa | grep openldap");
+            $I->seeInShellOutput("openldap-clients-2.4.40");
     }
 
     public function checkNSCDInstallation(UnitTester $I){
