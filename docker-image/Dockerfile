@@ -1,7 +1,7 @@
-FROM orangehrm/orangehrm-environment-images:dev-5.6
+FROM thulana/orangehrm-environment-images:dev-5.6-centos7
 
 MAINTAINER orangehrm
-LABEL authors = "Ridwan Shariffdeen <ridwan@orangehrmlive.com>
+LABEL authors = "Ridwan Shariffdeen <ridwan@orangehrmlive.com> , Thulana Kannangara <thulana@orangehrm.us.com>"
 
 # Our user in the container
 USER root
@@ -9,15 +9,29 @@ WORKDIR /var/www/html/
 
 
 #Install dependent software
-RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y  --no-install-recommends --force-yes \
-  libnss-ldap \
-  libpam-ldap \
-  libz-dev \
-  nscd \
-  openjdk-7-jre \
-  openssh-server \
-  sudo \
-  wget
+#RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y  --no-install-recommends --force-yes \
+#  libnss-ldap \
+#  libpam-ldap \
+#  libz-dev \
+#  nscd \
+#  openjdk-7-jre \
+#  openssh-server \
+#  sudo \
+#  wget
+
+RUN yum -y install \
+    openssh-server \
+    sudo \
+    wget \
+    sudo \
+    nscd \
+    openldap \
+    authconfig \
+    openldap-clients \
+    nss-pam-ldapd \
+    && yum -y update bash \
+    && rm -rf /var/cache/yum/* \
+    && yum clean all
 
 
 #Fix locale issue for SVN
@@ -34,15 +48,13 @@ RUN echo "export VISIBLE=now" >> /etc/profile
 RUN useradd -ms /bin/bash -p sa3tHJ3/KuYvI orangehrm
 RUN echo "root:root" | chpasswd
 
-# Tidy up the container
-RUN DEBIAN_FRONTEND=noninteractive apt-get purge -y \
-    build-essential \
-    && DEBIAN_FRONTEND=noninteractive apt-get -y autoremove  \
-    && apt-get clean  \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-
-
+RUN authconfig --enableforcelegacy --update
+RUN authconfig --enableldap --enableldapauth --ldapserver="instructor.example.com" \
+    --ldapbasedn="dc=example,dc=com" --update
+#RUN scp root@instructor.example.com:/etc/openldap/certs/cert.pem \
+#    /etc/openldap/cacerts/cert.pem
+#RUN restorecon /etc/openldap/cacerts/cert.pem
+#RUN authconfig --enableldaptls --update
 EXPOSE 22
 
 # Add supervisor conf
@@ -50,4 +62,4 @@ RUN mkdir -p /var/run/sshd
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Docker startup
-CMD ["/usr/bin/supervisord"]
+#CMD ["/usr/bin/supervisord"]

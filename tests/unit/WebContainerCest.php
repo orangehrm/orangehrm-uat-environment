@@ -24,71 +24,71 @@ class WebContainerCest
         $I->seeInShellOutput('PHP 5.6');
     }
 
-    public function checkSupervisorServiceIsRunning(UnitTester $I){
-        $I->wantTo("verify apache is up and running in the container");
-        $I->runShellCommand("docker exec uat_web service supervisor status");
-        $I->seeInShellOutput('supervisord is running');
-    }
+//    public function checkSupervisorServiceIsRunning(UnitTester $I){
+//        $I->wantTo("verify apache is up and running in the container");
+//        $I->runShellCommand("docker exec uat_web service supervisor status");
+//        $I->seeInShellOutput('supervisord is running');
+//    }
 
     public function checkApacheServiceIsRunning(UnitTester $I){
         $I->wantTo("verify apache is up and running in the container");
         $I->runShellCommand("ping -c 10 localhost");
-        $I->runShellCommand("docker exec uat_web service apache2 status");
-        $I->seeInShellOutput('apache2 is running');
+        $I->runShellCommand("docker exec uat_web service httpd status");
+        $I->seeInShellOutput('active (running)');
     }
 
     public function checkCronServiceIsRunning(UnitTester $I){
         $I->wantTo("verify cron is up and running in the container");
-        $I->runShellCommand("docker exec uat_web service cron status");
-        $I->seeInShellOutput('cron is running');
+        $I->runShellCommand("docker exec uat_web service crond status");
+        $I->seeInShellOutput('active (running)');
     }
 
     public function checkMemcacheServiceIsRunning(UnitTester $I){
         $I->wantTo("verify apache is up and running in the container");
-        $I->runShellCommand("docker exec uat_web service supervisor status");
-        $I->seeInShellOutput('supervisord is running');
+        $I->runShellCommand("docker exec uat_web service memcached status");
+        $I->seeInShellOutput('active (running)');
     }
 
     public function checkSSHInstallation(UnitTester $I){
             $I->wantTo("verify OpenSSH is installed in the container");
-            $I->runShellCommand("docker exec uat_web dpkg -s openssh-server");
-            $I->seeInShellOutput("Version: 1:6.7p1-5+deb8u3");
+            $I->runShellCommand("docker exec uat_web rpm -qa | grep openssh-server");
+            $I->seeInShellOutput("openssh-server-6.6.1p1-35");
     }
 
     public function checkSSHServiceRunning(UnitTester $I){
             $I->wantTo("verify ssh is up and running in the container");
-            $I->runShellCommand("docker exec uat_web service ssh status");
-            $I->seeInShellOutput('sshd is running');
+            $I->runShellCommand("docker exec uat_web service sshd status");
+            $I->seeInShellOutput('active (running)');
     }
 
-    public function checkLibPAMLDAPInstallation(UnitTester $I){
-            $I->wantTo("verify libpam-ldap is installed in the container");
-            $I->runShellCommand("docker exec uat_web dpkg -s libpam-ldap");
-            $I->seeInShellOutput("Version: 184-8.7+b1");
+    public function checkNSSPAMLDAPInstallation(UnitTester $I){
+            $I->wantTo("verify nss-pam-ldapd is installed in the container");
+            $I->runShellCommand("docker exec uat_web rpm -qa | grep nss-pam-ldapd");
+            $I->seeInShellOutput("nss-pam-ldapd-0.8.13");
     }
 
-    public function checkLibNSSLDAPInstallation(UnitTester $I){
-            $I->wantTo("verify libnss-ldap is installed in the container");
-            $I->runShellCommand("docker exec uat_web dpkg -s libnss-ldap");
-            $I->seeInShellOutput("Version: 265-3+b1");
+    public function checkOpenldapInstallation(UnitTester $I){
+            $I->wantTo("verify open-ldap is installed in the container");
+            $I->runShellCommand("docker exec uat_web rpm -qa | grep openldap");
+            $I->seeInShellOutput("openldap-clients-2.4.40");
     }
 
     public function checkNSCDInstallation(UnitTester $I){
             $I->wantTo("verify nscd is installed in the container");
-            $I->runShellCommand("docker exec uat_web dpkg -s nscd");
-            $I->seeInShellOutput("Version: 2.19");
+            $I->runShellCommand("docker exec uat_web rpm -qa | grep nscd");
+            $I->seeInShellOutput("nscd-2.17-157");
     }
 
     public function checkJavaVersion(UnitTester $I){
             $I->wantTo("verify java is installed in the container");
-            $I->runShellCommand("docker exec uat_web dpkg -s openjdk-7-jre");
-            $I->seeInShellOutput("Version: 7u131");
+            $I->runShellCommand("docker exec uat_web rpm -qa | grep java-1.8.0-openjdk");
+            $I->seeInShellOutput("java-1.8.0");
     }
 
     public function checkWgetVersion(UnitTester $I){
             $I->wantTo("verify wget is installed in the container");
-            $I->runShellCommand("docker exec uat_web dpkg -s wget");
-            $I->seeInShellOutput("Version: 1.16-1+deb8u2");
+            $I->runShellCommand("docker exec uat_web rpm -qa | grep wget");
+            $I->seeInShellOutput("wget-1.14-13");
     }
 
 }
