@@ -11,7 +11,7 @@ services:
       - ./config/apache2/sites-available:/etc/httpd/sites-available
       - ./config/apache2/cert:/etc/httpd/cert
       - ./logs/ubuntu_logs:/var/log/apache2
-      - /etc/localtime:/etc/localtime
+      -   /etc/localtime:/etc/localtime
       - ./config/hostname:/etc/hostname
       - ./config/welcome:/etc/motd
       - ./config/sudoers:/etc/sudoers
