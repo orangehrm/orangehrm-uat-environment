@@ -18,13 +18,7 @@ services:
       - ./config/crontabs:/var/spool/cron/crontabs
       - ./config/ssh/sshd_config:/etc/ssh/sshd_config
       - ./config/ldap/nsswitch.conf:/etc/nsswitch.conf
-      - ./config/ldap/ldap-nss.conf:/etc/libnss-ldap.conf
-      - ./config/ldap/ldap-pam.conf:/etc/pam_ldap.conf
-      - ./config/ldap/pam.d/common-auth:/etc/pam.d/common-auth
-      - ./config/ldap/pam.d/common-account:/etc/pam.d/common-account
-      - ./config/ldap/pam.d/common-password:/etc/pam.d/common-password
-      - ./config/ldap/pam.d/common-session:/etc/pam.d/common-session
-      - ./config/ldap/pam.d/common-session-noninteractive:/etc/pam.d/common-session-noninteractive
+      - ./config/ldap/nslcd.conf:/etc/nslcd.conf
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
 
     privileged: true
