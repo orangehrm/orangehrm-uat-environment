@@ -17,6 +17,7 @@ services:
       - ./config/sudoers:/etc/sudoers
       - ./config/crontabs:/var/spool/cron/crontabs
       - ./config/ssh/sshd_config:/etc/ssh/sshd_config
+      - ./config/ldap/cert:/etc/openldap/cacerts
       - ./config/ldap/nsswitch.conf:/etc/nsswitch.conf
       - ./config/ldap/nslcd.conf:/etc/nslcd.conf
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
