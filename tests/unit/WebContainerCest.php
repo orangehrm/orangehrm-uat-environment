@@ -91,4 +91,10 @@ class WebContainerCest
             $I->seeInShellOutput("wget-1.14-13");
     }
 
+    public function checkVHostConfig(UnitTester $I){
+        $I->wantTo("verify vhost is configured in the container");
+        $I->runShellCommand("docker exec phantom_web httpd -S");
+        $I->seeInShellOutput("wget-1.14-13");
+    }
+
 }
