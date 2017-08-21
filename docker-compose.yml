@@ -1,57 +1,65 @@
 version: '2'
 services:
   web:
-    image: orangehrm/orangehrm-environment-images:uat-5.6-centos
-    ports:
-      - "443:443"
-    volumes:
-      - ./html:/var/www/html
-      - ./config/php5/php.ini:/etc/php.ini
-      - ./config/mysql-client:/etc/mysql
-      - ./config/apache2/sites-available:/etc/httpd/sites-available
-      - ./config/apache2/cert:/etc/httpd/cert
-      - ./logs/ubuntu_logs:/var/log/apache2
-      -   /etc/localtime:/etc/localtime
-      - ./config/hostname:/etc/hostname
-      - ./config/welcome:/etc/motd
-      - ./config/sudoers:/etc/sudoers
-      - ./config/crontabs:/var/spool/cron/crontabs
-      - ./config/ssh/sshd_config:/etc/ssh/sshd_config
-      - ./config/ldap/cert:/etc/openldap/cacerts
-      - ./config/ldap/nsswitch.conf:/etc/nsswitch.conf
-      - ./config/ldap/nslcd.conf:/etc/nslcd.conf
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+  image: orangehrm/orangehrm-environment-images:uat-5.6-centos
+  ports:
+  - "6767:443"
+  - "2552:22"
+  volumes:
+  - ./html:/var/www/html
+  - ./home:/home
+  - ./config/php5/php.ini:/etc/php.ini
+  - ./config/mysql-client:/etc/mysql
+  - ./config/apache2/sites-available:/etc/httpd/sites-available
+  - ./config/apache2/cert:/etc/httpd/cert
+  - ./logs/ubuntu_logs:/var/log/apache2
+  - /etc/localtime:/etc/localtime
+  - ./config/hostname:/etc/hostname
+  - ./config/welcome:/etc/motd
+  - ./config/sudoers:/etc/sudoers
+  - ./config/crontabs:/var/spool/cron/crontabs
+  - ./config/ssh/sshd_config:/etc/ssh/sshd_config
+  - ./config/ldap/cert:/etc/openldap/cacerts
+  - ./config/ldap/nsswitch.conf:/etc/nsswitch.conf
+  - ./config/ldap/nslcd.conf:/etc/nslcd.conf
+  - /sys/fs/cgroup:/sys/fs/cgroup:ro
 
-    privileged: true
-    links:
-      - db
-    restart: always
-    hostname: orangehrm-uat-web
-    container_name: uat_web
+  privileged: true
+  links:
+  - db
+  restart: always
+  hostname: Phantom-Server
+  container_name: phantom_web
+  extra_hosts:
+  - "ldap.orangehrm.com:172.18.0.1"
+  - "ftp.orangehrm.com:172.18.0.1"
 
   db:
-    image: mysql:5.5
-    expose:
-      - "3306"
-    volumes:
-      - ./config/mysql-server:/etc/mysql
-      - ./logs/mysql_logs:/var/log
-      - /etc/localtime:/etc/localtime
-    environment:
-      MYSQL_ROOT_PASSWORD: 1234
-    restart: always
-    hostname: orangehrm-uat-db
-    container_name: uat_mysql
+  image: mysql:5.5
+  expose:
+  - "3306"
+  volumes:
+  - ./config/mysql-server:/etc/mysql
+  - ./logs/mysql_logs:/var/log
+  - /etc/localtime:/etc/localtime
+  - mysql:/var/lib/mysql
+  environment:
+  MYSQL_ROOT_PASSWORD:
+  restart: always
+  hostname: Phantom-Database
+  container_name: phantom_mysql
 
   phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    volumes:
-      - /etc/localtime:/etc/localtime
-    links:
-      - db
-    ports:
-      - "9090:80"
-    environment:
-      PMA_HOST: db
-    restart: always
-    container_name: enterprise_uat_phpmyadmin
+  image: phpmyadmin/phpmyadmin
+  volumes:
+  - /etc/localtime:/etc/localtime
+  links:
+  - db
+  ports:
+  - "6768:80"
+  environment:
+  PMA_HOST: db
+  restart: always
+  container_name: phantom_phpmyadmin
+volumes:
+  mysql:
