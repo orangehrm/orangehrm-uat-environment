@@ -1,4 +1,4 @@
-FROM orangehrm/orangehrm-environment-images:dev-5.6-centos
+FROM orangehrm/orangehrm-environment-images:dev-7.0-centos
 
 MAINTAINER orangehrm
 LABEL authors = "Ridwan Shariffdeen <ridwan@orangehrmlive.com> , Thulana Kannangara <thulana@orangehrm.us.com>"
@@ -56,10 +56,15 @@ RUN authconfig --enableldap --enableldapauth --ldapserver="instructor.example.co
 #RUN restorecon /etc/openldap/cacerts/cert.pem
 #RUN authconfig --enableldaptls --update
 EXPOSE 22
+#RUN ln -s /etc/httpd/sites-available/test.conf /etc/httpd/sites-enabled/test.conf
+#RUN ln -s /etc/httpd/sites-available/prod.conf /etc/httpd/sites-enabled/prod.conf
+#RUN ln -s /etc/httpd/sites-available/uat.conf /etc/httpd/sites-enabled/uat.conf
+#RUN ln -s /etc/httpd/sites-available/opensource.conf /etc/httpd/sites-enabled/opensource.conf
+#RUN ln -s /etc/httpd/sites-available/freehost.conf /etc/httpd/sites-enabled/freehost.conf
 
 # Add supervisor conf
 RUN mkdir -p /var/run/sshd
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-
+RUN systemctl enable nslcd.service
 # Docker startup
 #CMD ["/usr/bin/supervisord"]

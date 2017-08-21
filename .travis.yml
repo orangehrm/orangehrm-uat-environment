@@ -4,7 +4,7 @@ sudo: required
 env:
   global:
   - REPO=orangehrm/orangehrm-environment-images
-  - TAG=uat-5.6-centos
+  - TAG=uat-7.0-centos
 
 matrix:
     include:

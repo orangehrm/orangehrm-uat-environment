@@ -22,6 +22,12 @@ class UATEnvironmentCest
         $I->cantSeeInShellOutput("false");
     }
 
+//    public function checkSampleApp(AcceptanceTester $I){
+//        $I->wantTo("verify uat environment is working properly with a php application");
+//        $I->runShellCommand("docker exec uat_web php /var/www/html/OHRMStandalone/TEST/php-simple/app.php");
+//        $I->cantSeeInShellOutput("false");
+//    }
+
     public function checkLoginToDBFromPhpmyadmin(AcceptanceTester $I){
         $I->wantTo("log into mysql 5.5 server through phpmyadmin");
         $I->amOnPage('http://localhost:9090');

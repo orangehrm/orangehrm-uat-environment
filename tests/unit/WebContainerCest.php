@@ -90,5 +90,12 @@ class WebContainerCest
             $I->runShellCommand("docker exec uat_web rpm -qa | grep wget");
             $I->seeInShellOutput("wget-1.14-13");
     }
+    public function checkVHostConfig(UnitTester $I){
+        $I->wantTo("verify test vhost is configured in the container");
+        $I->runShellCommand("docker exec httpd -S");
+        $I->seeInShellOutput("*test-phantom.orangehrm.com");
+    }
+
+
 
 }
