@@ -92,8 +92,12 @@ class WebContainerCest
     }
     public function checkVHostConfig(UnitTester $I){
         $I->wantTo("verify test vhost is configured in the container");
-        $I->runShellCommand("docker exec httpd -S");
+        $I->runShellCommand("docker exec jade_web httpd -S");
         $I->seeInShellOutput("*test-phantom.orangehrm.com");
+        $I->seeInShellOutput("*uat-phantom.orangehrm.com");
+        $I->seeInShellOutput("*prod-phantom.orangehrm.com");
+        $I->seeInShellOutput("*opensource-phantom.orangehrm.com");
+        $I->seeInShellOutput("*freehost-phantom.orangehrm.com");
     }
 
 
