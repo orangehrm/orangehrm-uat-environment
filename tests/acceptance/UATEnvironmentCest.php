@@ -30,7 +30,7 @@ class UATEnvironmentCest
 
     public function checkLoginToDBFromPhpmyadmin(AcceptanceTester $I){
         $I->wantTo("log into mysql 5.5 server through phpmyadmin");
-        $I->amOnPage('http://localhost:9090');
+        $I->amOnPage('http://localhost:6869');
         $I->fillField('Username:', 'root');
         $I->fillField('Password:', '1234');
         $I->click('Go');

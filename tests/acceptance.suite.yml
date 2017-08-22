@@ -8,6 +8,6 @@ class_name: AcceptanceTester
 modules:
     enabled:
         - PhpBrowser:
-            url: http://localhost:9090
+            url: http://localhost:6868
         - Cli
         - \Helper\Acceptance
