@@ -18,27 +18,27 @@ Make sure mentioned prerequisites are there in your host machine.
 2. open terminal and go to the cloned directory
 3. run the command `docker-compose up -d`
 4. run `docker ps` and make sure all the containers are up and running.
-5. Your web root will be _/ohrm_uat_ directory and make sure to put your project in that folder.
+5. Your web root will be _/html_ directory and make sure to put your project in that folder.
 
 **Note** : [Video Tutorial](https://www.youtube.com/watch?v=fURFe-tARyk)
 
 ## Containers
 
-| Container Name  | Service Name in docker-compose.yml | Description | IP Address | Used Ports |
-|-----------------|------------------------------------|-------------|------------|------------|
-| uat_web         | web                                | PHP 5.6     | 10.5.0.2   | 443        |
-| uat_mysql       | db                                 | MySQL 5.5   | 10.5.0.3   | 3306       |
-| uat_phpmyadmin  | phpmyadmin                         | phpMyAdmin  | 10.5.0.4   | 9090       |
+| Container Name      | Service Name in docker-compose.yml | Description | IP Address | Used Ports |
+|---------------------|------------------------------------|-------------|------------|------------|
+| phantom_web         | web                                | PHP 5.6     | 10.5.0.2   | 443        |
+| phantom_mysql       | db                                 | MySQL 5.5   | 10.5.0.3   | 3306       |
+| phantom_phpmyadmin  | phpmyadmin                         | phpMyAdmin  | 10.5.0.4   | 9090       |
 
 ## Install orangehrm eagle-core inside the container
-1. Get a checkout from svn to ohrm_uat directory (`svn checkout https://repos.orangehrm.com/enterprise/branch/eagle-core/`).
+1. Get a checkout from svn to html directory (`svn checkout https://repos.orangehrm.com/enterprise/branch/eagle-core/`).
 2. To get the named virtual hosts to work, add the project folder name to /etc/hosts file (`127.0.0.1 folderName`).
 3. access from your browser (`https://folderName`). If you have changed the default port configuration in uat_web container then you can access using `htttps://folderName`
-4. Continue installation by installing system as normal way. (you can have access to inside of uat_web_56 container by running the command `docker exec -it uat_web_56 bash`)
+4. Continue installation by installing system as normal way. (you can have access to inside of uat_web_56 container by running the command `docker exec -it phantom_web bash`)
 
 ## Default configurations
 Developer can override the default configurations if they want by simply adding a docker-compose.override.yml file.It is better to have some knowledge on docker-compose file. ([docker-compose file reference](https://docs.docker.com/compose/compose-file/))
-### Default configurations in uat_web container
+### Default configurations in phantom_web container
 ```
 ports:
   - "443:443"
@@ -67,7 +67,7 @@ services:
 
 If you want to change any default apache or php configurations you can find them under _/config_ folder.
 
-### Default configurations in uat_mysql container
+### Default configurations in phantom_mysql container
 ```
 expose:
   - "3306"
@@ -80,7 +80,7 @@ environment:
   MYSQL_ROOT_PASSWORD: 1234
 ```
 You can change exposed port as mentioned in uat_web_55 container configuration. For more information about this container refer into [mysql official image](https://hub.docker.com/_/mysql/).
-### Default configurations in uat_phpmyadmin container
+### Default configurations in phantom_phpmyadmin container
 ```
 volumes:
   - /etc/localtime:/etc/localtime
