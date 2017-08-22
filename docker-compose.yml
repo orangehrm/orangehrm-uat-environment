@@ -25,8 +25,8 @@ services:
     links:
       - db
     restart: always
-    hostname: orangehrm-uat-web
-    container_name: uat_web
+    hostname: orangehrm-jade-web
+    container_name: jade_web
     extra_hosts:
       - "ldap.orangehrm.com:172.18.0.1"
       - "ftp.orangehrm.com:172.18.0.1"
@@ -41,8 +41,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: 1234
     restart: always
-    hostname: orangehrm-uat-db
-    container_name: uat_mysql
+    hostname: orangehrm-jade-db
+    container_name: jade_mysql
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -55,6 +55,6 @@ services:
     environment:
       PMA_HOST: db
     restart: always
-    container_name: enterprise_uat_phpmyadmin
+    container_name: jade_phpmyadmin
 volumes:
   mysql:
