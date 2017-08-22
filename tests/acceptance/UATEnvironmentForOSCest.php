@@ -6,7 +6,7 @@ class UATEnvironmentForOSCest
     public function _before(AcceptanceTester $I)
     {
         $I->comment("Cloning project into /var/www/html");
-        $I->runShellCommand("docker exec phantom_web git clone https://github.com/orangehrm/orangehrm.git /var/www/html/php-simple");
+        $I->runShellCommand("docker exec phantom_web git clone https://github.com/orangehrm/orangehrm.git /var/www/html");
         $I->runShellCommand('docker exec phantom_web mkdir -p symfony/web');
         $I->runShellCommand('docker exec phantom_web ls');
         $I->runShellCommand('docker exec phantom_web mv orangehrm symfony/web');
