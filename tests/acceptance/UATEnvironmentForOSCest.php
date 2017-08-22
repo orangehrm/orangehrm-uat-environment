@@ -6,18 +6,10 @@ class UATEnvironmentForOSCest
     public function _before(AcceptanceTester $I)
     {
         $I->comment("Cloning project into /var/www/html");
-<<<<<<< HEAD
-       $I->runShellCommand("docker exec phantom_web git clone https://github.com/orangehrm/orangehrm.git /var/www/html");
-        $I->runShellCommand('docker exec phantom_web mkdir -p symfony/web');
-        $I->runShellCommand('docker exec phantom_web ls');
-=======
         $I->runShellCommand("docker exec phantom_web git clone https://github.com/orangehrm/orangehrm.git ");
         $I->runShellCommand('docker exec phantom_web mkdir -p symfony/web');
         $I->runShellCommand('docker exec phantom_web ls');
-        $I->runShellCommand('docker exec phantom_web bash -c "cd /var/www/html/orangehrm && bash fix_permissions.sh"');
->>>>>>> 8132bff9c3f9ffb2d5fbfb8446adf4b69dddf444
-        $I->runShellCommand('docker exec phantom_web mv orangehrm symfony/web');
-        $I->runShellCommand('docker exec phantom_web bash -c "cd /var/www/html/orangehrm && mv * ../"');
+        $I->runShellCommand('docker exec phantom_web cd symfony/web/orangehrm && mv * ../');
         $I->runShellCommand('docker exec phantom_web chmod 777 -R /var/www/html');
     }
 
