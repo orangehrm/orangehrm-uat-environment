@@ -8,7 +8,8 @@ class UATEnvironmentForOSCest
         $I->comment("Cloning project into /var/www/html");
 
         $I->runShellCommand('docker exec phantom_web bash -c "git clone https://github.com/orangehrm/orangehrm.git "');
-       // $I->runShellCommand('docker exec phantom_web bash -c "cd OHRMStandalone/TEST/symfony/web && mv * ../"');
+        $I->runShellCommand('docker exec phantom_web bash -c "cd orangehrm && bash fix_permissions.sh"');
+        $I->runShellCommand('docker exec phantom_web bash -c "cd orangehrm; php installer/cli_install.php 0"');
         $I->runShellCommand('docker exec phantom_web chmod 777 -R /var/www/html');
     }
 
