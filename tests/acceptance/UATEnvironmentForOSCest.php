@@ -10,15 +10,15 @@ class UATEnvironmentForOSCest
     {
         $I->comment("Cloning project into /var/www/html");
 
-        $I->runShellCommand('docker exec phantom_web bash -c "git clone https://github.com/orangehrm/orangehrm.git "');
-        $I->runShellCommand('docker exec phantom_web bash -c "cd orangehrm && bash fix_permissions.sh"');
-        $I->runShellCommand('docker exec phantom_web bash -c "yes | cp -rf config.ini orangehrm/installer/config.ini"');
-        $I->runShellCommand('docker exec phantom_web bash -c "cd orangehrm; composer install -d symfony/lib"');
-        $I->runShellCommand('docker exec phantom_web bash -c "cd orangehrm/symfony; php symfony cc"');
-        $I->runShellCommand('docker exec phantom_web bash -c "cd orangehrm; php installer/cli_install.php 0"');
-        $I->runShellCommand('docker exec phantom_web bash -c "cd orangehrm/symfony; php symfony o:publish-assets"');
-        $I->runShellCommand('docker exec phantom_web bash -c "cd orangehrm/symfony; php symfony d:build-model"');
-        $I->runShellCommand('docker exec phantom_web chmod 777 -R /var/www/html');
+        $I->runShellCommand('docker exec jade_web bash -c "git clone https://github.com/orangehrm/orangehrm.git "');
+        $I->runShellCommand('docker exec jade_web bash -c "cd orangehrm && bash fix_permissions.sh"');
+        $I->runShellCommand('docker exec jade_web bash -c "yes | cp -rf config.ini orangehrm/installer/config.ini"');
+        $I->runShellCommand('docker exec jade_web bash -c "cd orangehrm; composer install -d symfony/lib"');
+        $I->runShellCommand('docker exec jade_web bash -c "cd orangehrm/symfony; php symfony cc"');
+        $I->runShellCommand('docker exec jade_web bash -c "cd orangehrm; php installer/cli_install.php 0"');
+        $I->runShellCommand('docker exec jade_web bash -c "cd orangehrm/symfony; php symfony o:publish-assets"');
+        $I->runShellCommand('docker exec jade_web bash -c "cd orangehrm/symfony; php symfony d:build-model"');
+        $I->runShellCommand('docker exec jade_web chmod 777 -R /var/www/html');
     }
 
 
@@ -148,8 +148,8 @@ class UATEnvironmentForOSCest
     public function cleanup(AcceptanceTester $I)
     {
         $I->comment("remove the project directory from /var/www/html");
-        $I->runShellCommand('docker exec phantom_web rm -rf orangehrm');
-        $I->runShellCommand('docker exec phantom_web rm config.ini');
+        $I->runShellCommand('docker exec jade_web rm -rf orangehrm');
+        $I->runShellCommand('docker exec jade_web rm config.ini');
     }
 
 
