@@ -63,6 +63,7 @@ RUN ln -s /etc/httpd/sites-available/prod.conf /etc/httpd/sites-enabled/prod.con
 RUN ln -s /etc/httpd/sites-available/uat.conf /etc/httpd/sites-enabled/uat.conf
 RUN ln -s /etc/httpd/sites-available/opensource.conf /etc/httpd/sites-enabled/opensource.conf
 RUN ln -s /etc/httpd/sites-available/freehost.conf /etc/httpd/sites-enabled/freehost.conf
+RUN ln -s /etc/httpd/sites-available/orangehrm.conf /etc/httpd/sites-enabled/orangehrm.conf
 #RUN ln -s /etc/httpd/sites-available/test.conf /etc/httpd/sites-enabled/test.conf
 #RUN ln -s /etc/httpd/sites-available/prod.conf /etc/httpd/sites-enabled/prod.conf
 #RUN ln -s /etc/httpd/sites-available/uat.conf /etc/httpd/sites-enabled/uat.conf
