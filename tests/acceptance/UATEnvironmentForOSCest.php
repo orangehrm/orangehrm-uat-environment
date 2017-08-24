@@ -42,9 +42,9 @@ class UATEnvironmentForOSCest
 
     /**
      *
-     * @example{"empname":"testemp1","user":"testuser1","pword":"12345"}
-     * @example{"empname":"testemp2","user":"testuser2","pword":"12345"}
-     * @example{"empname":"testemp3","user":"testuser3","pword":"12345"}
+     * @example{"empname":"testemp1","user":"testuser1","pword":"12345","role":"1"}
+     * @example{"empname":"testemp2","user":"testuser2","pword":"12345","role":"2"}
+     * @example{"empname":"testemp3","user":"testuser3","pword":"12345","role":"2"}
      *
      * */
 
@@ -61,13 +61,15 @@ class UATEnvironmentForOSCest
         $I->amOnPage('https://localhost:6767/orangehrm/symfony/web/index.php/pim/addEmployee');
         $I->fillField('firstName', $example['empname']);
         $I->fillField('lastName', $example['empname']);
-        $I->checkOption('Create Login Details');
-        $I->fillField('User Name', $example['user']);
+//        $I->checkOption('Create Login Details');
+        $I->click('btnSave');
+        $I->amOnPage('https://localhost:6767/orangehrm/symfony/web/index.php/admin/saveSystemUser');
+        $I->selectOption('systemUser[userType]', $example['role']);
+        $I->fillField('Employee Name', $example['empname']);
+        $I->fillField('Username', $example['user']);
         $I->fillField('Password', $example['pword']);
         $I->fillField('Confirm Password', $example['pword']);
-
         $I->click('btnSave');
-
         $I->see($example['empname'] + ' ' + $example['empname']);
     }
 
