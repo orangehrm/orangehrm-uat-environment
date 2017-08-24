@@ -21,7 +21,7 @@ class WebContainerCest
     public function checkPHPVersion(UnitTester $I){
         $I->wantTo("verify php 7.0 is installed in the container");
         $I->runShellCommand("docker exec jade_web php --version");
-        $I->seeInShellOutput('PHP 7.0');
+        $I->seeInShellOutput('PHP 7.1.8');
     }
 
 //    public function checkSupervisorServiceIsRunning(UnitTester $I){
