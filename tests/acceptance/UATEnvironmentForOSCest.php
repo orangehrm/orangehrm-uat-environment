@@ -28,7 +28,7 @@ class UATEnvironmentForOSCest
         $I->am('ohrm user');
         $I->wantTo('Login to application as admin');
         $I->lookForwardTo('access to orangehrm application');
-        $I->amOnPage('https://localhost:6869/orangehrm');
+        $I->amOnPage('https://localhost:6868/orangehrm');
         $I->fillField('txtUsername', 'Admin');
         $I->fillField('txtPassword', 'admin');
         $I->click('Submit');
@@ -36,7 +36,7 @@ class UATEnvironmentForOSCest
     }
 //    public function checkOrangeHRMOSApp(AcceptanceTester $I){
 //        $I->wantTo("verify uat environment is working properly with orangehrm opensource app");
-//        $I->amOnPage('https://localhost:6869/orangehrm');
+//        $I->amOnPage('https://localhost:6868/orangehrm');
 //        $I->see("internal error");
 //    }
 
@@ -54,11 +54,11 @@ class UATEnvironmentForOSCest
         $I->am('ohrm user');
         $I->wantTo('check add user functionality');
         $I->lookForwardTo('access to orangehrm application and add 3 ess users');
-        $I->amOnPage('https://localhost:6869/orangehrm');
+        $I->amOnPage('https://localhost:6868/orangehrm');
         $I->fillField('txtUsername','admin');
         $I->fillField('txtPassword','admin');
         $I->click('Submit');
-        $I->amOnPage('https://localhost:6869/orangehrm/symfony/web/index.php/pim/addEmployee');
+        $I->amOnPage('https://localhost:6868/orangehrm/symfony/web/index.php/pim/addEmployee');
         $I->fillField('firstName',$example['empname']);
         $I->fillField('lastName',$example['empname']);
         $I->checkOption('Create Login Details');
@@ -84,7 +84,7 @@ class UATEnvironmentForOSCest
         $I->am('ohrm user');
         $I->wantTo('check login with new users');
         $I->lookForwardTo('access to orangehrm application using credentials of new users');
-        $I->amOnPage('https://localhost:6869/orangehrm');
+        $I->amOnPage('https://localhost:6868/orangehrm');
         $I->fillField('txtUsername', $example['user']);
         $I->fillField('txtPassword', $example['pword']);
         $I->click('Submit');
@@ -96,12 +96,12 @@ class UATEnvironmentForOSCest
 //        $I->am('ohrm user');
 //        $I->wantTo('add leave period');
 //        $I->lookForwardTo('set leave period for whole year');
-//        $I->amOnPage('https://localhost:6869/orangehrm');
+//        $I->amOnPage('https://localhost:6868/orangehrm');
 //        $I->fillField('txtUsername', 'Admin');
 //        $I->fillField('txtPassword', 'admin');
 //        $I->click('Submit');
 //        $I->see('Dashboard');
-//        $I->amOnPage('https://localhost:6869/orangehrm/symfony/web/index.php/leave/defineLeavePeriod');
+//        $I->amOnPage('https://localhost:6868/orangehrm/symfony/web/index.php/leave/defineLeavePeriod');
 //        $I->selectOption('leaveperiod[cmbStartMonth]', '1');
 //        $I->selectOption('Start Date ', '1');
 //        $I->click('btnEdit');
@@ -114,12 +114,12 @@ class UATEnvironmentForOSCest
         $I->am('ohrm user');
         $I->wantTo('add leave types');
         $I->lookForwardTo('add new casual leave type');
-        $I->amOnPage('https://localhost:6869/orangehrm');
+        $I->amOnPage('https://localhost:6868/orangehrm');
         $I->fillField('txtUsername', 'Admin');
         $I->fillField('txtPassword', 'admin');
         $I->click('Submit');
         $I->see('Dashboard');
-        $I->amOnPage('https://localhost:6869/orangehrm/symfony/web/index.php/leave/defineLeaveType');
+        $I->amOnPage('https://localhost:6868/orangehrm/symfony/web/index.php/leave/defineLeaveType');
         $I->fillField('leaveType[txtLeaveTypeName]', 'casual');
         $I->click('saveButton');
 
@@ -130,12 +130,12 @@ class UATEnvironmentForOSCest
 //        $I->am('ohrm user');
 //        $I->wantTo('add leave to a user');
 //        $I->lookForwardTo('add leave to a user');
-//        $I->amOnPage('https://localhost:6869/orangehrm');
+//        $I->amOnPage('https://localhost:6868/orangehrm');
 //        $I->fillField('txtUsername', 'Admin');
 //        $I->fillField('txtPassword', 'admin');
 //        $I->click('Submit');
 //        $I->see('Dashboard');
-//        $I->amOnPage('https://localhost:6869/orangehrm/symfony/web/index.php/leave/addLeaveEntitlement');
+//        $I->amOnPage('https://localhost:6868/orangehrm/symfony/web/index.php/leave/addLeaveEntitlement');
 //        $I->fillField('#entitlements_employee_empId', 'testemp1');
 //        $I->fillField('entitlements[entitlement]', 'annual');
 //        $I->click('btnSave');
