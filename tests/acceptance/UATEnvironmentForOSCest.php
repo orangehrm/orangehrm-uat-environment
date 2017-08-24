@@ -54,7 +54,7 @@ class UATEnvironmentForOSCest
         $I->am('ohrm user');
         $I->wantTo('check add user functionality');
         $I->lookForwardTo('access to orangehrm application and add 3 ess users');
-        $I->amOnPage('/');
+        $I->amOnPage('https://localhost:6767/orangehrm');
         $I->fillField('txtUsername','admin');
         $I->fillField('txtPassword','admin');
         $I->click('Submit');
