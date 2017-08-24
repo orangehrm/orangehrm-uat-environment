@@ -13,6 +13,8 @@ class UATEnvironmentForOSCest
         $I->runShellCommand('docker exec phantom_web bash -c "cd orangehrm; composer install -d symfony/lib"');
         $I->runShellCommand('docker exec phantom_web bash -c "cd orangehrm/symfony; php symfony cc"');
         $I->runShellCommand('docker exec phantom_web bash -c "cd orangehrm; php installer/cli_install.php 0"');
+        $I->runShellCommand('docker exec phantom_web bash -c "cd orangehrm/symfony; php symfony o:publish-assets"');
+        $I->runShellCommand('docker exec phantom_web bash -c "cd orangehrm/symfony; php symfony d:build-model"');
         $I->runShellCommand('docker exec phantom_web chmod 777 -R /var/www/html');
     }
 
@@ -20,13 +22,25 @@ class UATEnvironmentForOSCest
     {
         $I->comment("remove the project directory from /var/www/html");
         $I->runShellCommand('docker exec phantom_web rm -rf orangehrm');
+        $I->runShellCommand('docker exec phantom_web rm config.ini');
     }
 
-    public function checkOrangeHRMOSApp(AcceptanceTester $I){
-        $I->wantTo("verify uat environment is working properly with orangehrm opensource app");
+    public function testValidCredentials(AcceptanceTester $I)
+    {
+        $I->am('ohrm user');
+        $I->wantTo('Login to application as admin');
+        $I->lookForwardTo('access to orangehrm application');
         $I->amOnPage('https://localhost:6767/orangehrm');
-        $I->see("internal error");
+        $I->fillField('txtUsername','Admin');
+        $I->fillField('txtPassword','admin');
+        $I->click('Submit');
+        $I->see('Dashboard');
     }
+//    public function checkOrangeHRMOSApp(AcceptanceTester $I){
+//        $I->wantTo("verify uat environment is working properly with orangehrm opensource app");
+//        $I->amOnPage('https://localhost:6767/orangehrm');
+//        $I->see("internal error");
+//    }
 
 
 }
