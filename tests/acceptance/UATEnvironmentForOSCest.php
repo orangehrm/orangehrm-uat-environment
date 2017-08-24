@@ -103,7 +103,7 @@ class UATEnvironmentForOSCest
         $I->see('Dashboard');
         $I->amOnPage('https://localhost:6767/orangehrm/symfony/web/index.php/leave/defineLeavePeriod');
         $I->selectOption('leaveperiod[cmbStartMonth]', '1');
-        $I->selectOption('leaveperiod[cmbStartDate]', '2');
+        $I->selectOption('leaveperiod_cmbStartDate', '1');
         $I->click('btnEdit');
 
 
