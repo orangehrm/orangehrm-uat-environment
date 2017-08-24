@@ -103,7 +103,7 @@ class UATEnvironmentForOSCest
         $I->see('Dashboard');
         $I->amOnPage('https://localhost:6767/orangehrm/symfony/web/index.php/leave/defineLeavePeriod');
         $I->selectOption('leaveperiod[cmbStartMonth]', '1');
-        $I->selectOption('leaveperiod_cmbStartDate', '1');
+        $I->selectOption('Start Date ', '1');
         $I->click('btnEdit');
 
 
@@ -136,7 +136,7 @@ class UATEnvironmentForOSCest
         $I->click('Submit');
         $I->see('Dashboard');
         $I->amOnPage('https://localhost:6767/orangehrm/symfony/web/index.php/leave/addLeaveEntitlement');
-        $I->fillField('entitlements[employee][empName]', 'testemp1');
+        $I->fillField('#entitlements_employee_empId', 'testemp1');
         $I->fillField('entitlements[entitlement]', 'annual');
         $I->click('btnSave');
 
