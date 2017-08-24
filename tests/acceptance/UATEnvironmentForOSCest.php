@@ -6,7 +6,7 @@ class UATEnvironmentForOSCest
 
 
 
-    public function _before(AcceptanceTester $I)
+    public function installApp(AcceptanceTester $I)
     {
         $I->comment("Cloning project into /var/www/html");
 
@@ -92,11 +92,8 @@ class UATEnvironmentForOSCest
         $I->see('Dashboard');
     }
 
-    /**
-     * @aftercla
-     */
 
-    public function after(AcceptanceTester $I)
+    public function cleanup(AcceptanceTester $I)
     {
         $I->comment("remove the project directory from /var/www/html");
         $I->runShellCommand('docker exec phantom_web rm -rf orangehrm');
