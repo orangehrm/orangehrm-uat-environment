@@ -70,6 +70,7 @@ RUN ln -s /etc/httpd/sites-available/freehost.conf /etc/httpd/sites-enabled/free
 #RUN ln -s /etc/httpd/sites-available/opensource.conf /etc/httpd/sites-enabled/opensource.conf
 #RUN ln -s /etc/httpd/sites-available/freehost.conf /etc/httpd/sites-enabled/freehost.conf
 
+RUN httpd -S
 # Add supervisor conf
 RUN mkdir -p /var/run/sshd
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
