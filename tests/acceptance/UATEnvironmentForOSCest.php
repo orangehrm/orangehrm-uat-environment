@@ -49,31 +49,27 @@ class UATEnvironmentForOSCest
      * */
 
 
-    public function testAddUserInOHRMApp(AcceptanceTester $I, \Codeception\Example $example)
+    public function testAddUserInOHRMApp( AcceptanceTester $I, \Codeception\Example $example)
     {
         $I->am('ohrm user');
         $I->wantTo('check add user functionality');
         $I->lookForwardTo('access to orangehrm application and add 3 ess users');
-        $I->amOnPage('https://localhost:6767/orangehrm');
-        $I->fillField('txtUsername', 'admin');
-        $I->fillField('txtPassword', 'admin');
+        $I->amOnPage('/');
+        $I->fillField('txtUsername','admin');
+        $I->fillField('txtPassword','admin');
         $I->click('Submit');
         $I->amOnPage('https://localhost:6767/orangehrm/symfony/web/index.php/pim/addEmployee');
-        $I->fillField('firstName', $example['empname']);
-        $I->fillField('lastName', $example['empname']);
+        $I->fillField('firstName',$example['empname']);
+        $I->fillField('lastName',$example['empname']);
         $I->checkOption('Create Login Details');
-        $I->fillField('User name', $example['user']);
-        $I->fillField('Password', $example['pword']);
-        $I->fillField('Confirm Password', $example['pword']);
+        $I->fillField('User Name',$example['user']);
+        $I->fillField('Password',$example['pword']);
+        $I->fillField('Confirm Password',$example['pword']);
+
         $I->click('btnSave');
-//        $I->amOnPage('https://localhost:6767/orangehrm/symfony/web/index.php/admin/saveSystemUser');
-//        $I->selectOption('systemUser[userType]', $example['role']);
-//        $I->fillField('Employee Name', $example['empname']);
 
-//        $I->click('btnSave');
-        $I->see($example['empname'] + ' ' + $example['empname']);
+        $I->see($example['empname']+' '+$example['empname']);
     }
-
 
     /**
      *
@@ -107,7 +103,7 @@ class UATEnvironmentForOSCest
         $I->see('Dashboard');
         $I->amOnPage('https://localhost:6767/orangehrm/symfony/web/index.php/leave/defineLeavePeriod');
         $I->selectOption('leaveperiod[cmbStartMonth]', '1');
-        $I->selectOption('leaveperiod[cmbStartDate]', '1');
+        $I->selectOption('leaveperiod[cmbStartDate]', '2');
         $I->click('btnEdit');
 
 
