@@ -4,11 +4,9 @@
 class UATEnvironmentForOSCest
 {
 
-    /**
-     * @before testValidCredentials
-     */
 
-    public function before(AcceptanceTester $I)
+
+    public function _before(AcceptanceTester $I)
     {
         $I->comment("Cloning project into /var/www/html");
 
