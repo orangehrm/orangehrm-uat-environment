@@ -58,7 +58,7 @@ class UATEnvironmentForOSCest
         $I->fillField('txtUsername', 'admin');
         $I->fillField('txtPassword', 'admin');
         $I->click('Submit');
-        $I->amOnPage('https://localhost:6767/orangehrm/pim/addEmployee');
+        $I->amOnPage('https://localhost:6767/orangehrm/symfony/web/index.php/pim/addEmployee');
         $I->fillField('firstName', $example['empname']);
         $I->fillField('lastName', $example['empname']);
         $I->checkOption('Create Login Details');
