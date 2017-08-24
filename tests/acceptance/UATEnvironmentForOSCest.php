@@ -4,8 +4,11 @@
 class UATEnvironmentForOSCest
 {
 
+    /**
+     * @before testValidCredentials
+     */
 
-    public function _beforeSuite(AcceptanceTester $I)
+    public function before(AcceptanceTester $I)
     {
         $I->comment("Cloning project into /var/www/html");
 
@@ -20,12 +23,7 @@ class UATEnvironmentForOSCest
         $I->runShellCommand('docker exec phantom_web chmod 777 -R /var/www/html');
     }
 
-    public function _afterSuite(AcceptanceTester $I)
-    {
-        $I->comment("remove the project directory from /var/www/html");
-        $I->runShellCommand('docker exec phantom_web rm -rf orangehrm');
-        $I->runShellCommand('docker exec phantom_web rm config.ini');
-    }
+
 
     public function testValidCredentials(AcceptanceTester $I)
     {
@@ -94,6 +92,17 @@ class UATEnvironmentForOSCest
         $I->fillField('txtPassword', $example['pword']);
         $I->click('Submit');
         $I->see('Dashboard');
+    }
+
+    /**
+     * @after testLoginWithNewUsersInOHRMApp
+     */
+
+    public function after(AcceptanceTester $I)
+    {
+        $I->comment("remove the project directory from /var/www/html");
+        $I->runShellCommand('docker exec phantom_web rm -rf orangehrm');
+        $I->runShellCommand('docker exec phantom_web rm config.ini');
     }
 
 
