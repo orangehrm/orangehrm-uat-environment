@@ -5,7 +5,7 @@ class UATEnvironmentForOSCest
 {
 
     /**
-     * @before testValidCredentials
+     * @@beforeClass
      */
     protected function install(AcceptanceTester $I)
     {
@@ -22,16 +22,6 @@ class UATEnvironmentForOSCest
         $I->runShellCommand('docker exec phantom_web chmod 777 -R /var/www/html');
     }
 
-    /**
-     * @after testLoginWithNewUsersInOHRMApp
-     */
-
-    protected function cleanup(AcceptanceTester $I)
-    {
-        $I->comment("remove the project directory from /var/www/html");
-        $I->runShellCommand('docker exec phantom_web rm -rf orangehrm');
-        $I->runShellCommand('docker exec phantom_web rm config.ini');
-    }
 
     public function testValidCredentials(AcceptanceTester $I)
     {
@@ -101,6 +91,20 @@ class UATEnvironmentForOSCest
         $I->click('Submit');
         $I->see('Dashboard');
     }
+
+    
+    /**
+     * @afterClass
+     */
+
+    protected function cleanup(AcceptanceTester $I)
+    {
+        $I->comment("remove the project directory from /var/www/html");
+        $I->runShellCommand('docker exec phantom_web rm -rf orangehrm');
+        $I->runShellCommand('docker exec phantom_web rm config.ini');
+    }
+
+
 
 
 }
