@@ -11,3 +11,4 @@ modules:
             url: http://localhost:6768
         - Cli
         - \Helper\Acceptance
+        - \Codeception\TestCase\Test

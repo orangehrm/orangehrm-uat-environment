@@ -93,7 +93,7 @@ class UATEnvironmentForOSCest
     }
 
     /**
-     * @after testLoginWithNewUsersInOHRMApp
+     * @aftercla
      */
 
     public function after(AcceptanceTester $I)
