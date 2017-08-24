@@ -3,7 +3,11 @@
 
 class UATEnvironmentForOSCest
 {
-    public function _before(AcceptanceTester $I)
+
+    /**
+     * @before testValidCredentials
+     */
+    protected function install(AcceptanceTester $I)
     {
         $I->comment("Cloning project into /var/www/html");
 
@@ -18,7 +22,11 @@ class UATEnvironmentForOSCest
         $I->runShellCommand('docker exec phantom_web chmod 777 -R /var/www/html');
     }
 
-    public function _after(AcceptanceTester $I)
+    /**
+     * @after testLoginWithNewUsersInOHRMApp
+     */
+
+    protected function cleanup(AcceptanceTester $I)
     {
         $I->comment("remove the project directory from /var/www/html");
         $I->runShellCommand('docker exec phantom_web rm -rf orangehrm');
