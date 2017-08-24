@@ -24,7 +24,7 @@ class UATEnvironmentForOSCest
     public function checkOrangeHRMOSApp(AcceptanceTester $I){
         $I->wantTo("verify uat environment is working properly with orangehrm opensource app");
         $I->amOnPage('https://localhost:6767');
-        $I->see("orange");
+        $I->see("OrangeHRM");
     }
 
 
