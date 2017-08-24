@@ -26,7 +26,7 @@ class WebContainerCest
 
     public function checkForNologinFile(UnitTester $I){
         $I->wantTo("verify nologin file is not there");
-        $I->runShellCommand("docker exec ls /var/run/");
+        $I->runShellCommand("docker exec jade_web ls /var/run/");
         $I->dontSeeInShellOutput("nologin");
     }
 
