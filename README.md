@@ -26,7 +26,7 @@ Make sure mentioned prerequisites are there in your host machine.
 
 | Container Name  | Service Name in docker-compose.yml | Description | IP Address | Used Ports |
 |-----------------|------------------------------------|-------------|------------|------------|
-| uat_web         | web                                | PHP 5.6     | 10.5.0.2   | 443        |
+| uat_web         | web                                | PHP 7.1     | 10.5.0.2   | 443        |
 | uat_mysql       | db                                 | MySQL 5.5   | 10.5.0.3   | 3306       |
 | uat_phpmyadmin  | phpmyadmin                         | phpMyAdmin  | 10.5.0.4   | 9090       |
 
