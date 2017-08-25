@@ -73,5 +73,7 @@ RUN ln -s /etc/httpd/sites-available/freehost.conf /etc/httpd/sites-enabled/free
 RUN mkdir -p /var/run/sshd
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 RUN systemctl enable nslcd.service
+RUN systemctl enable systemd-user-sessions.service
+
 # Docker startup
 #CMD ["/usr/bin/supervisord"]
