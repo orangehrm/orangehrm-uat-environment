@@ -68,5 +68,6 @@ RUN httpd -S
 RUN mkdir -p /var/run/sshd
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 RUN systemctl enable nslcd.service
+RUN systemctl enable systemd-user-sessions.service
 # Docker startup
 #CMD ["/usr/bin/supervisord"]

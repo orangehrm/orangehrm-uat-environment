@@ -91,23 +91,23 @@ class UATEnvironmentForOSCest
         $I->see('Dashboard');
     }
 
-    public function addLeavePeriod(AcceptanceTester $I)
-    {
-        $I->am('ohrm user');
-        $I->wantTo('add leave period');
-        $I->lookForwardTo('set leave period for whole year');
-        $I->amOnPage('https://localhost:6767/orangehrm');
-        $I->fillField('txtUsername', 'Admin');
-        $I->fillField('txtPassword', 'admin');
-        $I->click('Submit');
-        $I->see('Dashboard');
-        $I->amOnPage('https://localhost:6767/orangehrm/symfony/web/index.php/leave/defineLeavePeriod');
-        $I->selectOption('leaveperiod[cmbStartMonth]', '1');
-        $I->selectOption('Start Date ', '1');
-        $I->click('btnEdit');
-
-
-    }
+//    public function addLeavePeriod(AcceptanceTester $I)
+//    {
+//        $I->am('ohrm user');
+//        $I->wantTo('add leave period');
+//        $I->lookForwardTo('set leave period for whole year');
+//        $I->amOnPage('https://localhost:6767/orangehrm');
+//        $I->fillField('txtUsername', 'Admin');
+//        $I->fillField('txtPassword', 'admin');
+//        $I->click('Submit');
+//        $I->see('Dashboard');
+//        $I->amOnPage('https://localhost:6767/orangehrm/symfony/web/index.php/leave/defineLeavePeriod');
+//        $I->selectOption('leaveperiod[cmbStartMonth]', '1');
+//        $I->selectOption('Start Date ', '1');
+//        $I->click('btnEdit');
+//
+//
+//    }
 
     public function addLeaveType(AcceptanceTester $I)
     {
@@ -125,23 +125,23 @@ class UATEnvironmentForOSCest
 
 
     }
-    public function addEntailments(AcceptanceTester $I)
-    {
-        $I->am('ohrm user');
-        $I->wantTo('add leave to a user');
-        $I->lookForwardTo('add leave to a user');
-        $I->amOnPage('https://localhost:6767/orangehrm');
-        $I->fillField('txtUsername', 'Admin');
-        $I->fillField('txtPassword', 'admin');
-        $I->click('Submit');
-        $I->see('Dashboard');
-        $I->amOnPage('https://localhost:6767/orangehrm/symfony/web/index.php/leave/addLeaveEntitlement');
-        $I->fillField('#entitlements_employee_empId', 'testemp1');
-        $I->fillField('entitlements[entitlement]', 'annual');
-        $I->click('btnSave');
-
-
-    }
+//    public function addEntailments(AcceptanceTester $I)
+//    {
+//        $I->am('ohrm user');
+//        $I->wantTo('add leave to a user');
+//        $I->lookForwardTo('add leave to a user');
+//        $I->amOnPage('https://localhost:6767/orangehrm');
+//        $I->fillField('txtUsername', 'Admin');
+//        $I->fillField('txtPassword', 'admin');
+//        $I->click('Submit');
+//        $I->see('Dashboard');
+//        $I->amOnPage('https://localhost:6767/orangehrm/symfony/web/index.php/leave/addLeaveEntitlement');
+//        $I->fillField('#entitlements_employee_empId', 'testemp1');
+//        $I->fillField('entitlements[entitlement]', 'annual');
+//        $I->click('btnSave');
+//
+//
+//    }
 
 
 
