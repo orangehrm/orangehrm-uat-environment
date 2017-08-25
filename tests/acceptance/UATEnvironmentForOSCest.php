@@ -27,7 +27,7 @@ class UATEnvironmentForOSCest
         $I->am('ohrm user');
         $I->wantTo('check if login screen is available');
         $I->lookForwardTo('access to orangehrm application');
-        $I->amOnPage('https://localhost:6868/orangehrm');
+        $I->amOnPage('https://localhost:6868/orangehrm/');
         $I->see('OrangeHRM sdjsd');
     }
 
@@ -36,7 +36,7 @@ class UATEnvironmentForOSCest
         $I->am('ohrm user');
         $I->wantTo('Login to application as admin');
         $I->lookForwardTo('access to orangehrm application');
-        $I->amOnPage('https://localhost:6868/orangehrm');
+        $I->amOnPage('https://localhost:6868/orangehrm/');
         $I->fillField('txtUsername', 'Admin');
         $I->fillField('txtPassword', 'admin');
         $I->click('Submit');
