@@ -24,11 +24,11 @@ class WebContainerCest
         $I->seeInShellOutput('PHP 5.6');
     }
 
-    public function checkForNologinFile(UnitTester $I){
-        $I->wantTo("verify nologin file is not there");
-        $I->runShellCommand("docker exec phantom_web ls /var/run/");
-        $I->dontSeeInShellOutput("nologin");
-    }
+//    public function checkForNologinFile(UnitTester $I){
+//        $I->wantTo("verify nologin file is not there");
+//        $I->runShellCommand("docker exec phantom_web ls /var/run/");
+//        $I->dontSeeInShellOutput("nologin");
+//    }
 
 //    public function checkSupervisorServiceIsRunning(UnitTester $I){
 //        $I->wantTo("verify apache is up and running in the container");
