@@ -56,12 +56,12 @@ RUN authconfig --enableldap --enableldapauth --ldapserver="instructor.example.co
 #RUN restorecon /etc/openldap/cacerts/cert.pem
 #RUN authconfig --enableldaptls --update
 EXPOSE 22
-RUN yes | rm /etc/httpd/sites-available/orangehrm.conf
 ADD apache2/sites-available /etc/httpd/sites-available
 RUN ln -s /etc/httpd/sites-available/test.conf /etc/httpd/sites-enabled/test.conf
 RUN ln -s /etc/httpd/sites-available/prod.conf /etc/httpd/sites-enabled/prod.conf
 RUN ln -s /etc/httpd/sites-available/uat.conf /etc/httpd/sites-enabled/uat.conf
 RUN ln -s /etc/httpd/sites-available/opensource.conf /etc/httpd/sites-enabled/opensource.conf
+#RUN ln -s /etc/httpd/sites-available/os.conf /etc/httpd/sites-enabled/os.conf
 RUN ln -s /etc/httpd/sites-available/freehost.conf /etc/httpd/sites-enabled/freehost.conf
 
 #RUN ln -s /etc/httpd/sites-available/test.conf /etc/httpd/sites-enabled/test.conf
