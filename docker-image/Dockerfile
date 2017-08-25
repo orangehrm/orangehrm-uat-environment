@@ -69,7 +69,11 @@ RUN ln -s /etc/httpd/sites-available/freehost.conf /etc/httpd/sites-enabled/free
 #RUN ln -s /etc/httpd/sites-available/uat.conf /etc/httpd/sites-enabled/uat.conf
 #RUN ln -s /etc/httpd/sites-available/opensource.conf /etc/httpd/sites-enabled/opensource.conf
 #RUN ln -s /etc/httpd/sites-available/freehost.conf /etc/httpd/sites-enabled/freehost.conf
-
+RUN mkdir /var/log/httpd/freehost
+RUN mkdir /var/log/httpd/opensource
+RUN mkdir /var/log/httpd/uat
+RUN mkdir /var/log/httpd/test
+RUN mkdir /var/log/httpd/prod
 RUN httpd -S
 # Add supervisor conf
 RUN mkdir -p /var/run/sshd
