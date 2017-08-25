@@ -22,14 +22,6 @@ class UATEnvironmentForOSCest
     }
 
 
-    public function testOrangeHRMLoginScreen(AcceptanceTester $I)
-    {
-        $I->am('ohrm user');
-        $I->wantTo('check if login screen is available');
-        $I->lookForwardTo('access to orangehrm application');
-        $I->amOnPage('https://localhost:6868/orangehrm/');
-        $I->see('OrangeHRM sdjsd');
-    }
 
     public function testValidCredentials(AcceptanceTester $I)
     {
