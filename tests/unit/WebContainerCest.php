@@ -12,7 +12,7 @@ class WebContainerCest
     }
 
   public function checkContainerIsRunning(UnitTester $I){
-        $I->wantTo("verify ubuntu container up and running");
+        $I->wantTo("verify centos container up and running");
         $I->runShellCommand("docker inspect -f {{.State.Running}} phantom_web");
         $I->seeInShellOutput("true");
     }
@@ -50,7 +50,7 @@ class WebContainerCest
     }
 
     public function checkMemcacheServiceIsRunning(UnitTester $I){
-        $I->wantTo("verify apache is up and running in the container");
+        $I->wantTo("verify memcached is up and running in the container");
         $I->runShellCommand("docker exec phantom_web service memcached status");
         $I->seeInShellOutput('active (running)');
     }
@@ -103,7 +103,7 @@ class WebContainerCest
         $I->seeInShellOutput("*test-phantom.orangehrm.com");
         $I->seeInShellOutput("*uat-phantom.orangehrm.com");
         $I->seeInShellOutput("*prod-phantom.orangehrm.com");
-        $I->seeInShellOutput("*opensource-phantom.orangehrm.com");
+        $I->seeInShellOutput("*os-phantom.orangehrm.com");
         $I->seeInShellOutput("*freehost-phantom.orangehrm.com");
     }
 

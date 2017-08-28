@@ -12,7 +12,7 @@ class UATEnvironmentForOSCest
 
         $I->runShellCommand('docker exec phantom_web bash -c "cd OpenSourceFreeHosting && git clone https://github.com/orangehrm/orangehrm.git "');
         $I->runShellCommand('docker exec phantom_web bash -c "cd OpenSourceFreeHosting/orangehrm && bash fix_permissions.sh"');
-        $I->runShellCommand('docker exec phantom_web bash -c "yes | cp -rf config.ini orangehrm/installer/config.ini"');
+        $I->runShellCommand('docker exec phantom_web bash -c "yes | cp -rf config.ini OpenSourceFreeHosting/orangehrm/installer/config.ini"');
         $I->runShellCommand('docker exec phantom_web bash -c "cd OpenSourceFreeHosting/orangehrm; composer install -d symfony/lib"');
         $I->runShellCommand('docker exec phantom_web bash -c "cd OpenSourceFreeHosting/orangehrm/symfony; php symfony cc"');
         $I->runShellCommand('docker exec phantom_web bash -c "cd OpenSourceFreeHosting/orangehrm; php installer/cli_install.php 0"');
@@ -148,7 +148,7 @@ class UATEnvironmentForOSCest
     public function cleanup(AcceptanceTester $I)
     {
         $I->comment("remove the project directory from /var/www/html");
-        $I->runShellCommand('docker exec phantom_web rm -rf orangehrm');
+        $I->runShellCommand('docker exec phantom_web rm -rf OpenSourceFreeHosting/orangehrm');
         $I->runShellCommand('docker exec phantom_web rm config.ini');
     }
 
