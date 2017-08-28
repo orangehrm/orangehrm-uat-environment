@@ -8,27 +8,15 @@ USER root
 WORKDIR /var/www/html/
 
 
-#Install dependent software
-#RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y  --no-install-recommends --force-yes \
-#  libnss-ldap \
-#  libpam-ldap \
-#  libz-dev \
-#  nscd \
-#  openjdk-7-jre \
-#  openssh-server \
-#  sudo \
-#  wget
-
 RUN yum -y install \
+    authconfig \
+    nscd \
+    nss-pam-ldapd \
     openssh-server \
+    openldap-clients \
+    openldap \
     sudo \
     wget \
-    sudo \
-    nscd \
-    openldap \
-    authconfig \
-    openldap-clients \
-    nss-pam-ldapd \
     && yum -y update bash \
     && rm -rf /var/cache/yum/* \
     && yum clean all
@@ -37,7 +25,7 @@ RUN yum -y install \
 #Fix locale issue for SVN
 RUN export LC_ALL=C
 # Enable and configure sshd
-RUN mkdir /var/run/sshd
+#RUN mkdir /var/run/sshd
 
 # SSH login fix. Otherwise user is kicked off after login
 RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
@@ -51,10 +39,7 @@ RUN echo "root:root" | chpasswd
 RUN authconfig --enableforcelegacy --update
 RUN authconfig --enableldap --enableldapauth --ldapserver="instructor.example.com" \
     --ldapbasedn="dc=example,dc=com" --update
-#RUN scp root@instructor.example.com:/etc/openldap/certs/cert.pem \
-#    /etc/openldap/cacerts/cert.pem
-#RUN restorecon /etc/openldap/cacerts/cert.pem
-#RUN authconfig --enableldaptls --update
+
 EXPOSE 22
 
 ADD apache2/sites-available /etc/httpd/sites-available
@@ -63,21 +48,16 @@ RUN ln -s /etc/httpd/sites-available/prod.conf /etc/httpd/sites-enabled/prod.con
 RUN ln -s /etc/httpd/sites-available/uat.conf /etc/httpd/sites-enabled/uat.conf
 RUN ln -s /etc/httpd/sites-available/opensource.conf /etc/httpd/sites-enabled/opensource.conf
 RUN ln -s /etc/httpd/sites-available/freehost.conf /etc/httpd/sites-enabled/freehost.conf
-#RUN ln -s /etc/httpd/sites-available/test.conf /etc/httpd/sites-enabled/test.conf
-#RUN ln -s /etc/httpd/sites-available/prod.conf /etc/httpd/sites-enabled/prod.conf
-#RUN ln -s /etc/httpd/sites-available/uat.conf /etc/httpd/sites-enabled/uat.conf
-#RUN ln -s /etc/httpd/sites-available/opensource.conf /etc/httpd/sites-enabled/opensource.conf
-#RUN ln -s /etc/httpd/sites-available/freehost.conf /etc/httpd/sites-enabled/freehost.conf
-RUN mkdir /var/log/httpd/freehost
-RUN mkdir /var/log/httpd/opensource
-RUN mkdir /var/log/httpd/uat
-RUN mkdir /var/log/httpd/test
-RUN mkdir /var/log/httpd/prod
+
+RUN mkdir /var/log/httpd/freehost /var/log/httpd/opensource /var/log/httpd/uat /var/log/httpd/test /var/log/httpd/prod
+
+RUN httpd -S
+
+RUN yes| rm /usr/lib/tmpfiles.d/systemd-nologin.conf
 # Add supervisor conf
 RUN mkdir -p /var/run/sshd
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+#ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 RUN systemctl enable nslcd.service
 RUN systemctl enable systemd-user-sessions.service
-
 # Docker startup
 #CMD ["/usr/bin/supervisord"]

@@ -24,11 +24,14 @@ class WebContainerCest
         $I->seeInShellOutput('PHP 7.1.8');
     }
 
-//    public function checkSupervisorServiceIsRunning(UnitTester $I){
-//        $I->wantTo("verify apache is up and running in the container");
-//        $I->runShellCommand("docker exec jade_web service supervisor status");
-//        $I->seeInShellOutput('supervisord is running');
-//    }
+    public function checkForNologinFile(UnitTester $I){
+        $I->wantTo("verify nologin file is not there");
+        $I->runShellCommand("docker exec phantom_web ls /var/run/");
+        $I->dontSeeInShellOutput("nologin");
+    }
+
+
+
 
     public function checkApacheServiceIsRunning(UnitTester $I){
         $I->wantTo("verify apache is up and running in the container");
@@ -96,7 +99,7 @@ class WebContainerCest
         $I->seeInShellOutput("*test-phantom.orangehrm.com");
         $I->seeInShellOutput("*uat-phantom.orangehrm.com");
         $I->seeInShellOutput("*prod-phantom.orangehrm.com");
-        $I->seeInShellOutput("*opensource-phantom.orangehrm.com");
+        $I->seeInShellOutput("*os-phantom.orangehrm.com");
         $I->seeInShellOutput("*freehost-phantom.orangehrm.com");
     }
 
