@@ -30,11 +30,6 @@ class WebContainerCest
         $I->dontSeeInShellOutput("nologin");
     }
 
-//    public function checkSupervisorServiceIsRunning(UnitTester $I){
-//        $I->wantTo("verify apache is up and running in the container");
-//        $I->runShellCommand("docker exec uat_web service supervisor status");
-//        $I->seeInShellOutput('supervisord is running');
-//    }
 
     public function checkApacheServiceIsRunning(UnitTester $I){
         $I->wantTo("verify apache is up and running in the container");
