@@ -25,7 +25,7 @@ RUN yum -y install \
 #Fix locale issue for SVN
 RUN export LC_ALL=C
 # Enable and configure sshd
-RUN mkdir /var/run/sshd
+#RUN mkdir /var/run/sshd
 
 # SSH login fix. Otherwise user is kicked off after login
 RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
@@ -56,7 +56,7 @@ RUN httpd -S
 RUN yes| rm /usr/lib/tmpfiles.d/systemd-nologin.conf
 # Add supervisor conf
 RUN mkdir -p /var/run/sshd
-ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+#ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 RUN systemctl enable nslcd.service
 RUN systemctl enable systemd-user-sessions.service
 # Docker startup
