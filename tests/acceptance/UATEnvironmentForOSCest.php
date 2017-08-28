@@ -10,15 +10,15 @@ class UATEnvironmentForOSCest
     {
         $I->comment("Cloning project into /var/www/html");
 
-        $I->runShellCommand('docker exec jade_web bash -c "git clone https://github.com/orangehrm/orangehrm.git "');
-        $I->runShellCommand('docker exec jade_web bash -c "cd orangehrm && bash fix_permissions.sh"');
-        $I->runShellCommand('docker exec jade_web bash -c "yes | cp -rf config.ini orangehrm/installer/config.ini"');
-        $I->runShellCommand('docker exec jade_web bash -c "cd orangehrm; composer install -d symfony/lib"');
-        $I->runShellCommand('docker exec jade_web bash -c "cd orangehrm/symfony; php symfony cc"');
-        $I->runShellCommand('docker exec jade_web bash -c "cd orangehrm; php installer/cli_install.php 0"');
-        $I->runShellCommand('docker exec jade_web bash -c "cd orangehrm/symfony; php symfony o:publish-assets"');
-        $I->runShellCommand('docker exec jade_web bash -c "cd orangehrm/symfony; php symfony d:build-model"');
-        $I->runShellCommand('docker exec jade_web chmod 777 -R /var/www/html');
+        $I->runShellCommand('docker exec phantom_web bash -c "cd OpenSourceFreeHosting && git clone https://github.com/orangehrm/orangehrm.git "');
+        $I->runShellCommand('docker exec phantom_web bash -c "cd OpenSourceFreeHosting/orangehrm && bash fix_permissions.sh"');
+        $I->runShellCommand('docker exec phantom_web bash -c "yes | cp -rf config.ini OpenSourceFreeHosting/orangehrm/installer/config.ini"');
+        $I->runShellCommand('docker exec phantom_web bash -c "cd OpenSourceFreeHosting/orangehrm; composer install -d symfony/lib"');
+        $I->runShellCommand('docker exec phantom_web bash -c "cd OpenSourceFreeHosting/orangehrm/symfony; php symfony cc"');
+        $I->runShellCommand('docker exec phantom_web bash -c "cd OpenSourceFreeHosting/orangehrm; php installer/cli_install.php 0"');
+        $I->runShellCommand('docker exec phantom_web bash -c "cd OpenSourceFreeHosting/orangehrm/symfony; php symfony o:publish-assets"');
+        $I->runShellCommand('docker exec phantom_web bash -c "cd OpenSourceFreeHosting/orangehrm/symfony; php symfony d:build-model"');
+        $I->runShellCommand('docker exec phantom_web chmod 777 -R /var/www/html');
     }
 
 
@@ -28,7 +28,7 @@ class UATEnvironmentForOSCest
         $I->am('ohrm user');
         $I->wantTo('Login to application as admin');
         $I->lookForwardTo('access to orangehrm application');
-        $I->amOnPage('https://localhost:6868/orangehrm/');
+        $I->amOnPage('https://localhost:6767/OpenSourceFreeHosting/orangehrm');
         $I->fillField('txtUsername', 'Admin');
         $I->fillField('txtPassword', 'admin');
         $I->click('Submit');
@@ -36,7 +36,7 @@ class UATEnvironmentForOSCest
     }
 //    public function checkOrangeHRMOSApp(AcceptanceTester $I){
 //        $I->wantTo("verify uat environment is working properly with orangehrm opensource app");
-//        $I->amOnPage('https://localhost:6868/orangehrm');
+//        $I->amOnPage('https://localhost:6767/OpenSourceFreeHosting/orangehrm');
 //        $I->see("internal error");
 //    }
 
@@ -54,11 +54,11 @@ class UATEnvironmentForOSCest
         $I->am('ohrm user');
         $I->wantTo('check add user functionality');
         $I->lookForwardTo('access to orangehrm application and add 3 ess users');
-        $I->amOnPage('https://localhost:6868/orangehrm');
+        $I->amOnPage('https://localhost:6767/OpenSourceFreeHosting/orangehrm');
         $I->fillField('txtUsername','admin');
         $I->fillField('txtPassword','admin');
         $I->click('Submit');
-        $I->amOnPage('https://localhost:6868/orangehrm/symfony/web/index.php/pim/addEmployee');
+        $I->amOnPage('https://localhost:6767/OpenSourceFreeHosting/orangehrm/symfony/web/index.php/pim/addEmployee');
         $I->fillField('firstName',$example['empname']);
         $I->fillField('lastName',$example['empname']);
         $I->checkOption('Create Login Details');
@@ -84,7 +84,7 @@ class UATEnvironmentForOSCest
         $I->am('ohrm user');
         $I->wantTo('check login with new users');
         $I->lookForwardTo('access to orangehrm application using credentials of new users');
-        $I->amOnPage('https://localhost:6868/orangehrm');
+        $I->amOnPage('https://localhost:6767/OpenSourceFreeHosting/orangehrm');
         $I->fillField('txtUsername', $example['user']);
         $I->fillField('txtPassword', $example['pword']);
         $I->click('Submit');
@@ -96,12 +96,12 @@ class UATEnvironmentForOSCest
 //        $I->am('ohrm user');
 //        $I->wantTo('add leave period');
 //        $I->lookForwardTo('set leave period for whole year');
-//        $I->amOnPage('https://localhost:6868/orangehrm');
+//        $I->amOnPage('https://localhost:6767/OpenSourceFreeHosting/orangehrm');
 //        $I->fillField('txtUsername', 'Admin');
 //        $I->fillField('txtPassword', 'admin');
 //        $I->click('Submit');
 //        $I->see('Dashboard');
-//        $I->amOnPage('https://localhost:6868/orangehrm/symfony/web/index.php/leave/defineLeavePeriod');
+//        $I->amOnPage('https://localhost:6767/OpenSourceFreeHosting/orangehrm/symfony/web/index.php/leave/defineLeavePeriod');
 //        $I->selectOption('leaveperiod[cmbStartMonth]', '1');
 //        $I->selectOption('Start Date ', '1');
 //        $I->click('btnEdit');
@@ -114,28 +114,29 @@ class UATEnvironmentForOSCest
         $I->am('ohrm user');
         $I->wantTo('add leave types');
         $I->lookForwardTo('add new casual leave type');
-        $I->amOnPage('https://localhost:6868/orangehrm');
+        $I->amOnPage('https://localhost:6767/OpenSourceFreeHosting/orangehrm');
         $I->fillField('txtUsername', 'Admin');
         $I->fillField('txtPassword', 'admin');
         $I->click('Submit');
         $I->see('Dashboard');
-        $I->amOnPage('https://localhost:6868/orangehrm/symfony/web/index.php/leave/defineLeaveType');
+        $I->amOnPage('https://localhost:6767/OpenSourceFreeHosting/orangehrm/symfony/web/index.php/leave/defineLeaveType');
         $I->fillField('leaveType[txtLeaveTypeName]', 'casual');
         $I->click('saveButton');
 
 
     }
+
 //    public function addEntailments(AcceptanceTester $I)
 //    {
 //        $I->am('ohrm user');
 //        $I->wantTo('add leave to a user');
 //        $I->lookForwardTo('add leave to a user');
-//        $I->amOnPage('https://localhost:6868/orangehrm');
+//        $I->amOnPage('https://localhost:6767/OpenSourceFreeHosting/orangehrm');
 //        $I->fillField('txtUsername', 'Admin');
 //        $I->fillField('txtPassword', 'admin');
 //        $I->click('Submit');
 //        $I->see('Dashboard');
-//        $I->amOnPage('https://localhost:6868/orangehrm/symfony/web/index.php/leave/addLeaveEntitlement');
+//        $I->amOnPage('https://localhost:6767/OpenSourceFreeHosting/orangehrm/symfony/web/index.php/leave/addLeaveEntitlement');
 //        $I->fillField('#entitlements_employee_empId', 'testemp1');
 //        $I->fillField('entitlements[entitlement]', 'annual');
 //        $I->click('btnSave');
@@ -148,8 +149,8 @@ class UATEnvironmentForOSCest
     public function cleanup(AcceptanceTester $I)
     {
         $I->comment("remove the project directory from /var/www/html");
-        $I->runShellCommand('docker exec jade_web rm -rf orangehrm');
-        $I->runShellCommand('docker exec jade_web rm config.ini');
+        $I->runShellCommand('docker exec phantom_web rm -rf OpenSourceFreeHosting/orangehrm');
+        $I->runShellCommand('docker exec phantom_web rm config.ini');
     }
 
 
