@@ -1,4 +1,4 @@
-# OrangeHRM UAT Environment for PHP 5.6
+# OrangeHRM UAT Environment for PHP 7.0 - centos
 [![Docker Automated](https://img.shields.io/docker/automated/orangehrm/orangehrm-environment-images.svg)](https://hub.docker.com/r/orangehrm/orangehrm-environment-images/) [![Docker Status](https://img.shields.io/docker/build/orangehrm/orangehrm-environment-images.svg)](https://hub.docker.com/r/orangehrm/orangehrm-environment-images/) [![Docker Pulls](https://img.shields.io/docker/pulls/orangehrm/orangehrm-environment-images.svg)](https://hub.docker.com/r/orangehrm/orangehrm-environment-images/) [![Build Status](https://travis-ci.org/orangehrm/orangehrm-uat-environment.svg?branch=php-5.6)](https://travis-ci.org/orangehrm/orangehrm-uat-environment)
 
 ## Introduction
@@ -31,7 +31,7 @@ Make sure mentioned prerequisites are there in your host machine.
 | uat_phpmyadmin  | phpmyadmin                         | phpMyAdmin  | 10.5.0.4   | 9090       |
 
 ## Install orangehrm eagle-core inside the container
-1. Get a checkout from svn to ohrm_uat directory (`svn checkout https://repos.orangehrm.com/enterprise/branch/eagle-core/`).
+1. Get a checkout from svn to ohrm_uat directory.
 2. To get the named virtual hosts to work, add the project folder name to /etc/hosts file (`127.0.0.1 folderName`).
 3. access from your browser (`https://folderName`). If you have changed the default port configuration in uat_web container then you can access using `htttps://folderName`
 4. Continue installation by installing system as normal way. (you can have access to inside of uat_web_56 container by running the command `docker exec -it uat_web_56 bash`)
