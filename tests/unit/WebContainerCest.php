@@ -30,9 +30,6 @@ class WebContainerCest
         $I->dontSeeInShellOutput("nologin");
     }
 
-
-
-
     public function checkApacheServiceIsRunning(UnitTester $I){
         $I->wantTo("verify apache is up and running in the container");
         $I->runShellCommand("ping -c 10 localhost");
