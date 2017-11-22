@@ -53,7 +53,7 @@ class WebContainerCest
     public function checkSSHInstallation(UnitTester $I){
             $I->wantTo("verify OpenSSH is installed in the container");
             $I->runShellCommand("docker exec phantom_web rpm -qa | grep openssh-server");
-            $I->seeInShellOutput("openssh-server-6.6.1p1-35");
+            $I->seeInShellOutput("openssh-server-7");
     }
 
     public function checkSSHServiceRunning(UnitTester $I){
@@ -71,13 +71,13 @@ class WebContainerCest
     public function checkOpenldapInstallation(UnitTester $I){
             $I->wantTo("verify open-ldap is installed in the container");
             $I->runShellCommand("docker exec phantom_web rpm -qa | grep openldap");
-            $I->seeInShellOutput("openldap-clients-2.4.40");
+            $I->seeInShellOutput("openldap-clients-2.4");
     }
 
     public function checkNSCDInstallation(UnitTester $I){
             $I->wantTo("verify nscd is installed in the container");
             $I->runShellCommand("docker exec phantom_web rpm -qa | grep nscd");
-            $I->seeInShellOutput("nscd-2.17-157");
+            $I->seeInShellOutput("nscd-2");
     }
 
     public function checkJavaVersion(UnitTester $I){
@@ -89,7 +89,7 @@ class WebContainerCest
     public function checkWgetVersion(UnitTester $I){
             $I->wantTo("verify wget is installed in the container");
             $I->runShellCommand("docker exec phantom_web rpm -qa | grep wget");
-            $I->seeInShellOutput("wget-1.14-13");
+            $I->seeInShellOutput("wget-1.14");
     }
 
     public function checkVHostConfig(UnitTester $I){
