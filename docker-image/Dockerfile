@@ -15,6 +15,7 @@ RUN yum -y install \
     openssh-server \
     openldap-clients \
     openldap \
+    rsyslog \
     sudo \
     wget \
     && yum -y update bash \
@@ -58,6 +59,7 @@ RUN yes| rm /usr/lib/tmpfiles.d/systemd-nologin.conf
 RUN mkdir -p /var/run/sshd
 #ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 RUN systemctl enable nslcd.service
+RUN systemctl enable rsyslog.service
 RUN systemctl enable systemd-user-sessions.service
 # Docker startup
 #CMD ["/usr/bin/supervisord"]
