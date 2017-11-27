@@ -21,7 +21,7 @@ class WebContainerCest
     public function checkPHPVersion(UnitTester $I){
         $I->wantTo("verify php 7.0 is installed in the container");
         $I->runShellCommand("docker exec jade_web php --version");
-        $I->seeInShellOutput('PHP 7.1.8');
+        $I->seeInShellOutput('PHP 7.1');
     }
 
     public function checkForNologinFile(UnitTester $I){
@@ -52,7 +52,7 @@ class WebContainerCest
     public function checkSSHInstallation(UnitTester $I){
             $I->wantTo("verify OpenSSH is installed in the container");
             $I->runShellCommand("docker exec jade_web rpm -qa | grep openssh-server");
-            $I->seeInShellOutput("openssh-server-6.6.1p1-35");
+            $I->seeInShellOutput("openssh-server-7");
     }
 
     public function checkSSHServiceRunning(UnitTester $I){
@@ -64,19 +64,19 @@ class WebContainerCest
     public function checkNSSPAMLDAPInstallation(UnitTester $I){
             $I->wantTo("verify nss-pam-ldapd is installed in the container");
             $I->runShellCommand("docker exec jade_web rpm -qa | grep nss-pam-ldapd");
-            $I->seeInShellOutput("nss-pam-ldapd-0.8.13");
+            $I->seeInShellOutput("nss-pam-ldapd-0.8");
     }
 
     public function checkOpenldapInstallation(UnitTester $I){
             $I->wantTo("verify open-ldap is installed in the container");
             $I->runShellCommand("docker exec jade_web rpm -qa | grep openldap");
-            $I->seeInShellOutput("openldap-clients-2.4.40");
+            $I->seeInShellOutput("openldap-clients-2");
     }
 
     public function checkNSCDInstallation(UnitTester $I){
             $I->wantTo("verify nscd is installed in the container");
             $I->runShellCommand("docker exec jade_web rpm -qa | grep nscd");
-            $I->seeInShellOutput("nscd-2.17-157");
+            $I->seeInShellOutput("nscd-2");
     }
 
     public function checkJavaVersion(UnitTester $I){
@@ -88,7 +88,7 @@ class WebContainerCest
     public function checkWgetVersion(UnitTester $I){
             $I->wantTo("verify wget is installed in the container");
             $I->runShellCommand("docker exec jade_web rpm -qa | grep wget");
-            $I->seeInShellOutput("wget-1.14-13");
+            $I->seeInShellOutput("wget-1");
     }
     public function checkVHostConfig(UnitTester $I){
         $I->wantTo("verify test vhost is configured in the container");
