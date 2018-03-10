@@ -90,15 +90,15 @@ class WebContainerCest
             $I->runShellCommand("docker exec infinity_web rpm -qa | grep wget");
             $I->seeInShellOutput("wget-1");
     }
-    public function checkVHostConfig(UnitTester $I){
-        $I->wantTo("verify test vhost is configured in the container");
-        $I->runShellCommand("docker exec infinity_web httpd -S");
-        $I->seeInShellOutput("*-test-infinity.orangehrm.com");
-        $I->seeInShellOutput("*-uat-infinity.orangehrm.com");
-        $I->seeInShellOutput("*-prod-infinity.orangehrm.com");
-        $I->seeInShellOutput("*-os-infinity.orangehrm.com");
-        $I->seeInShellOutput("*-freehost-infinity.orangehrm.com");
-    }
+//    public function checkVHostConfig(UnitTester $I){
+//        $I->wantTo("verify test vhost is configured in the container");
+//        $I->runShellCommand("docker exec infinity_web httpd -S");
+//        $I->seeInShellOutput("*-test-infinity.orangehrm.com");
+//        $I->seeInShellOutput("*-uat-infinity.orangehrm.com");
+//        $I->seeInShellOutput("*-prod-infinity.orangehrm.com");
+//        $I->seeInShellOutput("*-os-infinity.orangehrm.com");
+//        $I->seeInShellOutput("*-freehost-infinity.orangehrm.com");
+//    }
 
 
 
