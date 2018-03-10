@@ -1,4 +1,4 @@
-FROM orangehrm/orangehrm-environment-images:dev-7.1-centos
+FROM orangehrm/orangehrm-environment-images:test-7.1
 
 MAINTAINER orangehrm
 LABEL authors = "Ridwan Shariffdeen <ridwan@orangehrmlive.com> , Thulana Kannangara <thulana@orangehrm.us.com>"
@@ -37,17 +37,11 @@ RUN useradd -ms /bin/bash -p sa3tHJ3/KuYvI orangehrm
 RUN echo "root:root" | chpasswd
 
 RUN authconfig --enableforcelegacy --update
-RUN authconfig --enableldap --enableldapauth --ldapserver="instructor.example.com" \
-    --ldapbasedn="dc=example,dc=com" --update
+RUN authconfig --enableldap --enableldapauth --enablemkhomedir --ldapserver="ldaps://ldap.orangehrm.com ldaps://ldap-slave.orangehrm.com" \
+    --ldapbasedn="dc=orangehrm,dc=com" --update
 
 EXPOSE 22
 
-ADD apache2/sites-available /etc/httpd/sites-available
-RUN ln -s /etc/httpd/sites-available/test.conf /etc/httpd/sites-enabled/test.conf
-RUN ln -s /etc/httpd/sites-available/prod.conf /etc/httpd/sites-enabled/prod.conf
-RUN ln -s /etc/httpd/sites-available/uat.conf /etc/httpd/sites-enabled/uat.conf
-RUN ln -s /etc/httpd/sites-available/opensource.conf /etc/httpd/sites-enabled/opensource.conf
-RUN ln -s /etc/httpd/sites-available/freehost.conf /etc/httpd/sites-enabled/freehost.conf
 
 RUN mkdir /var/log/httpd/freehost /var/log/httpd/opensource /var/log/httpd/uat /var/log/httpd/test /var/log/httpd/prod
 

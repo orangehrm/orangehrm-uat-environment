@@ -10,15 +10,15 @@ class UATEnvironmentForOSCest
     {
         $I->comment("Cloning project into /var/www/html");
 
-        $I->runShellCommand('docker exec jade_web bash -c "cd OpenSourceFreeHosting && git clone https://github.com/orangehrm/orangehrm.git "');
-        $I->runShellCommand('docker exec jade_web bash -c "cd OpenSourceFreeHosting/orangehrm && bash fix_permissions.sh"');
-        $I->runShellCommand('docker exec jade_web bash -c "yes | cp -rf config.ini OpenSourceFreeHosting/orangehrm/installer/config.ini"');
-        $I->runShellCommand('docker exec jade_web bash -c "cd OpenSourceFreeHosting/orangehrm; composer install -d symfony/lib"');
-        $I->runShellCommand('docker exec jade_web bash -c "cd OpenSourceFreeHosting/orangehrm/symfony; php symfony cc"');
-        $I->runShellCommand('docker exec jade_web bash -c "cd OpenSourceFreeHosting/orangehrm; php installer/cli_install.php 0"');
-        $I->runShellCommand('docker exec jade_web bash -c "cd OpenSourceFreeHosting/orangehrm/symfony; php symfony o:publish-assets"');
-        $I->runShellCommand('docker exec jade_web bash -c "cd OpenSourceFreeHosting/orangehrm/symfony; php symfony d:build-model"');
-        $I->runShellCommand('docker exec jade_web chmod 777 -R /var/www/html');
+        $I->runShellCommand('docker exec infinity_web bash -c "cd OpenSourceFreeHosting && git clone https://github.com/orangehrm/orangehrm.git "');
+        $I->runShellCommand('docker exec infinity_web bash -c "cd OpenSourceFreeHosting/orangehrm && bash fix_permissions.sh"');
+        $I->runShellCommand('docker exec infinity_web bash -c "yes | cp -rf config.ini OpenSourceFreeHosting/orangehrm/installer/config.ini"');
+        $I->runShellCommand('docker exec infinity_web bash -c "cd OpenSourceFreeHosting/orangehrm; composer install -d symfony/lib"');
+        $I->runShellCommand('docker exec infinity_web bash -c "cd OpenSourceFreeHosting/orangehrm/symfony; php symfony cc"');
+        $I->runShellCommand('docker exec infinity_web bash -c "cd OpenSourceFreeHosting/orangehrm; php installer/cli_install.php 0"');
+        $I->runShellCommand('docker exec infinity_web bash -c "cd OpenSourceFreeHosting/orangehrm/symfony; php symfony o:publish-assets"');
+        $I->runShellCommand('docker exec infinity_web bash -c "cd OpenSourceFreeHosting/orangehrm/symfony; php symfony d:build-model"');
+        $I->runShellCommand('docker exec infinity_web chmod 777 -R /var/www/html');
     }
 
 

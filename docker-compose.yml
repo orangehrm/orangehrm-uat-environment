@@ -3,16 +3,25 @@ services:
   web:
     image: orangehrm/orangehrm-environment-images:uat-7.1-centos
     ports:
-      - "6868:443"
-      - "2662:22"
+      - "7878:443"
+      - "2882:22"
     volumes:
     - ./html:/var/www/html
     - ./home:/home
-    - ./config/php5/php.ini:/etc/php.ini
+    - ./config/pam/su:/etc/pam.d/su
+    - ./config/pam/sshd:/etc/pam.d/sshd
+    - ./config/pam/password-auth:/etc/pam.d/password-auth
+    - ./config/pam/login:/etc/pam.d/login
+    - ./config/pam/system-auth:/etc/pam.d/system-auth
+    - ./config/security/access.conf:/etc/security/access.conf
+    - ./config/resolve-permission.sh:/etc/resolve-permission.sh
+    - ./config/resolve.conf:/etc/resolve.conf
+    - ./config/php7/php.ini:/etc/php.ini
     - ./config/mysql-client:/etc/mysql
-    - ./config/apache2/sites-available:/etc/httpd/sites-available
+    - ./config/apache2/sites-available:/etc/httpd/sites-enabled
     - ./config/apache2/cert:/etc/httpd/cert
-    - ./logs/ubuntu_logs:/var/log/apache2
+    - ./config/apache2/ssl.conf:/etc/httpd/conf.d/ssl.conf
+    - ./logs/ubuntu_logs:/var/log/httpd
     - /etc/localtime:/etc/localtime
     - ./config/hostname:/etc/hostname
     - ./config/welcome:/etc/motd
@@ -22,30 +31,36 @@ services:
     - ./config/ldap/cert:/etc/openldap/cacerts
     - ./config/ldap/nsswitch.conf:/etc/nsswitch.conf
     - ./config/ldap/nslcd.conf:/etc/nslcd.conf
+    - ./config/ldap/sudo-ldap.conf:/etc/sudo-ldap.conf
     - /sys/fs/cgroup:/sys/fs/cgroup:ro
 
     privileged: true
     links:
       - db
     restart: always
-    hostname: orangehrm-jade-web
-    container_name: jade_web
-    extra_hosts:
-      - "ldap.orangehrm.com:172.18.0.1"
-      - "ftp.orangehrm.com:172.18.0.1"
+    networks:
+      infinitynet:
+        ipv4_address: 172.40.0.71
+    hostname: infinity-server
+    container_name: infinity_web
+
   db:
-    image: mysql:5.5
+    image: mariadb:10.2
     expose:
       - "3306"
     volumes:
       - ./config/mysql-server:/etc/mysql
       - ./logs/mysql_logs:/var/log
       - /etc/localtime:/etc/localtime
+      - mariadb102:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: 1234
+    networks:
+      infinitynet:
+        ipv4_address: 172.40.0.102
     restart: always
-    hostname: orangehrm-jade-db
-    container_name: jade_mysql
+    hostname: orangehrm-infinity-db
+    container_name: infinity_mysql
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -54,10 +69,22 @@ services:
     links:
       - db
     ports:
-      - "6869:80"
+      - "7879:80"
+    networks:
+      infinitynet:
+        ipv4_address: 172.40.0.20
     environment:
       PMA_HOST: db
     restart: always
-    container_name: jade_phpmyadmin
+    container_name: infinity_phpmyadmin
+
 volumes:
-  mysql:
+  mariadb102:
+
+networks:
+  infinitynet:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 172.40.0.2/16
+         gateway: 172.40.0.1
