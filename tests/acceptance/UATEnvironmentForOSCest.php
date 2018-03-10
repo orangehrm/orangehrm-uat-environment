@@ -5,7 +5,6 @@ class UATEnvironmentForOSCest
 {
 
 
-
     public function installApp(AcceptanceTester $I)
     {
         $I->comment("Cloning project into /var/www/html");
@@ -143,7 +142,6 @@ class UATEnvironmentForOSCest
 ////
 ////
 ////    }
-
 
 
     public function cleanup(AcceptanceTester $I)

@@ -30,12 +30,12 @@ class WebContainerCest
         $I->dontSeeInShellOutput("nologin");
     }
 
-    public function checkApacheServiceIsRunning(UnitTester $I){
-        $I->wantTo("verify apache is up and running in the container");
-        $I->runShellCommand("ping -c 10 localhost");
-        $I->runShellCommand("docker exec infinity_web service httpd status");
-        $I->seeInShellOutput('active (running)');
-    }
+//    public function checkApacheServiceIsRunning(UnitTester $I){
+//        $I->wantTo("verify apache is up and running in the container");
+//        $I->runShellCommand("ping -c 10 localhost");
+//        $I->runShellCommand("docker exec infinity_web service httpd status");
+//        $I->seeInShellOutput('active (running)');
+//    }
 
     public function checkCronServiceIsRunning(UnitTester $I){
         $I->wantTo("verify cron is up and running in the container");
