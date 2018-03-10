@@ -27,7 +27,7 @@ class MysqlContainerCest
 
     public function checkMySQLConfigurations(AcceptanceTester $I){
         $I->wantTo("verify my.cnf configuration is loaded");
-        $I->runShellCommand("docker exec jade_mysql mysql -uroot -p1234 -se 'show variables'");
+        $I->runShellCommand("docker exec infinity_mysql mysql -uroot -p1234 -se 'show variables'");
         $I->seeInShellOutput("event_scheduler	ON");
         $I->seeInShellOutput("innodb_log_buffer_size	8388608");
         $I->seeInShellOutput("innodb_buffer_pool_size	2147483648");

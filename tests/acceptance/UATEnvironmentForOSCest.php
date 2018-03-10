@@ -149,8 +149,8 @@ class UATEnvironmentForOSCest
     public function cleanup(AcceptanceTester $I)
     {
         $I->comment("remove the project directory from /var/www/html");
-        $I->runShellCommand('docker exec jade_web rm -rf OpenSourceFreeHosting/orangehrm');
-        $I->runShellCommand('docker exec jade_web rm config.ini');
+        $I->runShellCommand('docker exec infinity_web rm -rf OpenSourceFreeHosting/orangehrm');
+        $I->runShellCommand('docker exec infinity_web rm config.ini');
     }
 
 
