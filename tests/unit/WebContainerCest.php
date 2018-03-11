@@ -100,6 +100,16 @@ class WebContainerCest
 //        $I->seeInShellOutput("*-freehost-infinity.orangehrm.com");
 //    }
 
+    public function checkRabbitMqStatus(UnitTester $I){
+        $I->wantTo("verify docker is listening to rabbitMq queues");
+        $I->runShellCommand("netstat -ltpn | grep 7881");
+        $I->seeInShellOutput("7881");
+    }
 
+    public function checkRabbitMqManagementPlugin(UnitTester $I){
+        $I->wantTo("verify docker is listening to rabbitMq management plugin");
+        $I->runShellCommand("netstat -ltpn | grep 7880");
+        $I->seeInShellOutput("7880");
+    }
 
 }
