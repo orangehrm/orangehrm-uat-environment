@@ -11,6 +11,7 @@ WORKDIR /var/www/html/
 RUN yum -y install \
     authconfig \
     nscd \
+    rsyslog \
     nss-pam-ldapd \
     openssh-server \
     openldap-clients \
