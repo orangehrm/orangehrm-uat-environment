@@ -84,7 +84,7 @@ services:
     container_name: infinity_rabbitmq
     ports:
       - "7880:15671"
-      - "7881: 5671"
+      - "7881:5671"
     volumes:
       - ./config/rabbitmq/cert:/cert_rabbitmq/
       - infinity_rabbitmq:/var/lib/rabbitmq
