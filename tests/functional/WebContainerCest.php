@@ -23,4 +23,5 @@ class WebContainerCest
         $I->runShellCommand("docker exec phantom_web bash -c 'rpm -qa | grep telnet'");
         $I->seeInShellOutput('telnet-0.17');
     }
+    
 }
