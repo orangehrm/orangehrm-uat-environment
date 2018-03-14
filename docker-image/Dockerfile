@@ -56,3 +56,6 @@ RUN systemctl enable nslcd.service
 RUN systemctl enable systemd-user-sessions.service
 # Docker startup
 #CMD ["/usr/bin/supervisord"]
+
+#Installing telnet
+RUN yum install telnet -y
