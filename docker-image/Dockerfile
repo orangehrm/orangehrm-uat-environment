@@ -63,3 +63,6 @@ RUN systemctl enable rsyslog.service
 RUN systemctl enable systemd-user-sessions.service
 # Docker startup
 #CMD ["/usr/bin/supervisord"]
+
+#Installing telnet
+RUN yum install telnet -y

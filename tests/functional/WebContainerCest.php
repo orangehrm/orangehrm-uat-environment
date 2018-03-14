@@ -18,6 +18,12 @@ class WebContainerCest
         $I->seeInShellOutput('2 packets transmitted, 2 received');
     }
 
+    public function checkTelnetInstallation(FunctionalTester $I){
+        $I->wantTo("verify the telnet installation");
+        $I->runShellCommand("docker exec -c 'rpm -qa | grep telnet'");
+        $I->seeInShellOutput('telnet-0.17');
+    }
+
 
 
 }
