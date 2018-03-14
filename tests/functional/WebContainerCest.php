@@ -20,7 +20,7 @@ class WebContainerCest
 
     public function checkTelnetInstallation(FunctionalTester $I){
         $I->wantTo("verify the telnet installation");
-        $I->runShellCommand("docker exec phantom_web bash -c 'rpm -qa | grep telnet'");
+        $I->runShellCommand("docker exec infinity_web bash -c 'rpm -qa | grep telnet'");
         $I->seeInShellOutput('telnet-0.17');
     }
 
