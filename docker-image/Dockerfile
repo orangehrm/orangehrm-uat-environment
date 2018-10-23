@@ -18,6 +18,7 @@ RUN yum -y install \
     openldap \
     sudo \
     wget \
+    urw-fonts.noarch \
     && yum -y update bash \
     && rm -rf /var/cache/yum/* \
     && yum clean all
