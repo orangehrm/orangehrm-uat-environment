@@ -112,4 +112,10 @@ class WebContainerCest
         $I->seeInShellOutput("7880");
     }
 
+    public function checkSendMailNoArch(UnitTester $I){
+        $I->wantTo("verify wether sendmail noarch is installed");
+        $I->runShellCommand("yum list installed| grep sendmail");
+        $I->seeInShellOutput("sendmail-cf.noarch");
+    }
+
 }

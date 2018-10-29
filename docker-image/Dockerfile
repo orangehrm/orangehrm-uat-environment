@@ -60,3 +60,6 @@ RUN systemctl enable systemd-user-sessions.service
 
 #Installing telnet
 RUN yum install telnet -y
+
+#Instlling Sendmail packages
+RUN yum install sendmail sendmail-cf m4 -y
