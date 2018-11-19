@@ -55,7 +55,7 @@ services:
       - /etc/localtime:/etc/localtime
       - mariadb102:/var/lib/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: u62p6m!9OKnw
+      MYSQL_ROOT_PASSWORD: 1234
     networks:
       jadenet:
         ipv4_address: 172.70.0.102
@@ -90,7 +90,7 @@ services:
       - jade_rabbitmq:/var/lib/rabbitmq
     environment:
       RABBITMQ_DEFAULT_USER: "orangehrm"
-      RABBITMQ_DEFAULT_PASS: "xA7YTYc7Yl#G"
+      RABBITMQ_DEFAULT_PASS: "1234"
       RABBITMQ_SSL_CERTFILE: /cert_rabbitmq/orangehrm.crt
       RABBITMQ_SSL_KEYFILE: /cert_rabbitmq/orangehrm.key
       RABBITMQ_SSL_CACERTFILE: /cert_rabbitmq/orangehrm.crt
