@@ -1,10 +1,10 @@
 version: '2'
 services:
   web:
-    image: orangehrm/orangehrm-environment-images:uat-7.1-centos
+    image: orangehrm/orangehrm-environment-images:uat-7.2-centos
     ports:
-      - "7878:443"
-      - "2882:22"
+      - "6868:443"
+      - "2662:22"
     volumes:
     - ./html:/var/www/html
     - ./home:/home
@@ -40,10 +40,10 @@ services:
       - rabbitmq
     restart: always
     networks:
-      infinitynet:
-        ipv4_address: 172.40.0.71
-    hostname: infinity-server
-    container_name: infinity_web
+      jadenet:
+        ipv4_address: 172.70.0.71
+    hostname: jade-server
+    container_name: jade_web
 
   db:
     image: mariadb:10.2
@@ -55,13 +55,13 @@ services:
       - /etc/localtime:/etc/localtime
       - mariadb102:/var/lib/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_ROOT_PASSWORD: u62p6m!9OKnw
     networks:
-      infinitynet:
-        ipv4_address: 172.40.0.102
+      jadenet:
+        ipv4_address: 172.70.0.102
     restart: always
-    hostname: orangehrm-infinity-db
-    container_name: infinity_mysql
+    hostname: orangehrm-jade-db
+    container_name: jade_mysql
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -70,46 +70,46 @@ services:
     links:
       - db
     ports:
-      - "7879:80"
+      - "6869:80"
     networks:
-      infinitynet:
-        ipv4_address: 172.40.0.20
+      jadenet:
+        ipv4_address: 172.70.0.20
     environment:
       PMA_HOST: db
     restart: always
-    container_name: infinity_phpmyadmin
+    container_name: jade_phpmyadmin
 
   rabbitmq:
     image: rabbitmq:3.6-management
-    container_name: infinity_rabbitmq
+    container_name: jade_rabbitmq
     ports:
-      - "7880:15671"
-      - "7881:5671"
+      - "6880:15671"
+      - "6881:5671"
     volumes:
       - ./config/rabbitmq/cert:/cert_rabbitmq/
-      - infinity_rabbitmq:/var/lib/rabbitmq
+      - jade_rabbitmq:/var/lib/rabbitmq
     environment:
       RABBITMQ_DEFAULT_USER: "orangehrm"
-      RABBITMQ_DEFAULT_PASS: "1234"
+      RABBITMQ_DEFAULT_PASS: "xA7YTYc7Yl#G"
       RABBITMQ_SSL_CERTFILE: /cert_rabbitmq/orangehrm.crt
       RABBITMQ_SSL_KEYFILE: /cert_rabbitmq/orangehrm.key
       RABBITMQ_SSL_CACERTFILE: /cert_rabbitmq/orangehrm.crt
       RABBITMQ_SSL_FAIL_IF_NO_PEER_CERT: 'false'
       RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS: '-rabbit ssl_listeners [{"::",5671}] -rabbit ssl_options [{certfile,"/cert_rabbitmq/orangehrm.crt"},{keyfile,"/cert_rabbitmq/orangehrm.key"},{cacertfile,"/cert_rabbitmq/orangehrm.crt"},{verify,verify_peer},{depth,3},{fail_if_no_peer_cert,false}] -rabbit tcp_listeners [{"::",5672}]'
     networks:
-      infinitynet:
-        ipv4_address: 172.40.0.5
-    hostname: infinity-RabbitMQ
+      jadenet:
+        ipv4_address: 172.70.0.5
+    hostname: jade-RabbitMQ
     restart: always
 
 volumes:
   mariadb102:
-  infinity_rabbitmq:
+  jade_rabbitmq:
 
 networks:
-  infinitynet:
+  jadenet:
     driver: bridge
     ipam:
      config:
-       - subnet: 172.40.0.2/16
-         gateway: 172.40.0.1
+       - subnet: 172.70.0.2/16
+         gateway: 172.70.0.1
