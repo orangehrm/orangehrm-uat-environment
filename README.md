@@ -1,4 +1,4 @@
-# OrangeHRM UAT Environment for PHP 7.1 - centos
+# OrangeHRM UAT Environment for PHP 7.2 - centos
 [![Docker Automated](https://img.shields.io/docker/automated/orangehrm/orangehrm-environment-images.svg)](https://hub.docker.com/r/orangehrm/orangehrm-environment-images/) [![Docker Status](https://img.shields.io/docker/build/orangehrm/orangehrm-environment-images.svg)](https://hub.docker.com/r/orangehrm/orangehrm-environment-images/) [![Docker Pulls](https://img.shields.io/docker/pulls/orangehrm/orangehrm-environment-images.svg)](https://hub.docker.com/r/orangehrm/orangehrm-environment-images/) [![Build Status](https://travis-ci.org/orangehrm/orangehrm-uat-environment.svg?branch=php-5.6)](https://travis-ci.org/orangehrm/orangehrm-uat-environment)
 
 ## Introduction
@@ -26,9 +26,9 @@ Make sure mentioned prerequisites are there in your host machine.
 
 | Container Name  | Service Name in docker-compose.yml | Description | IP Address | Used Ports |
 |-----------------|------------------------------------|-------------|------------|------------|
-| uat_web         | web                                | PHP 7.1     | 10.5.0.2   | 443        |
-| uat_mysql       | db                                 | MySQL 5.5   | 10.5.0.3   | 3306       |
-| uat_phpmyadmin  | phpmyadmin                         | phpMyAdmin  | 10.5.0.4   | 9090       |
+| uat_web         | web                                | PHP 7.2     | 172.70.0.71   | 6868, 2662        |
+| uat_mysql       | db                                 | MariaDB 10.2  | 172.70.0.102   | 3306       |
+| uat_phpmyadmin  | phpmyadmin                         | phpMyAdmin  | 172.70.0.20   | 6869       |
 
 ## Install orangehrm eagle-core inside the container
 1. Get a checkout from svn to ohrm_uat directory .
@@ -54,7 +54,7 @@ volumes:
   - ./config/xhgui/config.php:/usr/local/src/xhgui/config/config.php
 ```
 #### Example - Overriding port and web root
-* Sets apache port to 8080
+* Sets apache port to 6868
 * Changes web root directory to /home/john/web (from default of ./ohrm_dev)
 ```
 services:
