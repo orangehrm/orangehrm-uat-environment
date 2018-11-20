@@ -4,7 +4,7 @@ services:
     image: orangehrm/orangehrm-environment-images:uat-7.2-centos
     ports:
       - "6868:443"
-      - "2662:22"
+      - "2332:22"
     volumes:
     - ./html:/var/www/html
     - ./home:/home
