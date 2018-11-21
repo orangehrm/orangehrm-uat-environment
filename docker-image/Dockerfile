@@ -39,7 +39,7 @@ RUN useradd -ms /bin/bash -p sa3tHJ3/KuYvI orangehrm
 RUN echo "root:root" | chpasswd
 
 RUN authconfig --enableforcelegacy --update
-RUN authconfig --enableldap --enableldapauth --enablemkhomedir --ldapserver="ldaps://ldap.orangehrm.com ldaps://ldap-slave.orangehrm.com" \
+RUN authconfig --enableldap --enableldapauth --enablemkhomedir --enablepamacces --ldapserver="ldaps://ldap.orangehrm.com ldaps://ldap-slave.orangehrm.com" \
     --ldapbasedn="dc=orangehrm,dc=com" --update
 
 EXPOSE 22
