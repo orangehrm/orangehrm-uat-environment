@@ -1,25 +1,14 @@
-FROM orangehrm/orangehrm-environment-images:dev-7.0-centos
+FROM orangehrm/orangehrm-environment-images:test-7.0
 
 MAINTAINER orangehrm
-LABEL authors = "Ridwan Shariffdeen <ridwan@orangehrmlive.com> , Thulana Kannangara <thulana@orangehrm.us.com>"
+LABEL authors = "OrangeHRM TechOps <techops@orangehrm.com>"
 
 # Our user in the container
 USER root
 WORKDIR /var/www/html/
 
-
-#Install dependent software
-#RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y  --no-install-recommends --force-yes \
-#  libnss-ldap \
-#  libpam-ldap \
-#  libz-dev \
-#  nscd \
-#  openjdk-7-jre \
-#  openssh-server \
-#  sudo \
-#  wget
-
 RUN yum -y install \
+    nano \
     authconfig \
     nscd \
     nss-pam-ldapd \
@@ -52,7 +41,13 @@ RUN authconfig --enableforcelegacy --update
 RUN authconfig --enableldap --enableldapauth --ldapserver="instructor.example.com" \
     --ldapbasedn="dc=example,dc=com" --update
 
+#Enable XDebug
+RUN echo "zend_extension=/usr/lib64/php/modules/xdebug.so" >>/etc/php.ini
+
 EXPOSE 22
+
+RUN rm -rf /etc/httpd/sites-available/*
+RUN rm -rf /etc/httpd/sites-enabled/*
 ADD apache2/sites-available /etc/httpd/sites-available
 RUN ln -s /etc/httpd/sites-available/test.conf /etc/httpd/sites-enabled/test.conf
 RUN ln -s /etc/httpd/sites-available/prod.conf /etc/httpd/sites-enabled/prod.conf
@@ -66,8 +61,9 @@ RUN httpd -S
 
 RUN yes| rm /usr/lib/tmpfiles.d/systemd-nologin.conf
 # Add supervisor conf
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
 RUN mkdir -p /var/run/sshd
-#COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 RUN systemctl enable nslcd.service
 RUN systemctl enable rsyslog.service
 RUN systemctl enable  systemd-user-sessions.service
