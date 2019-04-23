@@ -10,7 +10,7 @@ services:
       - ./config/mysql-client:/etc/mysql
       - ./config/apache2/sites-available:/etc/httpd/sites-available
       - ./config/apache2/cert:/etc/httpd/cert
-      - ./logs/ubuntu_logs:/var/log/httpd
+      - ./logs/apache_logs:/var/log/httpd
       - /etc/localtime:/etc/localtime
       - ./config/hostname:/etc/hostname
       - ./config/welcome:/etc/motd
