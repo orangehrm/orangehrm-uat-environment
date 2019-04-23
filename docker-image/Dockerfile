@@ -9,6 +9,7 @@ WORKDIR /var/www/html/
 
 
 RUN yum -y install \
+    nano \
     authconfig \
     nscd \
     nss-pam-ldapd \
