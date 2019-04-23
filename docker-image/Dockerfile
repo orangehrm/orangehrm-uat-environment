@@ -1,7 +1,7 @@
-FROM orangehrm/orangehrm-environment-images:dev-5.6-centos
+FROM orangehrm/orangehrm-environment-images:test-5.6
 
 MAINTAINER orangehrm
-LABEL authors = "Ridwan Shariffdeen <ridwan@orangehrmlive.com> , Thulana Kannangara <thulana@orangehrm.us.com>"
+LABEL authors = "OrangeHRM TechOps <techops@orangehrm.com>"
 
 # Our user in the container
 USER root
@@ -9,6 +9,7 @@ WORKDIR /var/www/html/
 
 
 RUN yum -y install \
+    nano \
     authconfig \
     nscd \
     nss-pam-ldapd \
