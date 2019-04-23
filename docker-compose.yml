@@ -7,11 +7,10 @@ services:
       - "2662:22"
     volumes:
       - ./html:/var/www/html
-      - ./config/php5/php.ini:/etc/php.ini
       - ./config/mysql-client:/etc/mysql
       - ./config/apache2/sites-available:/etc/httpd/sites-available
       - ./config/apache2/cert:/etc/httpd/cert
-      - ./logs/ubuntu_logs:/var/log/apache2
+      - ./logs/ubuntu_logs:/var/log/httpd
       - /etc/localtime:/etc/localtime
       - ./config/hostname:/etc/hostname
       - ./config/welcome:/etc/motd
