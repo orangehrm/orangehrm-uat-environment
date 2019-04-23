@@ -43,6 +43,8 @@ RUN authconfig --enableldap --enableldapauth --ldapserver="instructor.example.co
 
 EXPOSE 22
 
+RUN rm -rf /etc/httpd/sites-available/*
+RUN rm -rf /etc/httpd/sites-enabled/*
 ADD apache2/sites-available /etc/httpd/sites-available
 RUN ln -s /etc/httpd/sites-available/test.conf /etc/httpd/sites-enabled/test.conf
 RUN ln -s /etc/httpd/sites-available/prod.conf /etc/httpd/sites-enabled/prod.conf
