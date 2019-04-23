@@ -1,4 +1,4 @@
-FROM orangehrm/orangehrm-environment-images:dev-5.6-centos
+FROM orangehrm/orangehrm-environment-images:test-5.6
 
 MAINTAINER orangehrm
 LABEL authors = "OrangeHRM TechOps <techops@orangehrm.com>"
