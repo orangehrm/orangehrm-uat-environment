@@ -1,0 +1,6 @@
+[Tue Apr 23 16:13:16.454294 2019] [suexec:notice] [pid 69] AH01232: suEXEC mechanism enabled (wrapper: /usr/sbin/suexec)
+AH00558: httpd: Could not reliably determine the server's fully qualified domain name, using 172.26.0.4. Set the 'ServerName' directive globally to suppress this message
+[Tue Apr 23 16:13:16.487773 2019] [auth_digest:notice] [pid 69] AH01757: generating secret for digest authentication ...
+[Tue Apr 23 16:13:16.488613 2019] [lbmethod_heartbeat:notice] [pid 69] AH02282: No slotmem from mod_heartmonitor
+[Tue Apr 23 16:13:16.672029 2019] [mpm_prefork:notice] [pid 69] AH00163: Apache/2.4.6 (CentOS) OpenSSL/1.0.2k-fips PHP/5.6.33 configured -- resuming normal operations
+[Tue Apr 23 16:13:16.672066 2019] [core:notice] [pid 69] AH00094: Command line: '/usr/sbin/httpd -D FOREGROUND'
