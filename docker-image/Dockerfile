@@ -1,4 +1,4 @@
-FROM orangehrm/orangehrm-environment-images:test-5.6
+FROM orangehrm/orangehrm-environment-images:dev-5.6-centos
 
 MAINTAINER orangehrm
 LABEL authors = "OrangeHRM TechOps <techops@orangehrm.com>"
@@ -9,7 +9,6 @@ WORKDIR /var/www/html/
 
 
 RUN yum -y install \
-    nano \
     authconfig \
     nscd \
     nss-pam-ldapd \
