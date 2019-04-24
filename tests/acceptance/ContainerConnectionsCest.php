@@ -20,7 +20,7 @@ class ContainerConnectionsCest
         $I->wantTo("log into mysql 5.5 server through phpmyadmin");
         $I->runShellCommand("docker exec infinity_web php /var/www/html/db-creation/app.php");
         $I->cantSeeInShellOutput("false");
-        $I->amOnPage('http://localhost:9090');
+        $I->amOnPage('http://localhost:7879');
         $I->fillField('Username:', 'root');
         $I->fillField('Password:', '1234');
         $I->click('Go');
