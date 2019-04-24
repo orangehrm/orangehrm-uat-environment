@@ -1,7 +1,7 @@
 FROM orangehrm/orangehrm-environment-images:test-7.2
 
 MAINTAINER orangehrm
-LABEL authors = "Chanaka Rathnayaka <chanaka@orangehrmlive.com>"
+LABEL authors = "OrangeHRM TechOps <techops@orangehrm.com>"
 
 # Our user in the container
 USER root
