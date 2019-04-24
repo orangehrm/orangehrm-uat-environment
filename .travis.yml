@@ -1,15 +1,14 @@
 language: php
 sudo: required
+os: linux
+dist: trusty
 
 env:
-  global:
-  - REPO=orangehrm/orangehrm-environment-images
-  - TAG=uat-7.1-centos
+  matrix:
+    - TEST_STAGE=unit
+    - TEST_STAGE=functional
+    - TEST_STAGE=acceptance
 
-matrix:
-    include:
-        - os: linux
-          dist: trusty          
 services:
   - docker
 
@@ -27,10 +26,7 @@ before_install:
 install:
   - docker-compose up -d
   - composer install
-  - docker ps
 
 script:
-  - php vendor/bin/codecept run unit
-  - php vendor/bin/codecept run functional
-  - php vendor/bin/codecept run acceptance
+  - php vendor/bin/codecept run $TEST_STAGE
 
