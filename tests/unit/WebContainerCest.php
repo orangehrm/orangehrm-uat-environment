@@ -84,18 +84,6 @@ class WebContainerCest
             $I->seeInShellOutput("wget-1");
     }
 
-    public function checkRabbitMqStatus(UnitTester $I){
-        $I->wantTo("verify docker is listening to rabbitMq queues");
-        $I->runShellCommand("netstat -ltpn | grep 7881");
-        $I->seeInShellOutput("7881");
-    }
-
-    public function checkRabbitMqManagementPlugin(UnitTester $I){
-        $I->wantTo("verify docker is listening to rabbitMq management plugin");
-        $I->runShellCommand("netstat -ltpn | grep 7880");
-        $I->seeInShellOutput("7880");
-    }
-
     public function checkSendMailNoArch(UnitTester $I){
         $I->wantTo("verify wether sendmail noarch is installed");
         $I->runShellCommand("docker exec infinity_web yum list installed | grep sendmail");
