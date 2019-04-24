@@ -20,7 +20,7 @@ class MysqlContainerCest
 
     public function checkMySQLServiceIsRunning(AcceptanceTester $I){
         $I->wantTo("verify mysql 10.2 service is up and running");
-        sleep(5);
+        sleep(20);
         $I->runShellCommand("docker exec phantom_mysql mysqladmin -uroot -p1234 status");
         $I->seeInShellOutput("Uptime");
     }

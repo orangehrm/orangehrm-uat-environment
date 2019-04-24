@@ -3,11 +3,6 @@ sudo: required
 dist: trusty
 os: linux
 
-env:
-  matrix:
-    - TEST_STAGE=unit
-    - TEST_STAGE=functional
-
 services:
   - docker
 
@@ -28,5 +23,6 @@ install:
   - docker ps
 
 script:
-  - php vendor/bin/codecept run $TEST_STAGE
+  - php vendor/bin/codecept run unit
+  - php vendor/bin/codecept run functional
 
