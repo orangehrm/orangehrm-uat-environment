@@ -1,7 +1,7 @@
 FROM orangehrm/orangehrm-environment-images:test-7.1
 
 MAINTAINER orangehrm
-LABEL authors = "Ridwan Shariffdeen <ridwan@orangehrmlive.com> , Thulana Kannangara <thulana@orangehrm.us.com>"
+LABEL authors = "OrangeHRM TechOps <techops@orangehrm.com>"
 
 # Our user in the container
 USER root
