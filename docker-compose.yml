@@ -23,41 +23,9 @@ services:
     - /sys/fs/cgroup:/sys/fs/cgroup:ro
 
     privileged: true
-    links:
-    - db
     restart: always
     hostname: Phantom-Server
     container_name: phantom_web
   #  extra_hosts:
   #  - "ldap.orangehrm.com:172.18.0.1"
   #  - "ftp.orangehrm.com:172.18.0.1"
-
-  db:
-    image: mysql:5.5
-    expose:
-    - "3306"
-    volumes:
-    - ./config/mysql-server:/etc/mysql
-    - ./logs/mysql_logs:/var/log
-    - /etc/localtime:/etc/localtime
-    - mysql:/var/lib/mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: 1234
-    restart: always
-    hostname: Phantom-Database
-    container_name: phantom_mysql
-
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    volumes:
-    - /etc/localtime:/etc/localtime
-    links:
-    - db
-    ports:
-    - "6768:80"
-    environment:
-      PMA_HOST: db
-    restart: always
-    container_name: phantom_phpmyadmin
-volumes:
-  mysql:

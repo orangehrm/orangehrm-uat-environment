@@ -1,0 +1,7 @@
+*
+!freehost/
+!uat/
+!prod/
+!test/
+!opensource/
+!.gitignore
