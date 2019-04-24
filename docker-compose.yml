@@ -16,7 +16,6 @@ services:
     - ./config/security/access.conf:/etc/security/access.conf
     - ./config/resolve-permission.sh:/etc/resolve-permission.sh
     - ./config/resolve.conf:/etc/resolve.conf
-    - ./config/php7/php.ini:/etc/php.ini
     - ./config/mysql-client:/etc/mysql
     - ./config/apache2/sites-available:/etc/httpd/sites-enabled
     - ./config/apache2/cert:/etc/httpd/cert
