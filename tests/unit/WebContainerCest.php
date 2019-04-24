@@ -33,7 +33,7 @@ class WebContainerCest
 
     public function checkApacheServiceIsRunning(UnitTester $I){
         $I->wantTo("verify apache is up and running in the container");
-        sleep(5);
+        sleep(20);
         $I->runShellCommand("docker exec phantom_web service httpd status");
         $I->seeInShellOutput('active (running)');
     }
