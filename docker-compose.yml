@@ -33,11 +33,10 @@ services:
   #  - "ftp.orangehrm.com:172.18.0.1"
 
   db:
-    image: mysql:5.5
+    image: orangehrm/orangehrm-db-images:mysql-5.5
     expose:
     - "3306"
     volumes:
-    - ./config/mysql-server:/etc/mysql
     - ./logs/mysql_logs:/var/log
     - /etc/localtime:/etc/localtime
     - mysql:/var/lib/mysql
