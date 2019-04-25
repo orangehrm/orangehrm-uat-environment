@@ -12,18 +12,13 @@ services:
       - ./config/apache2/cert:/etc/httpd/cert
       - ./logs/apache_logs:/var/log/httpd
       - /etc/localtime:/etc/localtime
-      - ./config/hostname:/etc/hostname
       - ./config/welcome:/etc/motd
       - ./config/sudoers:/etc/sudoers
       - ./config/crontabs:/var/spool/cron/crontabs
       - ./config/ssh/sshd_config:/etc/ssh/sshd_config
       - ./config/ldap/nsswitch.conf:/etc/nsswitch.conf
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
-
     privileged: true
     restart: always
     hostname: orangehrm-jade-web
     container_name: jade_web
-    extra_hosts:
-      - "ldap.orangehrm.com:172.18.0.1"
-      - "ftp.orangehrm.com:172.18.0.1"
