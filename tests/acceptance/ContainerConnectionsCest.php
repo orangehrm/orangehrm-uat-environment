@@ -17,7 +17,7 @@ class ContainerConnectionsCest
     }
 
     public function checkLoginToDBFromPhpmyadmin(AcceptanceTester $I){
-        $I->wantTo("log into mysql 5.5 server through phpmyadmin");
+        $I->wantTo("log into mysql 10.2 server through phpmyadmin");
         $I->runShellCommand("docker exec jade_web php /var/www/html/db-creation/app.php");
         $I->cantSeeInShellOutput("false");
         $I->amOnPage('http://localhost:6869');
