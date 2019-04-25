@@ -13,6 +13,7 @@ class MysqlContainerCest
 
     // tests
     public function mySqlContainerTest(UnitTester $I){
+        sleep(15);
         $I->wantTo("verify mysql container is up and running");
         $I->runShellCommand("docker inspect -f {{.State.Running}} phantom_mysql");
         $I->seeInShellOutput("true");
