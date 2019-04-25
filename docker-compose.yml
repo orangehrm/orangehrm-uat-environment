@@ -21,39 +21,9 @@ services:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
 
     privileged: true
-    links:
-      - db
     restart: always
     hostname: orangehrm-jade-web
     container_name: jade_web
     extra_hosts:
       - "ldap.orangehrm.com:172.18.0.1"
       - "ftp.orangehrm.com:172.18.0.1"
-  db:
-    image: mysql:5.5
-    expose:
-      - "3306"
-    volumes:
-      - ./config/mysql-server:/etc/mysql
-      - ./logs/mysql_logs:/var/log
-      - /etc/localtime:/etc/localtime
-    environment:
-      MYSQL_ROOT_PASSWORD: 1234
-    restart: always
-    hostname: orangehrm-jade-db
-    container_name: jade_mysql
-
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    volumes:
-      - /etc/localtime:/etc/localtime
-    links:
-      - db
-    ports:
-      - "6869:80"
-    environment:
-      PMA_HOST: db
-    restart: always
-    container_name: jade_phpmyadmin
-volumes:
-  mysql:
