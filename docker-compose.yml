@@ -49,7 +49,6 @@ services:
     expose:
       - "3306"
     volumes:
-      - ./config/mysql-server:/etc/mysql
       - ./logs/mysql_logs:/var/log
       - /etc/localtime:/etc/localtime
       - mariadb102:/var/lib/mysql
