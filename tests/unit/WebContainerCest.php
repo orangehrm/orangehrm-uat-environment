@@ -33,7 +33,7 @@ class WebContainerCest
 
     public function checkApacheServiceIsRunning(UnitTester $I){
         $I->wantTo("verify apache is up and running in the container");
-        sleep(3);
+        sleep(15);
         $I->runShellCommand("docker exec jade_web service httpd status");
         $I->seeInShellOutput('active (running)');
     }
@@ -45,7 +45,7 @@ class WebContainerCest
     }
 
     public function checkMemcacheServiceIsRunning(UnitTester $I){
-        $I->wantTo("verify apache is up and running in the container");
+        $I->wantTo("verify memcached service is running in the container");
         $I->runShellCommand("docker exec jade_web service memcached status");
         $I->seeInShellOutput('active (running)');
     }
