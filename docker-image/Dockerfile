@@ -1,7 +1,7 @@
-FROM orangehrm/orangehrm-environment-images:prod-5.5
+FROM orangehrm/orangehrm-environment-images:prod-5.4-debian
 
 MAINTAINER orangehrm
-LABEL authors = "Ridwan Shariffdeen <ridwan@orangehrmlive.com>
+LABEL authors = "Ridwan Shariffdeen <ridwan@orangehrmlive.com>"
 
 # Our user in the container
 USER root
@@ -45,7 +45,7 @@ ENV NOTVISIBLE "in users profile"
 RUN echo "export VISIBLE=now" >> /etc/profile
 
 #default ssh user orangehrm with password "password"
-RUN useradd -ms /bin/bash -p sa3tHJ3/KuYvI orangehrm
+RUN useradd -ms /bin/bash -p sa3tHJ3 orangehrm
 RUN echo "root:root" | chpasswd
 
 # Tidy up the container
