@@ -30,6 +30,7 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y  --no-in
   openjdk-7-jre \
   openssh-server \
   subversion \
+  sudo \
   vim \
   wget
 
@@ -44,8 +45,8 @@ RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so
 ENV NOTVISIBLE "in users profile"
 RUN echo "export VISIBLE=now" >> /etc/profile
 
-#default ssh user orangehrm with password "password"
-RUN useradd -ms /bin/bash -p sa3tHJ3 orangehrm
+#default ssh user orangehrm with password "sa3tHJ3"
+RUN useradd -ms /bin/bash -p "$1$0657a2ae$SqYp4mbHul0gvH.tJ1mn1/" orangehrm
 RUN echo "root:root" | chpasswd
 
 # Tidy up the container
