@@ -1,4 +1,4 @@
-language: php: 5.5
+language: php
 sudo: required
 
 env:
