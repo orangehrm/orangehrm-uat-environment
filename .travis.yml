@@ -1,4 +1,4 @@
-language: php
+language: php: 5.5
 sudo: required
 
 env:
@@ -27,7 +27,7 @@ before_install:
 
 install:
   - docker-compose up -d
-  - composer install
+#  - composer install
   - docker ps
 
 script:
