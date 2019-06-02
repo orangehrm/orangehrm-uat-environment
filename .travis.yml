@@ -24,9 +24,13 @@ before_install:
   - uname -a
   - php --version
   - docker version
+  - chmod +x build.sh
 
-#install:
-#  - docker build -t $REPO:$TAG docker-image
+install:
+  - docker build -t $REPO:$TAG docker-image
+
+script:
+  - ./build.sh
 
 #after_success:
 #  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
