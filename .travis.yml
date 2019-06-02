@@ -1,6 +1,8 @@
 language: php
 sudo: required
 
+php: 5.4
+
 env:
   global:
   - REPO=orangehrm/orangehrm-environment-images
@@ -22,18 +24,9 @@ before_install:
   - uname -a
   - php --version
   - docker version
-  - composer self-update
-  - docker build -t $REPO:$TAG docker-image
 
 install:
-  - docker-compose up -d
-#  - composer install
-  - docker ps
-
-script:
-#  - php vendor/bin/codecept run unit
-#  - php vendor/bin/codecept run functional
-#  - php vendor/bin/codecept run acceptance
+  - docker build -t $REPO:$TAG docker-image
 
 after_success:
   - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
