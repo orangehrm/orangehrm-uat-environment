@@ -3,8 +3,8 @@ services:
   web:
     image: orangehrm/orangehrm-environment-images:uat-7.3-centos
     ports:
-      - "6868:443"
-      - "2332:22"
+      - "6969:443"
+      - "2992:22"
     volumes:
     - ./html:/var/www/html
     - ./home:/home
@@ -39,10 +39,10 @@ services:
       - rabbitmq
     restart: always
     networks:
-      jadenet:
+      flashnet:
         ipv4_address: 172.73.0.73
-    hostname: jade-server
-    container_name: jade_web
+    hostname: flash-server
+    container_name: flash_web
 
   db:
     image: orangehrm/orangehrm-db-images:mariadb-10.2
@@ -55,11 +55,11 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: 1234
     networks:
-      jadenet:
+      flashnet:
         ipv4_address: 172.73.0.102
     restart: always
-    hostname: orangehrm-jade-db
-    container_name: jade_mysql
+    hostname: orangehrm-flash-db
+    container_name: flash_mysql
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -68,24 +68,24 @@ services:
     links:
       - db
     ports:
-      - "6869:80"
+      - "6970:80"
     networks:
-      jadenet:
+      flashnet:
         ipv4_address: 172.73.0.20
     environment:
       PMA_HOST: db
     restart: always
-    container_name: jade_phpmyadmin
+    container_name: flash_phpmyadmin
 
   rabbitmq:
     image: rabbitmq:3.6-management
-    container_name: jade_rabbitmq
+    container_name: flash_rabbitmq
     ports:
-      - "6880:15671"
-      - "6881:5671"
+      - "6990:15671"
+      - "6991:5671"
     volumes:
       - ./config/rabbitmq/cert:/cert_rabbitmq/
-      - jade_rabbitmq:/var/lib/rabbitmq
+      - flash_rabbitmq:/var/lib/rabbitmq
     environment:
       RABBITMQ_DEFAULT_USER: "orangehrm"
       RABBITMQ_DEFAULT_PASS: "1234"
@@ -95,17 +95,17 @@ services:
       RABBITMQ_SSL_FAIL_IF_NO_PEER_CERT: 'false'
       RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS: '-rabbit ssl_listeners [{"::",5671}] -rabbit ssl_options [{certfile,"/cert_rabbitmq/orangehrm.crt"},{keyfile,"/cert_rabbitmq/orangehrm.key"},{cacertfile,"/cert_rabbitmq/orangehrm.crt"},{verify,verify_peer},{depth,3},{fail_if_no_peer_cert,false}] -rabbit tcp_listeners [{"::",5672}]'
     networks:
-      jadenet:
+      flashnet:
         ipv4_address: 172.73.0.5
-    hostname: jade-RabbitMQ
+    hostname: flash-RabbitMQ
     restart: always
 
 volumes:
   mariadb102:
-  jade_rabbitmq:
+    flash_rabbitmq:
 
 networks:
-  jadenet:
+  flashnet:
     driver: bridge
     ipam:
      config:
