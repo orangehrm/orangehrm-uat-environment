@@ -20,7 +20,7 @@ class ContainerConnectionsCest
         $I->wantTo("log into mysql 10.2 server through phpmyadmin");
         $I->runShellCommand("docker exec flash_web php /var/www/html/db-creation/app.php");
         $I->cantSeeInShellOutput("false");
-        $I->amOnPage('http://localhost:6869');
+        $I->amOnPage('http://localhost:6970');
         $I->fillField('Username:', 'root');
         $I->fillField('Password:', '1234');
         $I->click('Go');
