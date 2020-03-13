@@ -102,7 +102,7 @@ services:
 
 volumes:
   mariadb102:
-    flash_rabbitmq:
+  flash_rabbitmq:
 
 networks:
   flashnet:
