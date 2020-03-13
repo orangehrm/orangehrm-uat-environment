@@ -26,9 +26,9 @@ Make sure mentioned prerequisites are there in your host machine.
 
 | Container Name  | Service Name in docker-compose.yml | Description | IP Address | Used Ports |
 |-----------------|------------------------------------|-------------|------------|------------|
-| uat_web         | web                                | PHP 7.2     | 172.70.0.71   | 6868, 2662        |
-| uat_mysql       | db                                 | MariaDB 10.2  | 172.70.0.102   | 3306       |
-| uat_phpmyadmin  | phpmyadmin                         | phpMyAdmin  | 172.70.0.20   | 6869       |
+| flash_web         | web                                | PHP 7.2     | 172.73.0.73   | 6868, 2662        |
+| flash_mysql       | db                                 | MariaDB 10.2  | 172.73.0.102   | 3306       |
+| flash_phpmyadmin  | phpmyadmin                         | phpMyAdmin  | 172.73.0.20   | 6869       |
 
 ## Install orangehrm eagle-core inside the container
 1. Get a checkout from svn to ohrm_uat directory .
