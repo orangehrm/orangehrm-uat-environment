@@ -16,15 +16,15 @@ class ContainerConnectionsCest
         $I->runShellCommand('docker exec flash_web mysql -hdb -uroot -p1234 -e "drop database php_simple"');
     }
 
-    public function checkLoginToDBFromPhpmyadmin(AcceptanceTester $I){
-        $I->wantTo("log into mysql 10.2 server through phpmyadmin");
-        $I->runShellCommand("docker exec flash_web php /var/www/html/db-creation/app.php");
-        $I->cantSeeInShellOutput("false");
-        $I->amOnPage('http://localhost:6970');
-        $I->fillField('Username:', 'root');
-        $I->fillField('Password:', '1234');
-        $I->click('Go');
-        $I->see('Server: db');
-        $I->see('php_simple');
-    }
+    // public function checkLoginToDBFromPhpmyadmin(AcceptanceTester $I){
+    //     $I->wantTo("log into mysql 10.2 server through phpmyadmin");
+    //     $I->runShellCommand("docker exec flash_web php /var/www/html/db-creation/app.php");
+    //     $I->cantSeeInShellOutput("false");
+    //     $I->amOnPage('http://localhost:6970');
+    //     $I->fillField('Username:', 'root');
+    //     $I->fillField('Password:', '1234');
+    //     $I->click('Go');
+    //     $I->see('Server: db');
+    //     $I->see('php_simple');
+    // }
 }
