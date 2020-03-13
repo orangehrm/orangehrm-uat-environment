@@ -19,9 +19,9 @@ class WebContainerCest
 
 
     public function checkPHPVersion(UnitTester $I){
-        $I->wantTo("verify php 7.2 is installed in the container");
+        $I->wantTo("verify php 7.3 is installed in the container");
         $I->runShellCommand("docker exec jade_web php --version");
-        $I->seeInShellOutput('PHP 7.2');
+        $I->seeInShellOutput('PHP 7.3');
     }
 
     public function checkForNologinFile(UnitTester $I){
@@ -29,13 +29,6 @@ class WebContainerCest
         $I->runShellCommand("docker exec jade_web ls /var/run/");
         $I->dontSeeInShellOutput("nologin");
     }
-
-//    public function checkApacheServiceIsRunning(UnitTester $I){
-//        $I->wantTo("verify apache is up and running in the container");
-//        $I->runShellCommand("ping -c 10 localhost");
-//        $I->runShellCommand("docker exec infinity_web service httpd status");
-//        $I->seeInShellOutput('active (running)');
-//    }
 
     public function checkCronServiceIsRunning(UnitTester $I){
         $I->wantTo("verify cron is up and running in the container");
@@ -90,16 +83,6 @@ class WebContainerCest
             $I->runShellCommand("docker exec jade_web rpm -qa | grep wget");
             $I->seeInShellOutput("wget-1");
     }
-//    public function checkVHostConfig(UnitTester $I){
-//        $I->wantTo("verify test vhost is configured in the container");
-//        $I->runShellCommand("docker exec infinity_web httpd -S");
-//        $I->seeInShellOutput("*-test-infinity.orangehrm.com");
-//        $I->seeInShellOutput("*-uat-infinity.orangehrm.com");
-//        $I->seeInShellOutput("*-prod-infinity.orangehrm.com");
-//        $I->seeInShellOutput("*-os-infinity.orangehrm.com");
-//        $I->seeInShellOutput("*-freehost-infinity.orangehrm.com");
-//    }
-
 
     public function checkSendMailNoArch(UnitTester $I){
         $I->wantTo("verify wether sendmail noarch is installed");
