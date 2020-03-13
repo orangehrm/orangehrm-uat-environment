@@ -14,7 +14,7 @@ class MysqlContainerCest
     // tests
     public function mySqlContainerTest(UnitTester $I){
         $I->wantTo("verify mysql container is up and running");
-        $I->runShellCommand("docker inspect -f {{.State.Running} flash_mysql");
+        $I->runShellCommand("docker inspect -f {{.State.Running}} flash_mysql");
         $I->seeInShellOutput("true");
     }
 

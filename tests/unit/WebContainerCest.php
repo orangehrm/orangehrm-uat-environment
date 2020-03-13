@@ -86,14 +86,14 @@ class WebContainerCest
 
     public function checkRabbitMqStatus(UnitTester $I){
         $I->wantTo("verify docker is listening to rabbitMq queues");
-        $I->runShellCommand("netstat -ltpn | grep 6881");
-        $I->seeInShellOutput("6881");
+        $I->runShellCommand("netstat -ltpn | grep 6991");
+        $I->seeInShellOutput("6991");
     }
 
     public function checkRabbitMqManagementPlugin(UnitTester $I){
         $I->wantTo("verify docker is listening to rabbitMq management plugin");
-        $I->runShellCommand("netstat -ltpn | grep 6880");
-        $I->seeInShellOutput("6880");
+        $I->runShellCommand("netstat -ltpn | grep 6990");
+        $I->seeInShellOutput("6990");
     }
 
     public function checkSendMailNoArch(UnitTester $I){
