@@ -68,7 +68,7 @@ services:
     links:
       - db
     ports:
-      - "6869:80"
+      - "6465:80"
     networks:
       guardiannet:
         ipv4_address: 172.74.0.20
