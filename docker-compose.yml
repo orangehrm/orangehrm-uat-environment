@@ -1,10 +1,10 @@
-version: '2'
+version: '2.2'
 services:
   web:
-    image: orangehrm/orangehrm-environment-images:uat-7.2-centos
+    image: orangehrm/orangehrm-environment-images:uat-7.4-centos-remi
     ports:
-      - "6868:443"
-      - "2332:22"
+      - "6464:443"
+      - "2222:22"
     volumes:
     - ./html:/var/www/html
     - ./home:/home
@@ -39,10 +39,10 @@ services:
       - rabbitmq
     restart: always
     networks:
-      jadenet:
-        ipv4_address: 172.70.0.71
-    hostname: jade-server
-    container_name: jade_web
+      guardiannet:
+        ipv4_address: 172.74.0.74
+    hostname: guardian-server
+    container_name: guardian_web
 
   db:
     image: orangehrm/orangehrm-db-images:mariadb-10.2
@@ -55,11 +55,11 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: 1234
     networks:
-      jadenet:
-        ipv4_address: 172.70.0.102
+      guardiannet:
+        ipv4_address: 172.74.0.102
     restart: always
-    hostname: orangehrm-jade-db
-    container_name: jade_mysql
+    hostname: orangehrm-guardian-db
+    container_name: guardian_mysql
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -70,22 +70,22 @@ services:
     ports:
       - "6869:80"
     networks:
-      jadenet:
-        ipv4_address: 172.70.0.20
+      guardiannet:
+        ipv4_address: 172.74.0.20
     environment:
       PMA_HOST: db
     restart: always
-    container_name: jade_phpmyadmin
+    container_name: guardian_phpmyadmin
 
   rabbitmq:
     image: rabbitmq:3.6-management
-    container_name: jade_rabbitmq
+    container_name: guardian_rabbitmq
     ports:
-      - "6880:15671"
-      - "6881:5671"
+      - "6440:15671"
+      - "6441:5671"
     volumes:
       - ./config/rabbitmq/cert:/cert_rabbitmq/
-      - jade_rabbitmq:/var/lib/rabbitmq
+      - guardian_rabbitmq:/var/lib/rabbitmq
     environment:
       RABBITMQ_DEFAULT_USER: "orangehrm"
       RABBITMQ_DEFAULT_PASS: "1234"
@@ -95,19 +95,19 @@ services:
       RABBITMQ_SSL_FAIL_IF_NO_PEER_CERT: 'false'
       RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS: '-rabbit ssl_listeners [{"::",5671}] -rabbit ssl_options [{certfile,"/cert_rabbitmq/orangehrm.crt"},{keyfile,"/cert_rabbitmq/orangehrm.key"},{cacertfile,"/cert_rabbitmq/orangehrm.crt"},{verify,verify_peer},{depth,3},{fail_if_no_peer_cert,false}] -rabbit tcp_listeners [{"::",5672}]'
     networks:
-      jadenet:
-        ipv4_address: 172.70.0.5
-    hostname: jade-RabbitMQ
+      guardiannet:
+        ipv4_address: 172.74.0.5
+    hostname: guardian-RabbitMQ
     restart: always
 
 volumes:
   mariadb102:
-  jade_rabbitmq:
+  guardian_rabbitmq:
 
 networks:
-  jadenet:
+  guardiannet:
     driver: bridge
     ipam:
      config:
-       - subnet: 172.70.0.2/16
-         gateway: 172.70.0.1
+       - subnet: 172.74.0.0/16
+         gateway: 172.74.0.1
