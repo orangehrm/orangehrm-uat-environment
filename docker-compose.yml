@@ -1,7 +1,7 @@
 version: '2'
 services:
   web:
-    image: orangehrm/orangehrm-environment-images:uat-7.3-centos
+    image: orangehrm/orangehrm-environment-images:uat-7.3.5-ING
     ports:
       - "6969:443"
       - "2992:22"
@@ -41,8 +41,8 @@ services:
     networks:
       flashnet:
         ipv4_address: 172.73.0.73
-    hostname: flash-server
-    container_name: flash_web
+    hostname: ing-server
+    container_name: ing_web
 
   db:
     image: orangehrm/orangehrm-db-images:mariadb-10.2
@@ -58,8 +58,8 @@ services:
       flashnet:
         ipv4_address: 172.73.0.102
     restart: always
-    hostname: orangehrm-flash-db
-    container_name: flash_mysql
+    hostname: ing-db
+    container_name: ing_mysql
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -75,7 +75,7 @@ services:
     environment:
       PMA_HOST: db
     restart: always
-    container_name: flash_phpmyadmin
+    container_name: ing_phpmyadmin
 
   rabbitmq:
     image: rabbitmq:3.6-management
@@ -85,7 +85,7 @@ services:
       - "6991:5671"
     volumes:
       - ./config/rabbitmq/cert:/cert_rabbitmq/
-      - flash_rabbitmq:/var/lib/rabbitmq
+      - ing_rabbitmq:/var/lib/rabbitmq
     environment:
       RABBITMQ_DEFAULT_USER: "orangehrm"
       RABBITMQ_DEFAULT_PASS: "1234"
@@ -97,15 +97,15 @@ services:
     networks:
       flashnet:
         ipv4_address: 172.73.0.5
-    hostname: flash-RabbitMQ
+    hostname: ing-RabbitMQ
     restart: always
 
 volumes:
   mariadb102:
-  flash_rabbitmq:
+  ing_rabbitmq:
 
 networks:
-  flashnet:
+  ingnet:
     driver: bridge
     ipam:
      config:
