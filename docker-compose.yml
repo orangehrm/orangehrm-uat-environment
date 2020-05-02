@@ -39,7 +39,7 @@ services:
       - rabbitmq
     restart: always
     networks:
-      flashnet:
+      ingnet:
         ipv4_address: 172.73.0.73
     hostname: ing-server
     container_name: ing_web
@@ -55,7 +55,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: 1234
     networks:
-      flashnet:
+      ingnet:
         ipv4_address: 172.73.0.102
     restart: always
     hostname: ing-db
@@ -70,7 +70,7 @@ services:
     ports:
       - "6970:80"
     networks:
-      flashnet:
+      ingnet:
         ipv4_address: 172.73.0.20
     environment:
       PMA_HOST: db
@@ -95,7 +95,7 @@ services:
       RABBITMQ_SSL_FAIL_IF_NO_PEER_CERT: 'false'
       RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS: '-rabbit ssl_listeners [{"::",5671}] -rabbit ssl_options [{certfile,"/cert_rabbitmq/orangehrm.crt"},{keyfile,"/cert_rabbitmq/orangehrm.key"},{cacertfile,"/cert_rabbitmq/orangehrm.crt"},{verify,verify_peer},{depth,3},{fail_if_no_peer_cert,false}] -rabbit tcp_listeners [{"::",5672}]'
     networks:
-      flashnet:
+      ingnet:
         ipv4_address: 172.73.0.5
     hostname: ing-RabbitMQ
     restart: always
