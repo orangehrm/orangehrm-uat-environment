@@ -10,4 +10,4 @@
 Connect:localhost.localdomain		RELAY
 Connect:localhost			RELAY
 Connect:127.0.0.1			RELAY
-AuthInfo:smtp.sendgrid.net "U:apikey" "" "M:PLAIN"
+AuthInfo:smtp.mandrillapp.com "U:apikey" "" "M:PLAIN"
