@@ -21,7 +21,7 @@ services:
     - ./config/apache2/cert:/etc/httpd/cert
     - ./config/apache2/ssl.conf:/etc/httpd/conf.d/ssl.conf
     - ./config/apache2/httpd.conf:/etc/httpd/conf/httpd.conf
-    - ./logs:/etc/httpd/logs
+    - ./logs:/var/log/httpd
     - /etc/localtime:/etc/localtime
     - ./config/hostname:/etc/hostname
     - ./config/welcome:/etc/motd
