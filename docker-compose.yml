@@ -31,6 +31,8 @@ services:
     - ./config/ldap/nsswitch.conf:/etc/nsswitch.conf
     - ./config/ldap/nslcd.conf:/etc/nslcd.conf
     - ./config/ldap/sudo-ldap.conf:/etc/sudo-ldap.conf
+    - ./config/send-mail/access:/etc/mail/access
+    - ./config/send-mail/sendmail.mc:/etc/mail/sendmail.mc
     - /sys/fs/cgroup:/sys/fs/cgroup:ro
 
     privileged: true
@@ -79,7 +81,7 @@ services:
 
   rabbitmq:
     image: rabbitmq:3.6-management
-    container_name: flash_rabbitmq
+    container_name: ing_rabbitmq
     ports:
       - "6990:15671"
       - "6991:5671"
@@ -97,7 +99,7 @@ services:
     networks:
       ingnet:
         ipv4_address: 172.73.0.5
-    hostname: ing-RabbitMQ
+    hostname: ing-Rabbitmq
     restart: always
 
 volumes:
