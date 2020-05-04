@@ -24,7 +24,7 @@ dnl # Uncomment and edit the following line if your outgoing mail needs to
 dnl # be sent out through an external mail server:
 dnl #
 dnl define(`SMART_HOST', `smtp.your.provider')dnl
-define(`SMART_HOST', `smtp.sendgrid.net')dnl
+define(`SMART_HOST', `smtp.mandrillapp.com')dnl
 FEATURE(`access_db')dnl
 define(`RELAY_MAILER_ARGS', `TCP $h 587')dnl
 define(`ESMTP_MAILER_ARGS', `TCP $h 587')dnl
