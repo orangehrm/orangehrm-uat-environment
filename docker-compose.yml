@@ -42,10 +42,10 @@ services:
       - rabbitmq
     restart: always
     networks:
-      ingnet:
+      zatananet:
         ipv4_address: 172.73.0.73
-    hostname: ing-server
-    container_name: ing_web
+    hostname: zatana-server
+    container_name: zatana_web
 
   db:
     image: orangehrm/orangehrm-db-images:mariadb-10.2
@@ -58,11 +58,11 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: 1234
     networks:
-      ingnet:
+      zatananet:
         ipv4_address: 172.73.0.102
     restart: always
-    hostname: ing-db
-    container_name: ing_mysql
+    hostname: zatana-db
+    container_name: zatana_mysql
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -73,22 +73,22 @@ services:
     ports:
       - "6970:80"
     networks:
-      ingnet:
+      zatananet:
         ipv4_address: 172.73.0.20
     environment:
       PMA_HOST: db
     restart: always
-    container_name: ing_phpmyadmin
+    container_name: zatana_phpmyadmin
 
   rabbitmq:
     image: rabbitmq:3.6-management
-    container_name: ing_rabbitmq
+    container_name: zatana_rabbitmq
     ports:
       - "6990:15671"
       - "6991:5671"
     volumes:
       - ./config/rabbitmq/cert:/cert_rabbitmq/
-      - ing_rabbitmq:/var/lib/rabbitmq
+      - zatana_rabbitmq:/var/lib/rabbitmq
     environment:
       RABBITMQ_DEFAULT_USER: "orangehrm"
       RABBITMQ_DEFAULT_PASS: "1234"
@@ -98,17 +98,17 @@ services:
       RABBITMQ_SSL_FAIL_IF_NO_PEER_CERT: 'false'
       RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS: '-rabbit ssl_listeners [{"::",5671}] -rabbit ssl_options [{certfile,"/cert_rabbitmq/orangehrm.crt"},{keyfile,"/cert_rabbitmq/orangehrm.key"},{cacertfile,"/cert_rabbitmq/orangehrm.crt"},{verify,verify_peer},{depth,3},{fail_if_no_peer_cert,false}] -rabbit tcp_listeners [{"::",5672}]'
     networks:
-      ingnet:
+      zatananet:
         ipv4_address: 172.73.0.5
-    hostname: ing-Rabbitmq
+    hostname: zatana-Rabbitmq
     restart: always
 
 volumes:
   mariadb102:
-  ing_rabbitmq:
+  zatana_rabbitmq:
 
 networks:
-  ingnet:
+  zatananet:
     driver: bridge
     ipam:
      config:
