@@ -35,5 +35,5 @@ services:
 
     privileged: true
     restart: always
-    hostname: jade-server
-    container_name: jade_web
+    hostname: ing_web_server
+    container_name: ing_web_server
