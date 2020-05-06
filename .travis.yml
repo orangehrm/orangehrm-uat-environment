@@ -24,7 +24,7 @@ install:
   - composer install
   - docker ps
 
-script:
-  - php vendor/bin/codecept run unit
-  - php vendor/bin/codecept run functional
-  - php vendor/bin/codecept run acceptance
+#script:
+#  - php vendor/bin/codecept run unit
+#  - php vendor/bin/codecept run functional
+#  - php vendor/bin/codecept run acceptance
