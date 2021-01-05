@@ -78,7 +78,7 @@ services:
     container_name: jade_phpmyadmin
 
   rabbitmq:
-    image: rabbitmq:3.6-management
+    image: rabbitmq:3.8.4-management
     container_name: jade_rabbitmq
     ports:
       - "6880:15671"
