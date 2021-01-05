@@ -81,7 +81,7 @@ services:
     container_name: zatana_phpmyadmin
 
   rabbitmq:
-    image: rabbitmq:3.6-management
+    image: rabbitmq:3.8.4-management
     container_name: zatana_rabbitmq
     ports:
       - "6990:15671"
