@@ -78,7 +78,7 @@ services:
     container_name: infinity_phpmyadmin
 
   rabbitmq:
-    image: rabbitmq:3.6-management
+    image: rabbitmq:3.8.4-management
     container_name: infinity_rabbitmq
     ports:
       - "7880:15671"
