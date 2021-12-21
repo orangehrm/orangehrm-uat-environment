@@ -39,7 +39,7 @@ services:
     restart: always
     networks:
       bishopnet:
-        ipv4_address: 172.24.0.74
+        ipv4_address: 172.34.0.74
     hostname: bishop-server
     container_name: bishop_web
 
@@ -55,7 +55,7 @@ services:
       MYSQL_ROOT_PASSWORD: 1234
     networks:
       bishopnet:
-        ipv4_address: 172.24.0.102
+        ipv4_address: 172.34.0.102
     restart: always
     hostname: orangehrm-bishop-db
     container_name: bishop_mysql
@@ -70,7 +70,7 @@ services:
       - "7465:80"
     networks:
       bishopnet:
-        ipv4_address: 172.24.0.20
+        ipv4_address: 172.34.0.20
     environment:
       PMA_HOST: db
     restart: always
@@ -84,5 +84,5 @@ networks:
     driver: bridge
     ipam:
      config:
-       - subnet: 172.24.0.0/16
-         gateway: 172.24.0.1
+       - subnet: 172.34.0.0/16
+         gateway: 172.34.0.1
