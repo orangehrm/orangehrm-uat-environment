@@ -17,10 +17,10 @@ services:
     - ./config/resolve-permission.sh:/etc/resolve-permission.sh
     - ./config/resolve.conf:/etc/resolve.conf
     - ./config/mysql-client:/etc/mysql
-    - ./config/apache2/sites-available:/etc/httpd/sites-enabled
-    - ./config/apache2/cert:/etc/httpd/cert
-    - ./config/apache2/ssl.conf:/etc/httpd/conf.d/ssl.conf
-    - ./logs/ubuntu_logs:/var/log/httpd
+    - ./config/apache2/sites-available:/etc/apache2/sites-enabled
+    - ./config/apache2/cert:/etc/apache2/cert
+    - ./config/apache2/ssl.conf:/etc/apache2/conf-available/ssl.conf
+    - ./logs/ubuntu_logs:/var/log/apache2
     - /etc/localtime:/etc/localtime
     - ./config/hostname:/etc/hostname
     - ./config/welcome:/etc/motd
