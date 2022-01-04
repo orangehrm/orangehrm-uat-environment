@@ -1,17 +1,17 @@
-FROM orangehrm/orangehrm-environment-images:test-7.4-ubuntu-20.04
+FROM orangehrm/orangehrm-environment-images:test-php-7.4-ubuntu-20.04
 
-MAINTAINER orangehrm
 LABEL authors = "OrangeHRM TechOps <techops@orangehrm.com>"
 
 # Our user in the container
 USER root
 WORKDIR /var/www/html/
 
-# Enable apache mods.
-RUN a2enmod  vhost_alias
-
 #configure 
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
+    openssh-server \
+    supervisor \
+    memcached \
+    libmemcached-tools \
     nscd \
     rsyslog \
     libnss-ldapd \
@@ -23,19 +23,24 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
     fonts-urw-base35 \
     && apt-get install --only-upgrade bash \
     && apt-get clean \
-    && apt-get autoclean \
+    && apt-get autoclean
+
+# Enable apache mods.
+RUN a2enmod vhost_alias
+RUN a2enmod headers
+RUN a2enmod expires
 
 #Fix locale issue for SVN
 RUN export LC_ALL=C
 
 # Enable and configure sshd
-RUN mkdir /var/run/sshd
+# RUN mkdir /var/run/sshd
 
 # SSH login fix. Otherwise user is kicked off after login
-COPY sshd.conf /etc/pam.d/sshd
-RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
-ENV NOTVISIBLE "in users profile"
-RUN echo "export VISIBLE=now" >> /etc/profile
+# COPY sshd.conf /etc/pam.d/sshd
+# RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
+# ENV NOTVISIBLE "in users profile"
+# RUN echo "export VISIBLE=now" >> /etc/profile
 
 #default ssh user orangehrm with password "password"
 RUN useradd -ms /bin/bash -p sa3tHJ3/KuYvI orangehrm
@@ -54,7 +59,7 @@ RUN a2ensite orangehrm.conf
 
 EXPOSE 22
 
-RUN mkdir /var/log/apache2/freehost /var/log/apache2/opensource /var/log/apache2/uat /var/log/apache2/test /var/log/apache2/prod
+RUN mkdir /var/log/apache2/freehost /var/log/apache2/opensource /var/log/apache2/uat /var/log/apache2/test /var/log/apache2/prod /var/log/memcached
 
 #rectify the DefaultRuntimeDir error
 RUN source /etc/apache2/envvars
@@ -64,11 +69,10 @@ RUN yes| rm /usr/lib/tmpfiles.d/systemd-nologin.conf
 
 # Add supervisor conf
 RUN mkdir -p /var/run/sshd
-#ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 RUN systemctl enable nslcd.service
 RUN systemctl enable systemd-user-sessions.service
-# Docker startup
-#CMD ["/usr/bin/supervisord"]
+
 
 #Installing telnet
 RUN apt-get update 
@@ -77,9 +81,5 @@ RUN apt-get install telnet
 #Instlling Sendmail packages
 RUN apt-get install -y sendmail
 
-#Enable Mod expires module
-RUN a2enmod headers
-RUN a2enmod expires
-
-#restart apache
-RUN service apache2 restart
+# Docker startup
+CMD ["/usr/bin/supervisord"]
