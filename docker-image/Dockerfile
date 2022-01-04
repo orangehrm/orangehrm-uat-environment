@@ -33,6 +33,12 @@ RUN a2enmod expires
 #Fix locale issue for SVN
 RUN export LC_ALL=C
 
+#Install MariaDB 10.4 client
+RUN curl -LsS -O https://downloads.mariadb.com/MariaDB/mariadb_repo_setup
+RUN bash mariadb_repo_setup --mariadb-server-version=10.4.22
+RUN apt install -y mariadb-client
+
+
 # Enable and configure sshd
 # RUN mkdir /var/run/sshd
 
@@ -41,10 +47,6 @@ RUN export LC_ALL=C
 # RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
 # ENV NOTVISIBLE "in users profile"
 # RUN echo "export VISIBLE=now" >> /etc/profile
-
-#default ssh user orangehrm with password "password"
-RUN useradd -ms /bin/bash -p sa3tHJ3/KuYvI orangehrm
-RUN echo "root:root" | chpasswd
 
 # Tidy up the container
 RUN DEBIAN_FRONTEND=noninteractive apt-get purge -y \
@@ -78,8 +80,8 @@ RUN systemctl enable systemd-user-sessions.service
 RUN apt-get update 
 RUN apt-get install telnet
 
-#Instlling Sendmail packages
-RUN apt-get install -y sendmail
+#Install Sendmail packages
+RUN apt-get install -y sendmail sendmail-cf m4
 
 # Docker startup
 CMD ["/usr/bin/supervisord"]
