@@ -114,7 +114,7 @@ class WebContainerCest
 
 
     public function checkSendMailNoArch(UnitTester $I){
-        $I->wantTo("verify wether sendmail noarch is installed");
+        $I->wantTo("verify whether sendmail noarch is installed");
         $I->runShellCommand("docker exec guardian_web dnf list installed | grep sendmail");
         $I->seeInShellOutput("sendmail-cf.noarch");
     }
