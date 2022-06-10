@@ -22,7 +22,6 @@ RUN dnf -y install \
     openldap-clients \
     openldap \
     sudo \
-    # wget \
     && dnf -y update bash \
     && rm -rf /var/cache/dnf/* \
     && dnf clean all
