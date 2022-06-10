@@ -85,6 +85,12 @@ class WebContainerCest
             $I->seeInShellOutput("openldap-clients-2");
     }
 
+    public function checkOpensslPerlInstallation(UnitTester $I){
+        $I->wantTo("verify openssl-perl is installed in the container");
+        $I->runShellCommand("docker exec guardian_web rpm -qa | grep openssl-perl");
+        $I->seeInShellOutput("openssl-perl-1");
+    }
+
     // public function checkNSCDInstallation(UnitTester $I){
     //         $I->wantTo("verify nscd is installed in the container");
     //         $I->runShellCommand("docker exec guardian_web rpm -qa | grep nscd");
