@@ -61,10 +61,22 @@ class WebContainerCest
             $I->seeInShellOutput('active (running)');
     }
 
-    public function checkNSSPAMLDAPInstallation(UnitTester $I){
-            $I->wantTo("verify nss-pam-ldapd is installed in the container");
-            $I->runShellCommand("docker exec guardian_web rpm -qa | grep nss-pam-ldapd");
-            $I->seeInShellOutput("nss-pam-ldapd-0.8");
+    public function checkSSSDInstallation(UnitTester $I){
+        $I->wantTo("verify sssd is installed in the container");
+        $I->runShellCommand("docker exec guardian_web rpm -qa | grep sssd");
+        $I->seeInShellOutput('sssd-2.6');
+    }
+
+    public function checkSSSDServiceRunning(UnitTester $I){
+        $I->wantTo("verify sssd is up and running in the container");
+        $I->runShellCommand("docker exec guardian_web systemctl status sssd");
+        $I->seeInShellOutput('active (running)');
+    }
+
+    public function checkOddJobMkHomeDirInstallation(UnitTester $I){
+            $I->wantTo("verify oddjob-mkhomedir is installed in the container");
+            $I->runShellCommand("docker exec guardian_web rpm -qa | grep oddjob-mkhomedir");
+            $I->seeInShellOutput("oddjob-mkhomedir-0.34");
     }
 
     public function checkOpenldapInstallation(UnitTester $I){
@@ -73,11 +85,11 @@ class WebContainerCest
             $I->seeInShellOutput("openldap-clients-2");
     }
 
-    public function checkNSCDInstallation(UnitTester $I){
-            $I->wantTo("verify nscd is installed in the container");
-            $I->runShellCommand("docker exec guardian_web rpm -qa | grep nscd");
-            $I->seeInShellOutput("nscd-2");
-    }
+    // public function checkNSCDInstallation(UnitTester $I){
+    //         $I->wantTo("verify nscd is installed in the container");
+    //         $I->runShellCommand("docker exec guardian_web rpm -qa | grep nscd");
+    //         $I->seeInShellOutput("nscd-2");
+    // }
 
     public function checkJavaVersion(UnitTester $I){
             $I->wantTo("verify java is installed in the container");
