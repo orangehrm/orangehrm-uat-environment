@@ -1,47 +1,42 @@
-FROM orangehrm/orangehrm-environment-images:test-7.4-ius
+FROM orangehrm/orangehrm-environment-images:test-php-latest-rhel-8    
 
-MAINTAINER orangehrm
+LABEL maintainer = "orangehrm"
 LABEL authors = "OrangeHRM TechOps <techops@orangehrm.com>"
+
+ARG REDHAT_USERNAME
+ARG REDHAT_PASSWORD
+
+# Register a system with the Red Hat Customer Portal
+RUN subscription-manager register --username $REDHAT_USERNAME --password $REDHAT_PASSWORD && \
+subscription-manager refresh && \
+subscription-manager attach --auto
 
 # Our user in the container
 USER root
 WORKDIR /var/www/html/
 
 
-RUN yum -y install \
-    authconfig \
-    nscd \
+RUN dnf -y install \
     rsyslog \
-    nss-pam-ldapd \
     openssh-server \
     openldap-clients \
     openldap \
     sudo \
-    wget \
-    cyrus-sasl-plain \
-    urw-fonts.noarch \
-    && yum -y update bash \
-    && rm -rf /var/cache/yum/* \
-    && yum clean all
+    # wget \
+    && dnf -y update bash \
+    && rm -rf /var/cache/dnf/* \
+    && dnf clean all
 
+# Prerequisites to perform LDAP authentication in RHEL 8.
+RUN dnf -y install sssd sssd-ldap oddjob-mkhomedir openssl-perl
 
 #Fix locale issue for SVN
 RUN export LC_ALL=C
 # Enable and configure sshd
 #RUN mkdir /var/run/sshd
 
-# SSH login fix. Otherwise user is kicked off after login
-RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
 ENV NOTVISIBLE "in users profile"
 RUN echo "export VISIBLE=now" >> /etc/profile
-
-#default ssh user orangehrm with password "password"
-RUN useradd -ms /bin/bash -p sa3tHJ3/KuYvI orangehrm
-RUN echo "root:root" | chpasswd
-
-RUN authconfig --enableforcelegacy --update
-RUN authconfig --enableldap --enableldapauth --enablemkhomedir --enablepamacces --ldapserver="ldaps://ldap.orangehrm.com ldaps://ldap-slave.orangehrm.com" \
-    --ldapbasedn="dc=orangehrm,dc=com" --update
 
 EXPOSE 22
 
@@ -54,13 +49,18 @@ RUN yes| rm /usr/lib/tmpfiles.d/systemd-nologin.conf
 # Add supervisor conf
 RUN mkdir -p /var/run/sshd
 #ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-RUN systemctl enable nslcd.service
-RUN systemctl enable systemd-user-sessions.service
+
+#not - wanted
+RUN systemctl enable systemd-user-sessions.service 
+
 # Docker startup
 #CMD ["/usr/bin/supervisord"]
 
 #Installing telnet
-RUN yum install telnet -y
+RUN dnf install telnet -y
 
 #Instlling Sendmail packages
-RUN yum install sendmail sendmail-cf m4 -y
+RUN dnf install sendmail sendmail-cf m4 -y
+
+# Unregister subscription
+RUN subscription-manager unregister
