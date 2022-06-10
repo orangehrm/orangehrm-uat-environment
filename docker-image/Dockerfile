@@ -15,7 +15,6 @@ subscription-manager attach --auto
 USER root
 WORKDIR /var/www/html/
 
-
 RUN dnf -y install \
     rsyslog \
     openssh-server \
