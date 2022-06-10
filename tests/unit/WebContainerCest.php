@@ -57,7 +57,7 @@ class WebContainerCest
 
     public function checkSSHServiceRunning(UnitTester $I){
             $I->wantTo("verify ssh is up and running in the container");
-            $I->runShellCommand("docker exec guardian_web service sshd status");
+            $I->runShellCommand("docker exec guardian_web systemctl status sshd");
             $I->seeInShellOutput('active (running)');
     }
 
