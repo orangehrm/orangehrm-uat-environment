@@ -52,7 +52,7 @@ class WebContainerCest
     public function checkSSHInstallation(UnitTester $I){
             $I->wantTo("verify OpenSSH is installed in the container");
             $I->runShellCommand("docker exec guardian_web rpm -qa | grep openssh-server");
-            $I->seeInShellOutput("openssh-server-7");
+            $I->seeInShellOutput("openssh-server-8");
     }
 
     public function checkSSHServiceRunning(UnitTester $I){
@@ -64,7 +64,7 @@ class WebContainerCest
     public function checkSSSDInstallation(UnitTester $I){
         $I->wantTo("verify sssd is installed in the container");
         $I->runShellCommand("docker exec guardian_web rpm -qa | grep sssd");
-        $I->seeInShellOutput('sssd-2.6');
+        $I->seeInShellOutput('sssd-2');
     }
 
     public function checkSSSDServiceRunning(UnitTester $I){
@@ -76,7 +76,7 @@ class WebContainerCest
     public function checkOddJobMkHomeDirInstallation(UnitTester $I){
             $I->wantTo("verify oddjob-mkhomedir is installed in the container");
             $I->runShellCommand("docker exec guardian_web rpm -qa | grep oddjob-mkhomedir");
-            $I->seeInShellOutput("oddjob-mkhomedir-0.34");
+            $I->seeInShellOutput("oddjob-mkhomedir-0");
     }
 
     public function checkOpenldapInstallation(UnitTester $I){
