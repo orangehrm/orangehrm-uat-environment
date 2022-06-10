@@ -43,11 +43,11 @@ class WebContainerCest
         $I->seeInShellOutput('active (running)');
     }
 
-    public function checkMemcacheServiceIsRunning(UnitTester $I){
-        $I->wantTo("verify apache is up and running in the container");
-        $I->runShellCommand("docker exec guardian_web service memcached status");
-        $I->seeInShellOutput('active (running)');
-    }
+    // public function checkMemcacheServiceIsRunning(UnitTester $I){
+    //     $I->wantTo("verify apache is up and running in the container");
+    //     $I->runShellCommand("docker exec guardian_web service memcached status");
+    //     $I->seeInShellOutput('active (running)');
+    // }
 
     public function checkSSHInstallation(UnitTester $I){
             $I->wantTo("verify OpenSSH is installed in the container");
