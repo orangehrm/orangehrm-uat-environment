@@ -39,13 +39,13 @@ class WebContainerCest
 
     public function checkCronServiceIsRunning(UnitTester $I){
         $I->wantTo("verify cron is up and running in the container");
-        $I->runShellCommand("docker exec guardian_web service crond status");
+        $I->runShellCommand("docker exec guardian_web systemctl status crond");
         $I->seeInShellOutput('active (running)');
     }
 
     // public function checkMemcacheServiceIsRunning(UnitTester $I){
     //     $I->wantTo("verify apache is up and running in the container");
-    //     $I->runShellCommand("docker exec guardian_web service memcached status");
+    //     $I->runShellCommand("docker exec guardian_web systemctl status memcached");
     //     $I->seeInShellOutput('active (running)');
     // }
 
