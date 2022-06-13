@@ -39,32 +39,44 @@ class WebContainerCest
 
     public function checkCronServiceIsRunning(UnitTester $I){
         $I->wantTo("verify cron is up and running in the container");
-        $I->runShellCommand("docker exec guardian_web service crond status");
+        $I->runShellCommand("docker exec guardian_web systemctl status crond");
         $I->seeInShellOutput('active (running)');
     }
 
-    public function checkMemcacheServiceIsRunning(UnitTester $I){
-        $I->wantTo("verify apache is up and running in the container");
-        $I->runShellCommand("docker exec guardian_web service memcached status");
-        $I->seeInShellOutput('active (running)');
-    }
+    // public function checkMemcacheServiceIsRunning(UnitTester $I){
+    //     $I->wantTo("verify apache is up and running in the container");
+    //     $I->runShellCommand("docker exec guardian_web systemctl status memcached");
+    //     $I->seeInShellOutput('active (running)');
+    // }
 
     public function checkSSHInstallation(UnitTester $I){
             $I->wantTo("verify OpenSSH is installed in the container");
             $I->runShellCommand("docker exec guardian_web rpm -qa | grep openssh-server");
-            $I->seeInShellOutput("openssh-server-7");
+            $I->seeInShellOutput("openssh-server-8");
     }
 
     public function checkSSHServiceRunning(UnitTester $I){
             $I->wantTo("verify ssh is up and running in the container");
-            $I->runShellCommand("docker exec guardian_web service sshd status");
+            $I->runShellCommand("docker exec guardian_web systemctl status sshd");
             $I->seeInShellOutput('active (running)');
     }
 
-    public function checkNSSPAMLDAPInstallation(UnitTester $I){
-            $I->wantTo("verify nss-pam-ldapd is installed in the container");
-            $I->runShellCommand("docker exec guardian_web rpm -qa | grep nss-pam-ldapd");
-            $I->seeInShellOutput("nss-pam-ldapd-0.8");
+    public function checkSSSDInstallation(UnitTester $I){
+        $I->wantTo("verify sssd is installed in the container");
+        $I->runShellCommand("docker exec guardian_web rpm -qa | grep sssd");
+        $I->seeInShellOutput('sssd-2');
+    }
+
+    public function checkSSSDServiceRunning(UnitTester $I){
+        $I->wantTo("verify sssd is up and running in the container");
+        $I->runShellCommand("docker exec guardian_web systemctl status sssd");
+        $I->seeInShellOutput('active (running)');
+    }
+
+    public function checkOddJobMkHomeDirInstallation(UnitTester $I){
+            $I->wantTo("verify oddjob-mkhomedir is installed in the container");
+            $I->runShellCommand("docker exec guardian_web rpm -qa | grep oddjob-mkhomedir");
+            $I->seeInShellOutput("oddjob-mkhomedir-0");
     }
 
     public function checkOpenldapInstallation(UnitTester $I){
@@ -73,11 +85,17 @@ class WebContainerCest
             $I->seeInShellOutput("openldap-clients-2");
     }
 
-    public function checkNSCDInstallation(UnitTester $I){
-            $I->wantTo("verify nscd is installed in the container");
-            $I->runShellCommand("docker exec guardian_web rpm -qa | grep nscd");
-            $I->seeInShellOutput("nscd-2");
+    public function checkOpensslPerlInstallation(UnitTester $I){
+        $I->wantTo("verify openssl-perl is installed in the container");
+        $I->runShellCommand("docker exec guardian_web rpm -qa | grep openssl-perl");
+        $I->seeInShellOutput("openssl-perl-1");
     }
+
+    // public function checkNSCDInstallation(UnitTester $I){
+    //         $I->wantTo("verify nscd is installed in the container");
+    //         $I->runShellCommand("docker exec guardian_web rpm -qa | grep nscd");
+    //         $I->seeInShellOutput("nscd-2");
+    // }
 
     public function checkJavaVersion(UnitTester $I){
             $I->wantTo("verify java is installed in the container");
@@ -102,8 +120,8 @@ class WebContainerCest
 
 
     public function checkSendMailNoArch(UnitTester $I){
-        $I->wantTo("verify wether sendmail noarch is installed");
-        $I->runShellCommand("docker exec guardian_web yum list installed | grep sendmail");
+        $I->wantTo("verify whether sendmail noarch is installed");
+        $I->runShellCommand("docker exec guardian_web dnf list installed | grep sendmail");
         $I->seeInShellOutput("sendmail-cf.noarch");
     }
 
