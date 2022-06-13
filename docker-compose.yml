@@ -35,5 +35,5 @@ services:
 
     privileged: true
     restart: always
-    hostname: guardian-server
-    container_name: guardian_web
+    hostname: uat-server-rhel
+    container_name: uat_web_rhel
