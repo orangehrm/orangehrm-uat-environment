@@ -27,7 +27,7 @@ services:
     - ./config/sudoers:/etc/sudoers
     - ./config/crontabs:/var/spool/cron/crontabs
     - ./config/ssh/sshd_config:/etc/ssh/sshd_config
-    - ./config/ldap/cert:/etc/openldap/cacerts
+    - ./config/openldap/cacerts:/etc/openldap/cacerts
     - /sys/fs/cgroup:/sys/fs/cgroup:ro
     - ./config/sssd/sssd.conf:/etc/sssd/sssd.conf
     - ./config/openldap/ldap.conf:/etc/openldap/ldap.conf
