@@ -34,7 +34,6 @@ services:
     privileged: true
     links:
       - db
-      - rabbitmq
     restart: always
     networks:
       atomnet:
@@ -77,7 +76,6 @@ services:
 
 volumes:
   mariadb102:
-  atom_rabbitmq:
 
 networks:
   atomnet:
