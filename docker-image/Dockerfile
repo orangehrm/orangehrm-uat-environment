@@ -26,7 +26,7 @@ RUN dnf -y install \
     && dnf clean all
 
 # Prerequisites to perform LDAP authentication in RHEL 8.
-RUN dnf -y install sssd sssd-ldap oddjob-mkhomedir openssl-perl
+RUN dnf -y install sssd sssd-ldap oddjob-mkhomedir openssl-perl authselect
 
 #Fix locale issue for SVN
 RUN export LC_ALL=C
