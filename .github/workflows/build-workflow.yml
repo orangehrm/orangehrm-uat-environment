@@ -28,7 +28,6 @@ jobs:
       - name: Verify prerequisites
         run: |
           docker --version
-          docker-compose --version
           composer --version
   
       - name: Install test suite dependencies
@@ -39,7 +38,7 @@ jobs:
 
       - name: Spin up the container
         run: |
-          docker-compose up -d
+          docker compose up -d
           docker ps -a
 
       - name: Run unit test suite
