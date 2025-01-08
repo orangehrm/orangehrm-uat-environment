@@ -1,4 +1,4 @@
-FROM orangehrm/orangehrm-environment-images:test-php-latest-ubuntu-20.04
+FROM orangehrm/test-environment:ubuntu24.04-php8.3-latest
 
 LABEL authors = "OrangeHRM TechOps <techops@orangehrm.com>"
 
@@ -34,7 +34,7 @@ RUN export LC_ALL=C
 
 #Install MariaDB 10.4 client
 RUN curl -LsS -O https://downloads.mariadb.com/MariaDB/mariadb_repo_setup
-RUN bash mariadb_repo_setup --mariadb-server-version=10.4.22
+RUN bash mariadb_repo_setup --mariadb-server-version=10.11.10
 RUN apt install -y mariadb-client
 
 
@@ -77,7 +77,7 @@ RUN systemctl enable systemd-user-sessions.service
 
 #Installing telnet
 RUN apt-get update 
-RUN apt-get install telnet
+RUN apt-get install telnet -y
 
 #Install Sendmail packages
 RUN apt-get install -y sendmail sendmail-cf m4

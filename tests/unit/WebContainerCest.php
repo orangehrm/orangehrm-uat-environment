@@ -19,9 +19,9 @@ class WebContainerCest
 
 
     public function checkPHPVersion(UnitTester $I){
-        $I->wantTo("verify php 7.4 is installed in the container");
+        $I->wantTo("verify php 8.3 is installed in the container");
         $I->runShellCommand("docker exec uat_web_ubuntu php --version");
-        $I->seeInShellOutput('PHP 7.4');
+        $I->seeInShellOutput('PHP 8.3');
     }
 
     public function checkForNologinFile(UnitTester $I){
