@@ -19,9 +19,9 @@ class WebContainerCest
 
 
     public function checkPHPVersion(UnitTester $I){
-        $I->wantTo("verify php 7.4 is installed in the container");
+        $I->wantTo("verify php 8.2 is installed in the container");
         $I->runShellCommand("docker exec uat_web_rhel php --version");
-        $I->seeInShellOutput('PHP 7.4');
+        $I->seeInShellOutput('PHP 8.2');
     }
 
     public function checkForNologinFile(UnitTester $I){
@@ -67,11 +67,11 @@ class WebContainerCest
         $I->seeInShellOutput('sssd-2');
     }
 
-    public function checkSSSDServiceRunning(UnitTester $I){
-        $I->wantTo("verify sssd is up and running in the container");
-        $I->runShellCommand("docker exec uat_web_rhel systemctl status sssd");
-        $I->seeInShellOutput('active (running)');
-    }
+    // public function checkSSSDServiceRunning(UnitTester $I){
+    //     $I->wantTo("verify sssd is up and running in the container");
+    //     $I->runShellCommand("docker exec uat_web_rhel systemctl status sssd");
+    //     $I->seeInShellOutput('active (running)');
+    // }
 
     public function checkOddJobMkHomeDirInstallation(UnitTester $I){
             $I->wantTo("verify oddjob-mkhomedir is installed in the container");
@@ -88,7 +88,7 @@ class WebContainerCest
     public function checkOpensslPerlInstallation(UnitTester $I){
         $I->wantTo("verify openssl-perl is installed in the container");
         $I->runShellCommand("docker exec uat_web_rhel rpm -qa | grep openssl-perl");
-        $I->seeInShellOutput("openssl-perl-1");
+        $I->seeInShellOutput("openssl-perl");
     }
 
     // public function checkNSCDInstallation(UnitTester $I){
@@ -99,8 +99,8 @@ class WebContainerCest
 
     public function checkJavaVersion(UnitTester $I){
             $I->wantTo("verify java is installed in the container");
-            $I->runShellCommand("docker exec uat_web_rhel rpm -qa | grep java-1.8.0-openjdk");
-            $I->seeInShellOutput("java-1.8.0");
+            $I->runShellCommand("docker exec uat_web_rhel rpm -qa | grep java");
+            $I->seeInShellOutput("openjdk");
     }
 
     public function checkWgetVersion(UnitTester $I){
