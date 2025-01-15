@@ -33,7 +33,7 @@ jobs:
         run: composer install
 
       - name: Build docker image
-        run: docker build -t ${{ env.DOCKER_HUB_REPO }}:${{ env.TAG_NAME }} --build-arg REDHAT_USERNAME=${{ secrets.REDHAT_USERNAME }} --build-arg REDHAT_PASSWORD=${{ secrets.REDHAT_PASSWORD }} docker-image
+        run: docker build -t ${{ env.DOCKER_HUB_REPO }}:${{ env.LATEST_TAG_NAME }} --build-arg REDHAT_USERNAME=${{ secrets.REDHAT_USERNAME }} --build-arg REDHAT_PASSWORD=${{ secrets.REDHAT_PASSWORD }} docker-image
 
       - name: Spin up the container
         run: |
@@ -48,10 +48,9 @@ jobs:
       - name: Get installed php version
         run: echo "VERSION_TAG_NAME=uat-php-$(docker exec uat_web_rhel php -r 'echo PHP_VERSION;')-rhel-8" >> $GITHUB_ENV
 
-      - name: New image with a version tag & latest tag
+      - name: New image with a version tag
         run: |
-          docker tag ${{ env.DOCKER_HUB_REPO }}:${{ env.TAG_NAME }} ${{ env.DOCKER_HUB_REPO }}:${{ env.VERSION_TAG_NAME }}
-          docker tag ${{ env.DOCKER_HUB_REPO }}:${{ env.TAG_NAME }} ${{ env.DOCKER_HUB_REPO }}:${{ env.LATEST_TAG_NAME }}
+          docker tag ${{ env.DOCKER_HUB_REPO }}:${{ env.LATEST_TAG_NAME }} ${{ env.DOCKER_HUB_REPO }}:${{ env.VERSION_TAG_NAME }}
           
       - name: Docker hub login
         if: ${{ github.repository == env.UPSTREAM_REPO && github.ref == env.UPSTREAM_BRANCH }}
