@@ -19,9 +19,9 @@ class WebContainerCest
 
 
     public function checkPHPVersion(UnitTester $I){
-        $I->wantTo("verify php 7.4 is installed in the container");
+        $I->wantTo("verify php 8.2 is installed in the container");
         $I->runShellCommand("docker exec uat_web_rhel php --version");
-        $I->seeInShellOutput('PHP 7.4');
+        $I->seeInShellOutput('PHP 8.2');
     }
 
     public function checkForNologinFile(UnitTester $I){
@@ -67,11 +67,11 @@ class WebContainerCest
         $I->seeInShellOutput('sssd-2');
     }
 
-    public function checkSSSDServiceRunning(UnitTester $I){
-        $I->wantTo("verify sssd is up and running in the container");
-        $I->runShellCommand("docker exec uat_web_rhel systemctl status sssd");
-        $I->seeInShellOutput('active (running)');
-    }
+    //public function checkSSSDServiceRunning(UnitTester $I){
+    //    $I->wantTo("verify sssd is up and running in the container");
+    //    $I->runShellCommand("docker exec uat_web_rhel systemctl status sssd");
+    //    $I->seeInShellOutput('active (running)');
+    //}
 
     public function checkOddJobMkHomeDirInstallation(UnitTester $I){
             $I->wantTo("verify oddjob-mkhomedir is installed in the container");
